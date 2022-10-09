@@ -1,0 +1,64 @@
+hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello
+hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello
+hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello
+hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello
+hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello
+hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello
+charging juice...2021-04-15 10:39:27.714849
+16.89
+span
+charging juice...2021-04-15 11:14:54.308583
+charging juice...2021-04-15 11:16:26.182619
+charging juice...2021-04-15 11:17:23.749787
+charging juice...2021-04-15 11:19:39.324525
+charging juice...2021-04-15 11:22:11.280604
+charging juice...2021-04-15 11:27:43.032546
+charging juice...2021-04-15 11:31:25.018034
+VIX210421C00017000 2021-04-15 6:12AM EDT 17.00 1.10 1.00 1.15 -0.25 -18.52% 1 11,813 121.29%
+charging juice...2021-04-15 11:32:53.723174
+VIX210421C00017000 2021-04-15 6:12AM EDT 17.00 1.10 1.00 1.15 -0.25 -18.52% 1 11,813 121.29%
+charging juice...2021-04-15 11:33:30.248717
+VIX210421C00017000 2021-04-15 6:12AM EDT 17.00 1.10 1.00 1.15 -0.25 -18.52% 1 11,813 122.46%
+charging juice...2021-04-15 11:41:58.878070
+charging juice...2021-04-15 11:53:45.509044
+charging juice...2021-04-15 11:55:38.194182
+charging juice...2021-04-15 11:56:28.110055
+charging juice...2021-04-15 12:00:22.183766
+charging juice...2021-04-15 12:07:39.182799
+charging juice...2021-04-15 12:09:38.592606
+charging juice...2021-04-15 12:10:42.924512
+charging juice...2021-04-15 23:47:51.049050
+charging juice...2021-04-16 00:07:16.961604
+charging juice...2021-04-16 00:34:55.479345
+charging juice...2021-04-16 00:39:19.075678
+charging juice...2021-04-16 00:42:50.319787
+charging juice...2021-04-16 00:44:13.339615
+charging juice...2021-04-16 00:45:39.473723
+charging juice...2021-04-16 00:46:21.730309
+charging juice...2021-04-16 00:51:43.760828
+charging juice...2021-04-16 00:58:01.912167
+charging juice...2021-04-16 01:04:23.080428
+charging juice...2021-04-16 01:07:43.985267
+charging juice...2021-04-16 01:10:23.450846
+charging juice...2021-04-16 01:18:20.649238
+charging juice...2021-04-16 01:22:07.129826
+charging juice...2021-04-16 01:22:58.069133
+charging juice...2021-04-17 00:03:00.305859
+charging juice...2021-04-17 00:03:47.940561
+charging juice...2021-04-17 00:05:26.557306
+charging juice...2021-04-17 00:12:08.564096
+charging juice...2021-04-17 00:17:05.912314
+charging juice...2021-04-17 00:19:46.961540
+charging juice...2021-04-17 00:21:47.117839
+charging juice...2021-04-17 00:26:11.769799
+charging juice...2021-04-17 00:27:07.240639
+charging juice...2021-04-17 00:28:20.813742
+charging juice...2021-04-17 00:30:46.912436
+charging juice...2021-04-22 00:05:32.348664
+Just added the graphing capability in arbitrary parameter search
+Conclude that rho is volatile and must mean something.
+Conclude that phi as free variable or normal function has no impact
+-> could be because e**(-kappa*tau) is too small for double float
+Really, it's that an analytic solution is needed to account for convergence scale with numeric calculation
+-> Need to auto adjust model accuracy metric based on open interest < 3e5
+->
