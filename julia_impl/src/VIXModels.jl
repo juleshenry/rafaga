@@ -103,13 +103,13 @@ function vix_option(m::MRLRJ, t::Float64, T::Float64, K::Float64, VIX_t::Float64
     τ = T - t
     F = vix_future(m, t, T, VIX_t)
     
-    ψ(s) = characteristic_function(m, t, T, s, VIX_t)
-    ψ1(s) = characteristic_function(m, t, T, s - im, VIX_t) / characteristic_function(m, t, T, -im, VIX_t)
+    ψ(s) = characteristic_function(m, t, T, ComplexF64(s), VIX_t)
+    ψ1(s) = characteristic_function(m, t, T, ComplexF64(s) - im, VIX_t) / characteristic_function(m, t, T, ComplexF64(0.0, -1.0), VIX_t)
     ψ2(s) = ψ(s)
     
     function gil_pelaez(ψ_func, k)
-        integrand(x) = real(ψ_func(x) * exp(-im*x*k)) / (im*x)
-        integral, err = quadgk(integrand, 0.0, 100.0, rtol=1e-6)
+        integrand(x) = imag(ψ_func(x) * exp(-im*x*k)) / x
+        integral, err = quadgk(integrand, 1e-8, 100.0, rtol=1e-6)
         return 0.5 + (1/π) * integral
     end
     

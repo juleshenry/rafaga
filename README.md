@@ -20,6 +20,17 @@ The Python code has been retained, refactored, and organized for utility (e.g., 
   - `src/VIXModels.jl`: Core implementations for `MRLR` and `MRLRJ` taking advantage of `BigFloat`.
   - `test/runtests.jl`: Unit tests for the models.
 
+## Fetching Historical VIX Data
+
+Since the models require historical VIX data for calibration, a Python script using `yfinance` has been added.
+
+```bash
+cd python_impl
+pip install -r requirements.txt
+python scripts/fetch_vix.py --start 2004-01-01 --output ../data/vix_historical.csv
+```
+This will create a `data/vix_historical.csv` containing Open, High, Low, Close, and Volume for the `^VIX` index.
+
 ## How to Install and Run Julia
 
 ### 1. Installation
