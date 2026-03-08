@@ -5,7 +5,7 @@ include("VIXModels.jl")
 using .VIXModels
 using CSV, DataFrames, Optim, Statistics, Printf
 
-df = CSV.read("../../csvs/VIX_April_16_2021_de_may_19_2021.csv", DataFrame)
+df = CSV.read("../csvs/VIX_April_16_2021_de_may_19_2021.csv", DataFrame)
 filter!(row -> row."Last Price" > 0.0, df)
 
 T = 33.0 / 365.0
