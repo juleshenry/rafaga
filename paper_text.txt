@@ -1,0 +1,9043 @@
+Munich Personal RePEc Archive
+
+Mean-Reverting Logarithmic Modeling
+of VIX
+Bao, Qunfang
+Zhejiang University
+
+1 March 2013
+
+Online at https://mpra.ub.uni-muenchen.de/46413/
+MPRA Paper No. 46413, posted 21 Apr 2013 16:32 UTC
+
+分类号：
+
+单位代码：
+
+F830.9
+
+密 级：
+
+学
+
+10335
+
+号：
+
+博士学位论文
+
+中文论文题目：
+
+基于对数均值回复模型的 VIX建 模
+
+英文论文题目： Mean-Reverting Logarithmic Modeling of VIX
+
+申请人姓名：
+Qunfang Bao(qunfang.bao@yahoo.com)
+指导教师：
+专业名称：
+研究方向：
+所在学院：
+
+论 文 提 交 日 期：
+
+March 2013
+
+摘要
+
+摘 要
+自 从2004年3月26日 芝 加 哥 期 权 交 易 所（CBOE）专 门 成 立 期 货 交 易 所CFE
+（CBOE Future Exchange）并开始交易基于S&P500波动率指数VIX的期货，过去几
+年中波动率已经被交易员、投资者和基金经理广泛接受为一种资产类型，并用于投
+资、分散和对冲资产组合中的集中度和 尾部风险。2006年2月24日，CBOE又推出
+了基于VIX指数的的期权。现在，VIX期权已经成为CBOE交易最为活跃的期权系
+列。
+本论文主要工作在于对VIX指数进行独立建模。部分文献中对VIX采用一致性
+建模方法。该方法以S&P500指数（SPX）和它的随机波动率建模为起点，并且基于
+这个动态模型根据 VIX的定义得到VIX表达式，从而可以基于这个表达式对VIX期
+货和VIX期权进行定价。与文献中VIX指数的一致性建模方法不同，独立建模方法
+直接指定VIX指数的动态过程，并基于这个 动态过程对VIX衍生品进行定价。
+虽然文献中有关于对数均值回复VIX模型（MRLR）的研究，目前尚未有文
+献考虑具有随机波动率的MRLR模型用于刻画VIX期权市场中的正向波动率偏
+斜。文献中也没有比较基于 纯粹扩散的MRLR模型与考虑跳扩散和/或随机波动率
+的MRLR模型的优劣。而且，大部分现有文献注重推导VIX期货和期权的静态定
+价公式，而没有研究VIX期货的动态性质、VIX期货和VIX期权的校正与对冲 策
+略，以及从远期方差互换到VIX期货的凸度调整。其中，远期方差互换可以用流动
+性很高的方差互换进行复制，并且能够用于估计MRLR模型中的波动率的波动率
+（vol-of-vol）参数。
+本文考虑了四个对数均值回复的VIX模型。第一个模型是纯粹基于扩散的
+的VIX模型，并且称为MRLR模型。之后，本文将这个基本的MRLR模型推广到包
+含泊松跳或随机波动率， 从而得到推广后的MRLRJ模型和MRLRSV模型。最后，
+本文在VIX指数动态过程中同时考虑泊松跳和随机波动率，并得到一个最全面
+的MRLRSVJ模型。
+对于这四个模型，本文推导了它们的转移概率密度函数或者条件特征函数。
+
+I
+
+浙江大学博士学位论文
+
+基于这些结果，本文推导了VIX期货和VIX期权的定价公式。为了能够很好的拟
+合VIX期货期限结构，本文假设 VIX动态过程的长期均值是时变函数，并且用这个
+函数来拟合VIX期货期限结构。此外，扩散、泊松跳和随机波动率的参数被用于拟
+合VIX隐含波动率曲面。
+本文建议了两种参数校正方法。对于MRLR形式的VIX模型，参数校正的第一
+个阶段是对VIX指数或者VIX期货中波动率的波动率（vol-of-vol）的拟合，从而决
+定vol-of-vol的扩散、泊松跳和随机 波动率参数可以被估计出来。这个校正阶段的
+第一种方法是用这些参数拟合VIX隐含波动率曲面。第二种方法是将这些参数用于
+拟合远期方差互换中的VIX凸度。之所以拟合远期 方差互换，是因为它包含VIX指
+数和VIX期货的的凸度并且方差互换市场的流动性非常高。基于第一阶段的参数拟
+合，VIX指数的长期均值函数可以用于拟合VIX期货的期限结构。
+除了VIX期货和VIX期权的静态定价公式，本文还推导了VIX期货的动态过
+程。本文的结论指出，MRLR模型下VIX期货服从一个几何布朗运动，MRLRJ模型
+下VIX期货服从 跳扩散模型，MRLRSV模型下VIX期货服从随机波动率模型，以
+及MRLRSVJ模型下VIX期货服从随机波动率跳扩散模型。
+本 文 还 推 导 了 基 于 对 数 均 值VIX模 型 下 的VIX期 货 与 期 权 对 冲 策 略。由
+于VIX指数本身不是可交易资产，投资者不能直接建立该指数的交易头寸。文献
+中的研究结果指出， 较短期限的VIX期货对下一个期限的VIX期货的走势具有很
+好的预测能力。因此，用较短期限的VIX期货对冲较长期限的VIX期货是一个非常
+自然的对冲策略并可以期待这个策略 表现较好。此外，VIX期权作为基于VIX指数
+的期权，它也可以视为基于具有同样期限的VIX期货的期权。从而，用较短期限
+的VIX期货合约对冲较长期限的VIX期权合约也是非常 自然的对冲策略。本文中推
+导了基于上述对冲策略的VIX期货与VIX期权的对冲公式。
+最后，本文用数值分析比较四个模型对VIX隐含波动率曲面的拟合效果。文中
+结果指出，MRLR模型完全不能产生VIX期权的正向隐含波动率偏斜。与此对比，
+MRLRJ模型 和MRLRSV模型能够同等程度地产生正向波动率偏斜。然而，最全面
+的MRLRSVJ模型对提高波动率偏斜拟合效果起到很小的作用。相反，这个复杂模
+型会导致更多参数需要估计并且 降低了模型参数的稳定性。
+
+II
+
+摘要
+
+关 键 词 ： VIX；VIX期货；VIX期权；远期方差互换；VIX隐含波动率偏斜；对数
+均值回复模型；跳-扩散；随机波动率。
+
+III
+
+浙江大学博士学位论文
+
+Abstract
+Since March 26, 2004, when the CBOE Futures Exchange (CFE) began trading futures
+written on S&P500 volatility index (VIX), volatility has become a widely accepted asset
+class as trading, diversifying and hedging vehicle by traders, investors and portfolio managers over the past few years. On February 24, 2006, CBOE introduced options written
+on VIX index and since then VIX option series has now become the most actively traded
+index option series on CBOE.
+This thesis focuses on mathematical modeling of spot VIX with standalone approach. Unlike the consistent modeling approach in literature, which starts with specifying joint dynamics for SPX index and its instantaneous stochastic volatility then derives expression for
+spot VIX and price VIX derivatives based on this expression, standalone approach starts
+with directly specifying dynamics for spot VIX and prices VIX derivatives in this simpler
+framework.
+Although there is work in literature that studies the mean-reverting logarithmic model (MRLR), no work has been done in considering stochastic volatility in MRLR to capture the
+positive implied volatility skew of VIX option, nor have they compared the pure diffusion
+version of MRLR with its jump and/or stochastic volatility extensions. Furthermore, most
+of the literature only focus on static pricing formulas for VIX future and VIX option, no
+work has been done in investigating the dynamic feature of VIX future, calibration and
+hedging strategies of mean-reverting logarithmic models, as well as the convexity adjustment of VIX future from forward variance swap, which has a liquid variance swap market
+to back out the vol-of-vol information in mean-reverting logarithmic models.
+In this thesis, I present four versions of MRLR models. The first model is a pure diffusion
+model where spot VIX follows a mean-reverting logarithmic dynamics. Then I extend this
+basic MRLR model by adding jump or stochastic volatility into spot VIX dynamics to get
+
+IV
+
+摘要
+
+MRLRJ and MRLRSV models. Finally, I combine jump and stochastic volatility together
+and add them into dynamics of spot VIX to get the fully specified MRLRSVJ model.
+For all the four models, I derive either transition function or conditional characteristic
+function of spot VIX. Based on those results, the pricing formulas for VIX future and VIX
+option are derived. In order to calibrate to VIX future term structure, I make the longterm mean of spot VIX be a time-dependent function and use the diffusion, jump and/or
+stochastic volatility parameters to calibrate VIX implied volatility surface.
+Two types of calibration strategies are suggested in this thesis. On the first stage of calibration, we need to calibrate all vol-of-vol parameters to convexity of spot VIX or VIX
+future. One strategy is to calibrate those parameters to VIX option implied volatility surface. Another strategy is to calibrate them to convexity adjustment of VIX future from
+forward variance swap, which can be replicated by liquid variance swaps. On the second
+stage of calibration, the long-term mean function of spot VIX is used to fit VIX futuer term
+structure given the vol-of-vol parameters calibrated on the first stage.
+In addition to the static pricing formula, dynamics of VIX future is also derived under
+all mean-reverting logarithmic models. The analysis in this thesis shows that VIX future
+follows geometric Brownian motion under MRLR model, jump-diffusion dynamics under MRLRJ model, stochastic volatility dynamics under MRLRSV model and stochastic
+volatility with jump dynamics under MRLRSVJ model.
+I develop the hedging strategies of VIX future and VIX option under mean-reverting logarithmic models. As spot VIX is not tradable asset, investors are unable to take positions
+on this index. Instead, research in literature has shown that a shorter-term VIX future has
+good power in forecasting movements of the subsequent VIX future. Therefore, hedging
+VIX future with a shorter-term VIX future is expected to perform well. Moreover, as VIX
+option can also be regarded as an option on a VIX future contract that has same maturity as
+VIX option, using the shorter-term VIX future contract as hedging instrument is a natural
+choice. In this thesis, I derive hedging ratios of VIX future and VIX option under the above
+hedging strategy.
+
+V
+
+浙江大学博士学位论文
+
+At last, numerical analysis in this thesis compares the four models in fitting VIX implied
+volatility surface. The results show that MRLR is unable to create positive implied volatility skew for VIX option. In contrast, MRLRJ and MRLRSV models perform equally well
+in fitting positive skew. However, the fully specified MRLRSVJ model adds little value in
+fitting VIX skew but incurs additional cost of calibrating more parameters and is subject to
+less stable parameters over maturities and over time.
+Keywords: VIX; VIX Future; VIX Option; Forward Variance Swap; VIX Implied Volatility Skew; MRLR Model; Jump-Diffusion; Stochastic Volatility.
+
+VI
+
+目录
+
+目 次
+摘要 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+I
+
+Abstract . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . IV
+目录
+1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+1
+
+2 VIX Modeling Review . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+5
+
+2.1 Consistent Approach . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+5
+
+2.2 Standalone Approach . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+9
+
+2.3 Comparison of two Approaches . . . . . . . . . . . . . . . . . . . . . . . 12
+3 MRLR Model. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+3.1 MRLR dynamics and distribution . . . . . . . . . . . . . . . . . . . . . . 14
+3.2 VIX Future and VIX Option Pricing . . . . . . . . . . . . . . . . . . . . . 16
+3.3 VIX Future and VIX Option Calibration . . . . . . . . . . . . . . . . . . . 19
+3.4 VIX Future and VIX Option Hedging . . . . . . . . . . . . . . . . . . . . 21
+3.5 Forward Variance Swap and Convexity . . . . . . . . . . . . . . . . . . . . 25
+4 MRLRJ Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 29
+4.1 MRLRJ dynamics and characteristic function . . . . . . . . . . . . . . . . . 29
+4.2 VIX Future and VIX Option Pricing . . . . . . . . . . . . . . . . . . . . . 33
+4.3 VIX Future and VIX Option Calibration . . . . . . . . . . . . . . . . . . . 37
+4.4 VIX Future and VIX Option Hedging . . . . . . . . . . . . . . . . . . . . 39
+4.5 Forward Variance Swap and Convexity . . . . . . . . . . . . . . . . . . . . 42
+5 MRLRSV Model . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 46
+5.1 MRLRSV dynamics and characteristic function . . . . . . . . . . . . . . . . 46
+5.2 VIX Future and VIX Option Pricing . . . . . . . . . . . . . . . . . . . . . 53
+5.3 VIX Future and VIX Option Calibration . . . . . . . . . . . . . . . . . . . 58
+5.4 VIX Future and VIX Option Hedging . . . . . . . . . . . . . . . . . . . . 59
+
+VII
+
+浙江大学博士学位论文
+
+5.5 Forward Variance Swap and Convexity . . . . . . . . . . . . . . . . . . . . 61
+6 MRLRSVJ Model. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 64
+6.1 MRLRSVJ dynamics and characteristic function . . . . . . . . . . . . . . . 64
+6.2 VIX Future and VIX Option Pricing . . . . . . . . . . . . . . . . . . . . . 66
+6.3 VIX Future and VIX Option Calibration . . . . . . . . . . . . . . . . . . . 69
+6.4 VIX Future and VIX Option Hedging . . . . . . . . . . . . . . . . . . . . 71
+6.5 Forward Variance Swap and Convexity . . . . . . . . . . . . . . . . . . . . 72
+7 Numerical Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 74
+7.1 Market Data and Data Processing . . . . . . . . . . . . . . . . . . . . . . 74
+7.2 Loss Function . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 75
+7.3 Calibration Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 77
+8 Conclusion . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 90
+参考文献 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 92
+
+VIII
+
+Introduction
+
+1 Introduction
+Since March 26, 2004, when the CBOE Futures Exchange (CFE) began trading futures
+written on S&P500 volatility index (VIX), volatility has become a widely accepted asset
+class as trading, diversifying and hedging vehicle by traders, investors and portfolio managers over the past few years. On February 24, 2006, CBOE introduced options written
+on VIX index and since then VIX option series has now become the most actively traded
+index option series on CBOE.
+Spot VIX index is defined as square root of 30-day variance swap of S&P500 index (SPX)
+and it can be understood as an index representing 30-day average implied volatility of
+S&P500 index option. As all well known, variance swap is a tradable asset and it can
+be statically replicated by a series of out-of-money (OTM) SPX options. However, being
+defined as square root of SPX variance swap, spot VIX itself is not tradable asset and
+this is the exact reason CBOE introduces VIX futures and VIX options as vehicles to take
+positions on VIX.
+As a volatility index, VIX shares the properties of mean-reversion, large upward jumps and
+stochastic volatility, which is known as stochastic vol-of-vol. Therefore, a good model for
+modeling spot VIX should take into account at least some of these factors.
+For the purpose of calibration, pricing and hedging of VIX futures, one is concerned with
+statically calibrating the initial VIX future term structure and dynamics of VIX future contracts. In order to develop a good model for pricing and hedging VIX option, one is also
+very concerned with the ability of VIX model in calibrating VIX volatility surface and
+derive reasonable hedging ratios for VIX options with respect to VIX futures.
+There are roughly two categories of approaches for VIX modeling in the literature. In one
+line of research, the inherent relationship between S&P500 and VIX are retained by specifying joint dynamics of S&P500 index (SPX) and its stochastic instantaneous volatility.
+Then the expression for spot VIX is derived by its definition as square root of forward re-
+
+1
+
+浙江大学博士学位论文
+
+alized variance of SPX. This approach is called consistent modeling approach in literature
+and it has been studied and applied to pricing VIX futures in Zhang and Zhu [31] , Zhu and
+Zhang [34] , Lin [16] , Lu and Zhu [19] , Zhang and Huang [29] and Zhu and Lian [33] , where model
+factors such as mean-reversion and jumps are characterized by various kinds of stochastic processes. Following this approach, Lin and Chang [17] , Lin and Chang [18] and Sepp [24]
+address the problem of VIX option pricing by characteristic function method.
+In the other line of research, VIX dynamics are directly specified and thus VIX options can be priced in simpler formula. Papers following this approach include Whaley [28] ,
+Grunbichler and Longstaff [8] , Detemple and Osakwe [3] and Psychoyios [21] , where meanreverting square-root and mean-reverting logarithmic processes with or without jumps are
+adopted to characterize VIX.
+Psychoyios and Skiadopoulos [22] and Wang and Daigler [27] made some comparative studies
+about the above two categories of VIX future and option pricing models in the aspect of
+hedging effectiveness and pricing accuracy. They suggest that simpler models of the second
+kind perform equally well with or even better than the first kind complicated models, such
+as the fully-specified Lin and Chang [17] model.
+In spite of the accomplishment of VIX modeling in the literature, some problems are still
+need to be addressed. Psychoyios and Skiadopoulos [22] and Psychoyios [21] recommend that
+the mean-reverting logarithmic model (denoted as MRLR) serves better than the meanreverting square root models (denoted as MRSR) in both aspects of fitting VIX historical
+data under the objective measure and calibrating VIX options under martingale measure.
+The logarithmic models proposed in Psychoyios and Skiadopoulos [22] and Psychoyios [21]
+assumes that logarithm of VIX follows a OU process as Vasicek [26] . By adding upward
+jumps that follow exponential distribution into the MRLR model to construct mean-reverting
+logarithmic jump model (denoted as MRLRJ), Psychoyios [21] successfully get an explicit pricing formula for VIX option expressed by characteristic function of log-VIX in the
+MRLRJ model.
+Bao [36] calibrates the four models BS, MRSR, MRLR and MRLRJ to a series of VIX
+
+2
+
+Introduction
+
+options, and performs a comparative study on pricing accuracy and flexibility to generating
+reasonable positive volatility skew. Calibration in Bao [36] is conducted for each separate
+maturity across strikes that have non-zero bid prices. The results confirm that MRLR and
+MRLRJ are better than MRSR model in fitting VIX option quotes, especially MRLRJ.
+However, pricing accuracy of MRLR is still not satisfactory, especially for out of the money
+call options, which can provide effective hedging instruments against large downside move
+of stock market. Therefore, the results in Bao [36] conclude that upward jumps in spot VIX
+and stochastic volatility of spot VIX is necessary in order to improve the mean-reverting
+logarithmic modeling of VIX.
+The most significant shortage of research in literature regarding VIX modeling is the dynamic features of VIX futures implied by VIX models as well as the hedging ratios of
+VIX futures and VIX options with respect to other VIX future contracts. In this thesis,
+I will focus on the family of mean-reverting logarithmic models in the aspects of pricing,
+dynamics, calibration, hedging and convexity adjustments of VIX futures and VIX options.
+The remaining chapters of this thesis are organized as follows. Chapter 2 reviews some of
+the literature of VIX modeling that are most relevant to this thesis. Chapter 3 begins the
+research of this thesis and starts with MRLR model. I derive the VIX future and VIX option pricing formulas and also the dynamics of VIX future. Based on the dynamics of VIX
+future, I calculate the instantaneous correlation of VIX futures with different maturities.
+Furthermore, I derive hedging ratios of VIX futures and VIX options both with respect to
+spot VIX and VIX futures of different maturities. Finally, I derive the pricing formula for
+forward 30-day variance swap and calculate the convexity adjustment of VIX future from
+forward variance swap. The MRLR model is calibrated to both VIX future term structure and VIX implied volatility surfaces. Also calibration idea of making use of forward
+variance swap market data is suggested in this chapter.
+In the following chapters 4, 5 and 6, I extend MRLR model to including jump or/and
+stochastic volatility and conduct the same research as above to those models MRLRJ, MRLRSV, MRLRJSV.
+
+3
+
+浙江大学博士学位论文
+
+In Chapter 7, I present some numerical results of those models and make some concluding
+remarks on pros and cons of all of these models.
+
+4
+
+VIX Modeling Review
+
+2 VIX Modeling Review
+2.1 Consistent Approach
+In the first line of research for VIX future modeling in literature, the joint dynamics of SPX
+index and its instantaneous stochastic volatility is specified. Based on this joint dynamics,
+expression for spot VIX is further derived and it can be represented as function of instantaneous SPX volatility and its driving factors. Consequently, VIX future and VIX option
+can be priced using the characteristic function of instantaneous volatility. This approach
+is usually called consistent modeling approach because under this model both SPX option
+and VIX option can be priced simultaneously and the model is jointly calibrated to both
+option markets.
+2.1.1 Zhang and Zhu (2006) [31]
+Zhang and Zhu [31] is the first paper in literature that proposes a consistent model for VIX
+future. Under pricing measure Q, the authors assume that SPX index follows Heston stochastic volatility model
+{ dSt
+
+√
+=
+rdt
++
+Vt dWtS
+St
+√
+∼Q
+dVt = κ (θ − Vt ) dt + σV Vt dWtV
+
+(2.1)
+
+with dWtS dWtV = ρdt. Given the above joint dynamics, especially dynamics of instantaneous variance Vt , V IXt2 as conditional expectation of 30 day realized variance is expressed as
+.
+V IXt2 = EtQ
+
+[
+
+1
+τ0
+
+∫ t+τ0
+t
+
+]
+
+Vs ds = A + B · Vt
+
+where τ0 = 30/365, A and B are represented as
+[
+]
+{
+A = θ 1 − κτ10 [1 − e−κτ0 ]
+B = κτ10 [1 − e−κτ0 ]
+
+Furthermore, transition function of instantaneous variance Vt is expressed as
+( )q/2 ( √ )
+Q
+−u−v v
+f (VT |Vt ) = ce
+Iq 2 uv
+u
+
+(2.2)
+
+(2.3)
+
+(2.4)
+
+5
+
+浙江大学博士学位论文
+
+with
+
+c = σ2 1−e2κ
+
+−κ(T −t)
+
+]
+
+V[
+
+−κ(T −t)
+u = cVt e
+
+v = cVT
+
+
+ q = 2κθ
+−1
+σ2
+
+(2.5)
+
+V
+
+Consequently, VIX future pricing formula can be easily expressed as
+[√
+] ∫ +∞ √
+Q
+Q
+T
+Ft = Et [V IXT ] = Et
+A + B · VT =
+A + B · VT f Q (VT |Vt ) dVT (2.6)
+0
+
+Given the analytical formula of transition function f Q (VT |Vt ) under martingale measure
+Q, the above formula as an integral can be implemented by Gaussian quadrature.
+
+With the 3 free parameters (κ, θ, σV ), the VIX future model can be calibrated to market
+prices of VIX futures.
+2.1.2
+
+Zhu and Zhang [34]
+
+Zhu and Zhang [34] extends the model of Zhang and Zhu [31] by making the long-term mean
+in instantaneous variance be time-dependent, i.e. θ = θt .
+{ dSt
+√
+=
+rdt
++
+Vt dWtS
+St
+√
+∼Q
+dVt = κ (θt − Vt ) dt + σV Vt dWtV
+with dWtS dWtV = ρdt. Again, square of spot VIX, V IXt2 , can be represented as
+[ ∫ t+τ0
+]
+1
+Q
+2 .
+V IXt = Et
+Vs ds = A + B · Vt
+τ0 t
+where A and B are given by
+]
+∫ t+τ [
+{
+A = τ10 t 0 1 − e−(t+τ0 −s) θs ds
+B = κτ10 [1 − e−κτ0 ]
+
+(2.7)
+
+(2.8)
+
+(2.9)
+
+Furthermore, transition function of instantaneous variance Vt is expressed as inverse Fourier transform of conditional characteristic function
+∫
+[
+]
+1 +∞
+Q
+Re e−isVT +α(t;is)+β(t;is)Vt ds
+f (VT |Vt ) =
+π 0
+
+(2.10)
+
+with
+
+{
+6
+
+κue−κ(T −t)
+1 2
+κ− σV u[1−e−κ(T −t) ]
+∫2T
+α (t; u) = κ t θh β (h; u) dh
+
+β (t; u) =
+
+(2.11)
+
+VIX Modeling Review
+
+Consequently, VIX future pricing formula can be easily expressed as
+] ∫ +∞ √
+[√
+Q
+Q
+T
+A + B · VT =
+A + B · VT f Q (VT |Vt ) dVT (2.12)
+Ft = Et [V IXT ] = Et
+0
+
+This model is calibrated to SPX index option market and forward variance term structure.
+2.1.3 Zhang, Shu and Brenner (2010) [30]
+
+Zhang, Shu and Brenner [30] further extends the previous two models by making the longterm mean stochastic, i.e.
+ dS
+√
+ Stt = rdt + Vt dWtS
+√
+dVt = κ (θt − Vt ) dt + σV Vt dWtV ∼ Q
+
+dθt = σθ dWtθ
+
+(2.13)
+
+with dWtS dWtV = ρdt and dWtV dWtθ = ρθ dt. Again, square of spot VIX, V IXt2 , can be
+represented as
+.
+V IXt2 = EtQ
+
+[
+
+1
+τ0
+
+∫ t+τ0
+t
+
+]
+
+Vs ds = (1 − B) · θt + B · Vt
+
+(2.14)
+
+where B is given by
+B=
+
+]
+1 [
+1 − e−κτ0
+κτ0
+
+Also, VIX future pricing formula can be easily expressed as
+[√
+]
+FtT = EtQ [V IXT ] = EtQ
+A + B · VT
+∫ +∞ √
+(1 − B) · θT + B · VT f Q (VT |Vt ) dVT
+=
+
+(2.15)
+
+(2.16)
+
+0
+
+However, transition function nor conditional characteristic function of instantaneous vari√
+ance Vt is derived in this thesis. Instead, the authors approximate (1 − B) · θT + B · VT
+√
+with (1 − B) · θt + B · VT and further expand it up to the third order using Taylor’s ex-
+
+pansion so that VIX future can be expressed by 1st , 2nd and 3rd moments of VT
+This model is calibrated to VIX future term structure.
+2.1.4 Other Consistent Models
+
+In addition to the above mentioned papers, there are other literature that focus on consistent
+modeling of spot VIX and further price VIX future and VIX option under this model.
+7
+
+浙江大学博士学位论文
+
+The first fully specified model is Lin [16] . The author assumes that SPX index and its instantaneous variance follows
+{
+√
+Vt dWtS + zS dNt
+dSt /St = [r − λt ] dt + √
+∼Q
+dVt = κ (θ − Vt ) dt + σV Vt dWtV + zV dNt
+
+(2.17)
+
+with dWtS dWtV = ρdt. The Poisson process Nt is assumed to be independent from the two
+Brownian Motions WtS and WtV and it controls jumps both in SPX index and instantaneous
+variance. Intensity of this Poisson process is assumed to be stochastic and it is affine function of instantaneous variance Vt , i.e. λt = λ0 + λ1 · Vt . Jump size in Vt is exponentially
+distributed with ZV ∼ exp (µV ). Conditioned on ZV , the jump size in SPX index follows
+normal distribution, i.e. zS |zV ∼ N (µJ + ρJ zV , σJ2 ).
+Again, V IXt2 can be expressed as affine function of Vt in this model. Therefore, knowing
+the transition function of Vt is equivalent to knowing transition of V IXt2 . The method to
+obtain transition function of Vt is to express it as inverse Fourier transform of conditional
+characteristic function of Vt . Given conditional characteristic function of Vt defined as
+below
+[
+]
+ψ (Vt , t; s) = EtQ eisVT
+
+(2.18)
+
+one can calculate conditional moments of VT , thus using the affine expression of V IXT2
+with VT one can easily derive the second moment of V IXT . By making use of the below
+convexity adjustment formula
+FtT =
+
+√
+
+varQ [V IXT2 ]
+EtQ [V IXT2 ] − { t
+}3/2
+8 EtQ [V IXT2 ]
+
+(2.19)
+
+VIX future price can be obtained. However, as several authors point out, the formula for
+conditional characteristic function of Vt in Lin [16] is problematic and it can cause significant
+pricing discrepancy from other pricing formulas under the same model, see Lian [15] .
+In chapter 7 of thesis Lian [15] , the author corrects the formula for conditional characteristic
+function under the same model as Lin [16] . Furthermore, instead of deriving an approximate
+pricing formula for VIX future using the convexity adjustment formula (2.19), Lian [15]
+express VIX future price as in eqn. (2.12)
+8
+
+VIX Modeling Review
+
+2.2 Standalone Approach
+In the second line of research for VIX future modeling in literature, the dynamics of spot
+VIX is directly specified and VIX future and VIX option can be priced under this model.
+This approach only focuses on pricing derivatives written on VIX index without considering SPX option. The advantage of this model is that a clear dynamics for spot VIX can
+be obtained and thus the pricing formula and dynamics of VIX future and VIX option
+can be clearer and simpler. This makes pricing and calibration of VIX derivatives more
+straightforward and accurate.
+This approach makes good sense because the market practice of hedging VIX future and
+VIX option is usually making use of other VIX futures with shorter maturities. One reason
+of using other VIX future contracts as hedging instruments is that spot VIX itself is not a
+tradable asset and the simplest and most relevant contract to VIX future and VIX option
+is another VIX future contract. Second reason for this hedging strategy is that VIX option
+can be regarded as an option written on VIX future contract with the same maturity as VIX
+option. Third reason for this method is the evidence from literature that a shorter maturity
+VIX future has significant power in forecasting changes in the subsequent VIX future price
+(see Simon and Campasano [25] ). Consequently, hedging VIX future and VIX option with
+a shorter maturity VIX future contract is not only reasonable but also one of the few only
+choices available to investors.
+2.2.1 Whaley (1993) [28]
+Whaley [28] is the first paper proposes a standalone method for modeling spot VIX. Of
+course, at that time the definition of spot VIX is still under the old methodology. Whaley [28] simply assumes that spot VIX follows a Geometric Brownian Motion process under
+martingale measure Q
+dV IXt
+= rdt + σdWt
+V IXt
+
+(2.20)
+
+9
+
+浙江大学博士学位论文
+
+Thus VIX call option is given by Black-Scholes formula
+[
+]
+CalltT = e−r(T −t) FtT · N (d1 ) − K · N (d2 )
+
+(2.21)
+
+with
+FtT = V IXt er(T −t)
+and
+σ2T
+FT
+d1,2 = ln t ±
+K
+2
+[
+
+]/
+
+√
+σ T
+
+.
+Although this model is too simple to capture the feature of VIX option, it can serve as
+a formula to invert market quotes of VIX option to implied volatility of VIX option. This
+implied volatility is known as the implied vol-of-vol. However, the input of FtT in the above
+pricing formula needs to be replaced with market quotes of VIX future which has the same
+maturity as VIX option, instead of FtT = V IXt er(T −t) .
+2.2.2
+
+Grunbichler and Longstaff (1996) [8]
+
+In Grunbichler and Longstaff [8] , the authors assume that V IXt follows a mean-reverting
+square root process (MRSR) as below
+dV IXt = κ (θ − V IXt ) dt + σ
+
+√
+V IXt dWt
+
+(2.22)
+
+By making use of the analytical transition function of V IXt under this model, one can get
+the below analytical pricing formula for VIX call option
+{
+[
+]
+CalltT = e−r(T −t) φT −t V IXt · 1 − χ2 (ωK; v + 4, ξ)
+[
+]
+[
+]}
++θ (1 − φT −t ) 1 − χ2 (ωK; v + 2, ξ) − K 1 − χ2 (ωK; v, ξ) (2.23)
+with
+
+φτ = e−κτ
+
+
+ ω=
+4κ
+
+σ 2 (1−φτ )
+4κθ
+
+v = σ2
+
+
+ξ = ωφτ V IXt
+
+10
+
+VIX Modeling Review
+
+and χ2 (v, ξ) is a cumulative function of Chi-Square distribution with degree of freedom v
+and non-central parameter ξ.
+Disadvantage of this pricing formula is the calculation speed of cumulative distribution
+function χ2 (v, ξ). An alternative method is to calculate the conditional characteristic function ψ (t; s) of V IXt
+[
+]
+.
+ψ (t; s) = EtQ eisV IXT
+
+(2.24)
+
+and then using the below formula to calculate VIX option price
+{ ∫ T
+}
+[
+]
+T
+Callt = exp −
+rs ds · EtQ (V IXT − K)+
+t
+{ ∫ T
+}
+]
+[
+= exp −
+rs ds · FtT · Π1 − K · Π2
+
+(2.25)
+
+t
+
+where Π1 and Π2 are two tail probabilities under two martingale measures and they are
+given as
+1 1
+Πj = +
+2 π
+
+∫ +∞
+0
+
+]
+ψj (t; s)
+ds,
+Re
+is
+[
+
+j = 1, 2
+
+and the two characteristic functions are given by
+{
+ψ1 (t; s) = ψ(t;s−i)
+ψ(t;−i)
+ψ2 (t; s) = ψ (t; s)
+
+(2.26)
+
+(2.27)
+
+2.2.3 Detemple and Osakwe (2000) [3]
+In Detemple and Osakwe [3] , the authors assume that V IXt follows a mean-reverting
+logarithmic process (MRLR) as below
+d ln V IXt = κ (θ − ln V IXt ) dt + σdWt
+
+(2.28)
+
+By making use of the log-normal distribution of V IXt under MRLR model, one can easily
+derive the pricing formula for VIX call option as below
+
+where
+
+[
+]
+CalltT = e−r(T −t) FtT · N (dT −t + αT −t ) − K · N (dT −t )
+
+(2.29)
+
+φ
+
+FtT = V IXt T −t MT −t
+11
+
+浙江大学博士学位论文
+
+is VIX future, and
+
+}
+{
+1 2
+
+α
+M
+=
+exp
+θ(1
+−
+φ
+)
++
+τ
+τ
+
+2 τ
+
+
+ φτ = e−κτ
+√
+1−φ2τ
+α
+=
+σ
+τ
+
+2κ
+
+
+τ +(1−φ )·θ
+
+τ
+ d = φτ ·ln V IX
+K
+τ
+
+2.2.4
+
+ατ
+
+Psychoyios, Dotsis, and Markellos [21]
+
+In Psychoyios [21] , the authors assume that V IXt follows a mean-reverting logarithmic
+jump process (MRLRJ) as below
+d ln V IXt = κ (θ − ln V IXt ) dt + σdWt + JdNt
+
+(2.30)
+
+In this model analytical formula for the transition function is not available and the pricing
+formula for VIX call option can be expressed as
+{ ∫ T
+}
+[
+]
+Ct = exp −
+rs ds · FtT · Π1 − K · Π2
+
+(2.31)
+
+t
+
+where
+φ
+
+FtT = V IXt T −t MT −t
+is VIX future and this time Mτ is given by
+Mτ = exp
+
+{
+
+θ(1 − φτ ) + 21 ατ2 + λκ ln
+
+(
+
+η−φτ
+η−1
+
+)}
+
+2.3 Comparison of two Approaches
+Psychoyios and Skiadopoulos [22] and Wang and Daigler [27] conduct some comparative studies about the above two categories of VIX future and VIX option pricing models in the
+aspect of hedging effectiveness and pricing accuracy. Their research results suggest that
+simpler models of the second kind perform equally well with or even better than the more
+complicated consistent models, such as the fully-specified Lin and Chang [17] model.
+As indicated above, the standalone approach makes good sense because the market practice
+of hedging VIX future and VIX option is usually making use of other VIX futures with
+
+12
+
+VIX Modeling Review
+
+shorter maturities. This is not only reasonable but also one of the few only choices available
+to investors.
+Therefore, in this thesis I focus on studying the standalone approach for VIX future and
+VIX option modeling. As shown in Psychoyios [21] and Bao [36] , the mean-reverting logarithmic model (MRLR) serves much better than mean-reverting square root model (MRSR)
+in fitting quality, calibration accuracy, computation speed and property of VIX future dynamics. Therefore, I will focus on MRLR and its extension in this thesis.
+What separates my work from that in literature of standalone approach is multi-fold. Firstly,
+the models proposed in this thesis calibrate to initial VIX future curve by construction and
+I explicitly present the calibration formula for doing so. Secondly, I am not only concerned
+about the static calibration to initial VIX future curve but also the convexity adjustment of
+VIX future from forward variance swap. Thirdly, I not only derive the pricing formula for
+VIX future and VIX option, but also derive the dynamics of VIX future and VIX option
+under the proposed models. This helps well explain hedging strategies for VIX futures and
+VIX options under those models.
+
+13
+
+浙江大学博士学位论文
+
+3
+
+MRLR Model
+
+In this chapter I present the first version of mean-reverting logarithmic model (MRLR).
+Under this model, logarithm of spot VIX is assumed to follow an OU process. As a process of OU type is normally distributed (see Vasicek [26] ), spot VIX under this model thus
+follows log-normal distribution. Of course conditional distribution of V IXT conditioned
+on V IXt also follows log-normal distribution. Consequently, VIX future as conditional expectation of V IXT also is log-normally distributed. VIX option can be regarded as
+an option written on VIX future with the same maturity and thus Black’s formula with
+time-dependent volatility for VIX option is obtained. This is a modification of the simple
+log-normal spot VIX model of Whaley [28] as presented in subsection 2.2.1 and the VIX
+option pricing formula can serves as a formula to invert VIX option market quotes to VIX
+implied volatilities.
+
+3.1 MRLR dynamics and distribution
+I first present the dynamics of ln V IXt under MRLR model here. In order to calibrate this
+model to initial VIX future curve, I make the long-term mean θt be time-dependent. Also,
+in order to calibrate to VIX ATM implied volatility term structure, I let the instantaneous
+volatility-of-volatility (vol-of-vol) to be time dependent.
+Definition 3.1：(MRLR Dynamics)
+Under martingale measure Q, the mean-reverting logarithmic process is formulated as
+d ln V IXt = κ (θt − ln V IX t ) dt + σt dWt
+
+(3.1)
+
+where κ is mean-reverting speed, time-dependent function θt is the long-term mean of
+logarithm of spot VIX, σt is also a function of time and it can be thought as vol-of-vol for
+spot VIX.
+Of course, θt and σt can either be constant or be time-dependent. When θt is time-dependent,
+14
+
+MRLR Model
+
+e.g. piece-wise constant, it can be calibrated to term structure of VIX future. The timedependent vol-of-vol function σt can be used to calibrate to ATM VIX implied volatility
+term structure.
+Below I present the analytical conditional distribution of V IXT under MRLR model.
+Proposition 3.1：(VIX Distribution)
+Under the assumption of MRLR process in Definition 3.1, spot V IXT is log-normal distributed under martingale measure Q conditioned on information at time t, i.e.
+(
+)
+∫ T
+∫ T
+−κ(T −t)
+−κ(T −s)
+2 −2κ(T −s)
+V IXT |Ft ∼ LN e
+ln V IXt +
+κθs e
+ds,
+(3.2)
+σs e
+ds
+t
+
+t
+
+In particular, if parameters θ and σ are constant, we have
+)
+(
+]
+[
+] σ2 [
+−2κ(T −t)
+−κ(T −t)
+−κ(T −t)
+1−e
+V IXT |Ft ∼ LN e
+ln V IXt + θ 1 − e
+,
+2κ
+
+(3.3)
+
+Proof: Given dynamics of lnV IXt in eqn. (3.1), we can make the following change of
+variable
+)
+(
+d eκt ln V IXt = κeκt ln V IXt dt + eκt d ln V IXt
+
+= κeκt ln V IXt dt + eκt [κ (θt − ln V IXt ) dt + σt dWt ]
+
+= κθt eκt dt + eκt σt dWt
+Thus we have
+e
+
+κT
+
+κt
+
+ln V IXT = e ln V IXt +
+
+∫ T
+
+κθs e ds +
+
+κθs e
+
+−κ(T −s)
+
+κs
+
+t
+
+∫ T
+
+σs eκs dWs
+
+∫ T
+
+σs e−κ(T −s) dWs
+
+t
+
+and further
+ln V IXT = e
+
+−κ(T −t)
+
+ln V IXt +
+
+∫ T
+
+ds +
+
+t
+
+t
+
+With the following property in mind
+(∫ T
+) ∫ T
+Q
+−κ(T −s)
+vart
+σs e
+dWs =
+σs2 e−2κ(T −s) ds
+t
+
+t
+
+we conclude that V IXT is log-normally distributed conditioned on information at time t
+as in eqn. (3.2).
+Proof of eqn. (3.3) is trivial based on results in eqn. (3.2). 
+15
+
+浙江大学博士学位论文
+
+3.2 VIX Future and VIX Option Pricing
+Based on the distribution of spot VIX under martingale measure Q as in eqn. (3.2), we can
+derive the pricing formulas for VIX future and VIX option.
+Theorem 3.1：(VIX Future Pricing)
+.
+Under the assumption of MRLR process in Definition 3.1, VIX future FtT = EtQ [V IXT ]
+can be explicitly solved as
+−κ(T −t)
+· exp
+FtT = {V IXt }e
+
+{∫ T
+
+κθs e
+
+t
+
+−κ(T −s)
+
+1
+ds +
+2
+
+∫ T
+t
+
+}
+
+σs2 e−2κ(T −s) ds
+
+(3.4)
+
+In particular, when parameters θ and σ are constant, VIX future can be expressed as
+}
+{
+]
+[
+] σ2 [
+e−κ(T −t)
+−2κ(T −t)
+−κ(T −t)
+T
+1−e
+(3.5)
+· exp θ 1 − e
++
+Ft = {V IXt }
+4κ
+
+Furthermore, dynamics of VIX future under pricing measure Q can be given by
+dFtT
+= e−κ(T −t) · σt dWt
+FtT
+
+(3.6)
+
+Proof:
+VIX future pricing formulas (3.4) and (3.5) are direct consequence of log-normal distribution of V IX under pricing measure Q as shown in eqn. (3.2) and the below property of
+normal variable
+(
+)
+X ∼ N µ, σ 2
+
+⇒
+
+1 2
+[ ]
+E eX = eµ+ 2 σ
+
+In order to derive the risk-neutral dynamics of VIX future, we first derive dynamics of
+V IXt under the pricing measure.
+1
+dV IXt = deln V IXt = eln V IXt d ln V IXt + eln V IXt d ln V IXt d ln V IXt
+2
+V IXt 2
+= V IXt [κ (θt − ln V IXt ) dt + σt dWt ] +
+σt dt
+2
+)
+]
+[(
+σ2
+= V IXt θt κ + 2t − κ ln V IXt dt + V IXt σt dWt
+Consequently, we get
+]
+)
+dV IXt [(
+σ2
+= θt κ + 2t − κ ln V IXt dt + σt dWt
+V IXt
+16
+
+(3.7)
+
+MRLR Model
+
+Using Ito’s lemma to eqn. (3.4) and result in the above equation, we get
+{∫ T
+}
+∫
+1 T 2 −2κ(T −s)
+T
+−κ(T −s)
+dFt = exp
+κθs e
+ds +
+ds
+σ e
+2 t s
+t
+−κ(T −t)
+
+−1
+·e−κ(T −t) · {V IXt }e
+dV IXt
+{∫ T
+}
+∫
+1 T 2 −2κ(T −s)
+1
+−κ(T −s)
+κθs e
+ds +
+σ e
+ds
++ exp
+2
+2 t s
+t
+[
+]
+−κ(T −t) −2
+·e−κ(T −t) e−κ(T −t) − 1 · {V IXt }e
+· dV IXt dV IXt
+{∫ T
+}
+∫ T
+1
+2 −2κ(T −s)
+−κ(T −s)
++ exp
+σ e
+ds
+κθs e
+ds +
+2 t s
+t
+−κ(T −t)
+
+· ln V IXt · {V IXt }e
+· κe−κ(T −t) dt
+]
+[
+1 −2κ(T −t) 2
+−κ(T −t)
+σt · FtT dt
+− κθt e
++ e
+2
+)
+]
+}
+{[(
+σt2
+−κ(T −t)
+T
+·
+θt κ + 2 − κ ln V IXt dt + σt dWt
+= Ft · e
+[
+]
+1
++ FtT · e−κ(T −t) e−κ(T −t) − 1 σt2 dt
+2
++FtT · ln V IXt · κe−κ(T −t) dt
+]
+[
+1 −2κ(T −t) 2
+−κ(T −t)
+σt · FtT dt
+− κθt e
++ e
+2
+T
+−κ(T −t)
+= Ft · e
+· σt dWt
+which concludes proof of eqn. (3.6). 
+
+One conclusion we can draw from eqn. (3.6) is that the time-dependent vol-of-vol function
+σt of spot VIX is also a significant component of the vol-of-vol of VIX future. In addition,
+the mean-reverting speed κ of spot VIX has inverse impact on vol-of-vol of VIX future.
+This is understandable as increase of mean-reverting speed makes spot VIX less possibly
+to deviate significantly from its long-term mean and thus spot VIX is less volatile in longer
+term compared to a non mean-reverting process with same vol-of-vol. This effect of meanreversion further translates into less vol-of-vol in VIX future.
+Now I calculate the correlation of VIX futures with different maturities. For the single
+factor MRLR model, we have the below corollary.
+Corollary 3.1：(VIX Future Correlation)
+From the dynamics of VIX future in eqn. (3.6), we get the instantaneous correlation of VIX
+17
+
+浙江大学博士学位论文
+
+futures with different maturities as
+ρtT1 ,T2 = corr
+
+(
+
+dFtT1 , dFtT2
+
+with T1 < T2 .
+
+⟩
+⟨ T1
+) .
+dFt , dFtT2
+= √⟨
+⟩ ⟨ T2
+⟩ =1
+T1
+T1
+T2
+dFt , dFt
+dFt , dFt
+
+(3.8)
+
+Proof:
+Given dynamics of VIX future in eqn. (3.6), we have
+⟩
+⟨ T1
+T2
+dF
+,
+dF
+t
+t
+ρtT1 ,T2 = √⟨
+⟩
+⟩⟨
+dFtT1 , dFtT1 dFtT2 , dFtT2
+= √[
+
+e−κ(T1 −t) e−κ(T2 −t) σt2 FtT1 FtT2 dt
+=1
+( T1 )2 ] [
+( T2 )2 ]
+2
+2
+−2κ(T
+−t)
+−2κ(T
+−t)
+2
+1
+e
+σt Ft
+e
+σ t Ft
+
+which concludes proof of this corollary. 
+
+Like the drawback of single factor short rate model in interest rate modeling, the one-factor
+MRLR model implies that VIX futures with different maturities are perfectly correlated
+instantaneously.
+Theorem 3.2：(VIX Option Pricing)
+.
+Under the assumption of MRLR process in Definition 3.1, VIX call option CalltT (K) =
+}
+{ ∫
+[
+]
+T
+exp − t rs ds · EtQ (V IXT − K)+ can be explicitly solved as
+{ ∫ T
+}
+]
+[
+T
+Callt (K) = exp −
+rs ds · FtT · Π1 − K · Π2
+t
+{ ∫ T
+}
+[
+]
+= exp −
+rs ds · FtT · Φ (d1 ) − K · Φ (d2 )
+(3.9)
+t
+
+where Φ is cumulative distribution function of standard normal variable, d1 and d2 are
+defined as
+
+1 ∫ T 2 −2κ(T −s)
+σ e
+ds
+ln(FtT /K )+
+
+
+√∫ T 2 t s
+ d1 =
+2 −2κ(T −s)
+
+ds
+t σs e
+(3.10)
+1 ∫ T 2 −2κ(T −s)
+σ
+e
+ds
+ln(FtT /K )−
+
+s
+t
+2
+
+√∫ T
+ d2 =
+2 −2κ(T −s) ds
+t σs e
+{ ∫
+}
+]
+[
+.
+T
+Furthermore, VIX put option P utTt (K) = exp − t rs ds · EtQ (K − V IXT )+ can be
+
+explicitly solved as
+
+P utTt (K)
+
+18
+
+{ ∫ T
+}
+]
+[
+= exp −
+rs ds · K · (1 − Π2 ) − FtT · (1 − Π1 )
+t
+
+MRLR Model
+
+{ ∫ T
+}
+[
+]
+= exp −
+rs ds · K · Φ (−d2 ) − FtT · Φ (−d1 )
+
+(3.11)
+
+t
+
+Proof:
+VIX option is settled with spot VIX at maturity, thus it can be regarded as an option on spot
+VIX. Alternatively, VIX option can also be regarded as an option written on VIX future
+contract which has the same maturity as VIX option, because
+CalltT (K)
+
+{ ∫ T
+}
+]
+[
+= exp −
+rs ds · EtQ (V IXT − K)+
+t
+{ ∫ T
+}
+[(
+)+ ]
+= exp −
+rs ds · EtQ FTT − K
+
+(3.12)
+
+t
+
+Based on the conditional log-normal distribution of FTT given by driftless dynamics of FtT
+as in eqn. (3.6), we can just use Black’s formula with time-dependent volatility to obtain
+call and put option prices as in eqn. (3.9) and (3.11). 
+Of course, pricing formulas (3.9) and (3.11) can also be derived by treating VIX option
+with spot VIX as underlying and using the log-normal distribution of spot VIX as shown
+in eqn. (3.2).
+The pricing formula (3.9) seems very close to the Whaley [28] pricing formula (2.21). However, in formula (2.21) the VIX future is priced with a problematic formula and if the input
+of current underlying level is spot VIX, the obtained VIX option price can be wrong. In
+contrast, in pricing formula (3.9) the VIX future FtT is also priced with MRLR model and
+after calibration it can perfectly match market VIX future prices. Therefore, even the spot
+VIX is used as input for current level of underlying, the VIX option pricing formula can
+still perfectly fit VIX ATM implied volatility term structure.
+
+3.3 VIX Future and VIX Option Calibration
+Theorem 3.3：(Calibration of VIX ATM Implied Vol and VIX Future Term Structure)
+For the MRLR model in Definition 3.1, VIX option is priced using a log-normal underlying
+FtT with time-dependent volatility. Thus this model has no effect of skewness and we can
+only imply ATM implied volatility of VIX option using this model. From the result of
+19
+
+浙江大学博士学位论文
+
+Black’s formula, we can easily derive
+IV
+σAT
+M (T ) =
+
+√
+
+1
+T
+
+∫ T
+0
+
+e−2κ(T −s) σs2 ds
+
+(3.13)
+
+IV
+where σAT
+M (T ) is ATM VIX implied volatility term structure. Thus we have the below
+
+calibration formula
+IV
+[ IV
+]2
+dσAT
+M (T )
+IV
+σT2 = σAT
+(T
+)
+·
+(1
++
+2κT
+)
++
+2T
+σ
+(T
+)
+M
+AT M
+dT
+
+(3.14)
+
+In practice, one could specify a pre-given value for mean-reverting speed κ and calibrate σt
+to ATM VIX implied volatility term structure according to above formula. With calibration
+result of κ and σt from ATM implied volatility term structure, we can move forward to
+calibrate VIX future term structure.
+]
+[ 2 ∫ T
+σT
+−2κ(T −s) 2
+−
+e
+σs ds
+2 κ
+0
+
+1 df0T
+1
+−
+θT = f0T +
+κ dT
+
+(3.15)
+
+.
+where f0T = ln F0T is the initial VIX future term structure.
+Proof:
+In order to prove the pricing formula (3.14), we take derivatives w.r.t. T on both sides of
+eqn. (3.13). Thus we get
+IV
+[ IV
+]2
+dσAT
+M (T )
+IV
+T
+σAT M (T ) + 2σAT
+(T
+)
+M
+dT
+∫ T
+2
+= σT − 2κ
+e−2κ(T −s) σs2 ds
+0
+]2
+[ IV
+2
+= σT − 2κ σAT M (T ) T
+
+Reorganize the above equation, we get calibration formula (3.14) for vol-of-vol σt . According to eqn. (3.4), the initial VIX future term structure F0T is given by
+−κT
+· exp
+F0T = {V IX0 }e
+
+{ ∫ T
+}
+∫
+1 T −2κ(T −s) 2
+−κ(T −s)
+κ
+e
+θs ds +
+e
+σs ds
+2 0
+0
+
+Thus
+f0T = ln F0T = e−κT · ln V IX0 + κ
+
+20
+
+∫ T
+0
+
+e
+
+−κ(T −s)
+
+1
+θs ds +
+2
+
+∫ T
+0
+
+e−2κ(T −s) σs2 ds
+
+MRLR Model
+
+Take derivative w.r.t. T on both sides of the above equation, we get
+df0T
+dT
+
+−κT
+
+2
+
+= −κe
+· ln V IX0 + κθT − κ
+∫ T
+−κ
+e−2κ(T −s) σs2 ds
+
+∫ T
+0
+
+1
+e−κ(T −s) θs ds + σT2
+2
+
+0
+
+1
+= −κe
+· ln V IX0 + κθT + σT2 − κ
+2
+[ ∫ T
+]
+−κ κ
+e−κ(T −s) θs ds
+−κT
+
+∫ T
+0
+
+e−2κ(T −s) σs2 ds
+
+0
+
+∫ T
+1 2
+= −κe
+· ln V IX0 + κθT + σT − κ
+e−2κ(T −s) σs2 ds
+2
+0
+]
+[
+∫ T
+1
+−2κ(T −s) 2
+T
+−κT
+e
+σs ds
+−κ f0 − e
+· ln V IX0 −
+2 0
+[
+]
+∫ T
+1 2
+−2κ(T −s) 2
+= κθT +
+σ −κ
+e
+σs ds − κf0T
+2 T
+0
+−κT
+
+(3.16)
+
+Rearrange the above equation, we get the result in eqn. (3.15). 
+The above calibration formulas (3.14) and (3.15) suggest calibration strategy of this model.
+On the first stage of calibration, we calibrate the vol-of-vol function σt to VIX ATM implied
+volatility term structure with a given pre-specified mean-reverting speed κ using formula
+(3.14). On the second stage of calibration, we further calibrate the long-term mean function
+θt to initial VIX future term structure using formula (3.15).
+
+3.4 VIX Future and VIX Option Hedging
+VIX future is defined as the expectation in future level of change in spot VIX. However,
+spot VIX is not tradable asset and investors can not take position on this index. This is
+similar as the situation in fixed income modeling framework. Interest rate is not a tradable
+asset but it’s the driving factor of fixed income assets and derivatives. In fixed income asset
+class, one can calculate sensitivities of both interest rate derivatives and bonds to interest
+rate and then use those sensitives to further develop hedging strategies for interest rate
+derivatives with bonds as hedging instruments. Similarly, one can calculate sensitivities
+of VIX futures and VIX options with respect to spot VIX and further develop hedging
+
+21
+
+浙江大学博士学位论文
+
+strategies for VIX futures and VIX options with other VIX future contracts as hedging
+instruments.
+Theorem 3.4：(VIX Future Hedging)
+Firstly, we calculate the sensitivities of VIX future price to spot VIX. We are concerned
+with the spot delta and spot gamma.
+
+ ∂FtT = e−κ(T −t) · F T
+t
+∂V IXt
+V IXt
+−κ(T −t) · 1−e−κ(T −t)
+2F T
+e
+[
+]
+∂
+t
+
+=−
+· FtT
+∂V IX 2
+V IX 2
+
+(3.17)
+
+with maturity T2 to another VIX future with shorter maturity T1 .
+ T
+T2
+2
+
+ ∂FtT1 = e−κ(T2 −T1 ) · FtT1
+∂Ft
+Ft
+T
+[ κ(T −T )
+] F T2
+∂ 2 Ft 2
+−2κ(T2 −T1 )
+2
+1
+
+=
+−e
+·
+e
+−
+1
+· Tt 1 2
+
+2
+T
+∂ ( Ft 1 )
+( Ft )
+Proof:
+
+(3.18)
+
+t
+
+t
+
+Based on the above formulas, we can move forward to calculate sensitivities of VIX future
+
+Given the pricing formula for VIX future in eqn. (3.4), we have the first order derivative of
+VIX future with respect to V IXt as
+−κ(T −t) −1
+∂FtT
+= e−κ(T −t) · {V IXt }e
+∂V IXt
+{ ∫ T
+}
+∫
+1 T −2κ(T −s) 2
+−κ(T −s)
+· exp κ
+e
+θs ds +
+e
+σs ds
+2 t
+t
+e−κ(T −t)
+· FtT
+=
+V IXt
+
+Based on the above equation, we can further calculate
+]
+[ −κ(T −t)
+e
+∂
+∂ 2 FtT
+T
+· Ft
+=
+∂V IXt2
+∂V IXt V IXt
+e−κ(T −t)
+∂FtT
+−e−κ(T −t)
+=
+·
++
+· FtT
+2
+V IXt ∂V IXt
+V IXt
+−κ(T −t)
+−κ(T −t)
+e
+e
+−e−κ(T −t)
+·
+· FtT +
+· FtT
+=
+V IXt
+V IXt
+V IXt2
+[
+]
+e−κ(T −t) · 1 − e−κ(T −t)
+· FtT
+= −
+2
+V IXt
+Furthermore, we notice the below change of variable formula
+ ∂Y
+/ ∂Z
+∂Y
+ ∂Z = ∂X
+∂X
+2
+
+∂ 2 Y ∂Z
+
+2
+
+− ∂ Z ∂Y
+
+ ∂∂ZY2 = ∂X 2 ∂X∂Z ∂X3 2 ∂X
+( ∂X )
+
+22
+
+(3.19)
+
+MRLR Model
+
+Therefore, by making use of the above formula we can derive the delta hedging ratio of
+VIX future w.r.t. a shorter term maturity VIX future as
+∂FtT2
+∂FtT1
+
+/
+∂FtT1
+∂FtT2
+=
+∂V IXt ∂V IXt
+[ −κ(T2 −t)
+]/[ −κ(T1 −t)
+]
+e
+· FtT2
+e
+· FtT1
+=
+V IXt
+V IXt
+T2
+F
+= e−κ(T2 −T1 ) · tT1
+Ft
+
+(3.20)
+
+and finally
+∂ 2 FtT2
+)2 =
+(
+∂ FtT1
+
+[
+
+∂ 2 FtT2 ∂FtT1
+∂ 2 FtT1 ∂FtT2
+−
+∂V IXt2 ∂V IXt ∂V IXt2 ∂V IXt
+
+] /(
+
+∂FtT1
+∂V IXt
+
+)3
+
+] −κ(T1 −t) · FtT1
+e−κ(T2 −t) · FtT2 [
+−κ(T2 −t) e
+1−e
+= −
+V IXt2
+V IXt
+] /( −κ(T1 −t)
+)3
+T
+] −κ(T2 −t) · FtT2
+e−κ(T1 −t) · Ft 1 [
+e
+· FtT1
+−κ(T1 −t) e
++
+1−e
+V IXt2
+V IXt
+V IXt
+[
+]
+[
+]
+−e−κ(T2 −t) · FtT2 1 − e−κ(T2 −t) + 1 − e−κ(T1 −t) e−κ(T2 −t) · FtT2
+=
+)2
+(
+e−κ(T1 −t) · FtT1
+[
+]
+[
+]
+e−κ(T2 −t) · 1 − e−κ(T1 −t) − e−κ(T2 −t) · 1 − e−κ(T2 −t)
+FtT2
+=
+·
+)2
+(
+e−2κ(T1 −t)
+FtT1
+[
+
+FtT2
+e−κ(T2 −t) e−κ(T2 −t) − e−κ(T2 −t) e−κ(T1 −t)
+·
+( T1 )2
+e−2κ(T1 −t)
+Ft
+
+=
+
+[ −2κ(T2 −T1 )
+] F T2
+e
+− e−κ(T2 −T1 ) · ( t )2
+FtT1
+[ κ(T2 −T1 )
+] FtT2
+−2κ(T2 −T1 )
+= −e
+· e
+−1 · (
+)2
+FtT1
+
+=
+
+(3.21)
+
+which concludes proof of this theorem. 
+Theorem 3.5：(VIX Option Hedging)
+
+Firstly, we calculate the sensitivities of VIX call option price to spot VIX. We are concerned
+with the spot delta and spot gamma.
+{ ∂CallT
+e−(r+κ)(T −t) ·FtT
+t
+=
+· Π1
+∂V IXt
+V IXt
+]
+}
+e−(r+κ)(T −t) ·FtT {[ −κ(T −t)
+∂ 2 CalltT
+e
+− 1 · Π1 + e−κ(T −t) · f1 (ln K)
+=
+∂V IX 2
+V IX 2
+t
+
+(3.22)
+
+t
+
+23
+
+浙江大学博士学位论文
+
+where Π1 is defined in eqn. (3.9) and f1 (x) is conditional p.d.f. of ln V IXT under a martingale measure with V IXt as numeraire and it can be expressed as
+f1 (ln K) = −
+
+dΠ1 (K)
+dΠ1
+=−
+d (ln K)
+d (ln K)
+
+(3.23)
+
+Based on the above formulas (3.22), we can move forward to calculate sensitivities of VIX
+call option price with maturity T2 to a VIX future with shorter maturity T1 .
+
+T2
+T2
+
+ ∂CallT1t = e−r(T2 −t) e−κ(T2 −T1 ) · FtT1 · Π1 (T2 )
+∂Ft
+Ft
+T
+[(
+)
+] (3.24)
+2 CallT2
+∂
+F 2
+−r(T
+−t)
+−2κ(T
+−T
+)
+t
+2
+2
+1
+
+=e
+e
+· Tt 1 2 · 1 − eκ(T2 −T1 ) · Π1 + f1 (ln K)
+
+T1 2
+∂ ( Ft )
+( Ft )
+Proof:
+
+Proof of formula (3.22) is referred to Theorem 4.6 in next chapter where we provide proof
+for the formula in more generic setup.
+Using the change of variable formula in eqn. (3.19), we can easily derive the first and
+second order sensitivities of VIX call option w.r.t. VIX future that has shorter maturity
+than call option.
+Firstly, we calculate the first order sensitivity of VIX call option with maturity T2 with
+respect to VIX future with maturity T1 < T2 .
+/
+∂CalltT2
+∂FtT1
+∂CalltT2
+=
+∂V IXt ∂V IXt
+∂FtT1
+[ −(r+κ)(T2 −t)
+]/[ −κ(T1 −t)
+]
+e
+· FtT2
+e
+· FtT1
+· Π1
+=
+V IXt
+V IXt
+F T2
+= e−r(T2 −t) · e−κ(T2 −T1 ) · tT1 · Π1
+Ft
+
+(3.25)
+
+Now, we move forward to calculate the gamma sensitivity of CalltT2 with respect to FtT1
+[ 2
+] /(
+)3
+∂ CalltT2 ∂FtT1
+∂FtT1
+∂ 2 FtT1 ∂CalltT2
+∂ 2 CalltT2
+−
+)2 =
+(
+∂V IXt2 ∂V IXt ∂V IXt2 ∂V IXt
+∂V IXt
+∂ FtT1
+{ −(r+κ)(T2 −t)
+]
+} e−κ(T1 −t) · FtT1
+e
+· FtT2 {[
+−κ(T2 −t)
+−κ(T2 −t)
+=
+−
+1
+−
+e
+·
+Π
+−
+e
+·
+f
+(ln
+K)
+1
+1
+V IXt2
+V IXt
+]
+}
+[ −κ(T1 −t)
+] e−(r+κ)(T2 −t) · FtT2
+e
+· FtT1 [
+−κ(T1 −t)
+1
+−
+e
+· Π1
+− −
+V IXt2
+V IXt
+/(
+)3
+e−κ(T1 −t) · FtT1
+V IXt
+24
+
+MRLR Model
+
+{[
+]
+}
+−e−(r+κ)(T2 −t) · FtT2 1 − e−κ(T2 −t) · Π1 − e−κ(T2 −t) · f1 (ln K) e−κ(T1 −t) · FtT1
+[
+[
+]]
+}
++ e−κ(T1 −t) · FtT1 1 − e−κ(T1 −t) e−(r+κ)(T2 −t) · FtT2 · Π1
+/(
+)3
+e−κ(T1 −t) · FtT1
+{
+{[
+]
+}
+= −e−(r+κ)(T2 −t) · FtT2 1 − e−κ(T2 −t) · Π1 − e−κ(T2 −t) · f1 (ln K)
+}
+[
+]
++ 1 − e−κ(T1 −t) e−(r+κ)(T2 −t) · FtT2 · Π1
+/(
+)2
+e−κ(T1 −t) · FtT1
+{
+(
+)
+= e−(r+κ)(T2 −t) · FtT2 · Π1 · e−κ(T2 −t) − e−κ(T1 −t)
+)2
+} /( −κ(T1 −t)
++e−(r+κ)(T2 −t) · FtT2 · e−κ(T2 −t) · f1 (ln K)
+e
+· FtT1
+( −κ(T −t)
+)
+T2
+−κ(T1 −t)
+2
+Π
+·
+e
+−
+e
++ e−κ(T2 −t) · f1 (ln K)
+F
+1
+t
+−(r+κ)(T2 −t)
+= e
+·(
+)2 ·
+e−2κ(T1 −t)
+FtT1
+
+=
+
+{
+
+[ (
+)
+]
+F T2
+= e−(r+κ)(T2 −t) eκ(T1 −t) · ( t )2 · − 1 − e−κ(T2 −T1 ) · Π1 + e−κ(T2 −T1 ) · f1 (ln K)
+FtT1
+[(
+)
+]
+F T2
+(3.26)
+= e−r(T2 −t) e−2κ(T2 −T1 ) · ( t )2 · 1 − eκ(T2 −T1 ) · Π1 + f1 (ln K)
+FtT1
+
+which concludes proof of this theorem. 
+
+3.5 Forward Variance Swap and Convexity
+Another contract with close connection to VIX future is forward variance swap. The reason
+of mentioning forward variance is that variance swap has longer history than VIX future
+and nowadays variance swap market is very liquid and many investors treat variance swap
+as a benchmark in modeling and calibration of volatility derivatives. The popularity of
+variance swap is due to the fact that variance swap as forward contract in realized variance
+can be statically replicated by a series of OTM SPX options. One of the popular market
+practices in the industry is to price VIX future by adding a convexity adjustment term to a
+relevant forward variance swap.
+Theorem 3.6：(Forward Variance Swap Pricing)
+Under the assumption of MRLR process in Definition 3.1, forward variance swap on a
+
+25
+
+浙江大学博士学位论文
+
+30-day realized variance
+]]
+[
+]
+[
+[
+[
+]
+.
+F V StT = EtQ RVTT +30days = EtQ ETQ RVTT +30days = EtQ V IXT2
+
+(3.27)
+
+can be explicitly solved as
+−κ(T −t)
+· exp
+F V StT = {V IXt }2e
+
+{ ∫ T
+}
+∫ T
+−κ(T −s)
+−2κ(T −s) 2
+2κ
+e
+θs ds + 2
+e
+σs ds (3.28)
+t
+
+t
+
+In particular, when parameters θ and σ are constant, forward variance swap can be expressed as
+−κ(T −t)
+· exp
+F V StT = {V IXt }2e
+
+{
+
+[
+
+2θ 1 − e
+
+−κ(T −t)
+
+]
+
+]
+σ2 [
+1 − e−2κ(T −t)
++
+κ
+
+}
+
+(3.29)
+
+Furthermore, dynamics of the 30-day forward variance swap under pricing measure Q can
+be given by
+dF V StT
+= 2e−κ(T −t) · σt dWt
+F V StT
+
+(3.30)
+
+Proof:
+Forward variance swap pricing formula (3.28) is direct consequence of log-normal distribution of V IX under pricing measure Q as shown in eqn. (3.2).
+Using Ito’s lemma to eqn. (3.28) and dynamics of V IXt in eqn. (3.7), we get
+{ ∫ T
+}
+∫ T
+T
+−κ(T −s)
+2 −2κ(T −s)
+dF V St = exp 2
+κθs e
+ds + 2
+σs e
+ds
+t
+
+·2e
+
+t
+
+2e−κ(T −t) −1
+
+−κ(T −t)
+
+· {V IXt }
+dV IXt
+{ ∫ T
+}
+∫ T
+1
+−κ(T −s)
+2 −2κ(T −s)
+κθs e
+ds + 2
+σs e
+ds
++ exp 2
+2
+t
+t
+[
+]
+−κ(T −t) −2
+·2κe−κ(T −t) 2κe−κ(T −t) − 1 · {V IXt }2e
+dV IXt dV IXt
+{ ∫ T
+}
+∫ T
+−κ(T −s)
+2 −2κ(T −s)
++ exp 2
+κθs e
+ds + 2
+σs e
+ds
+t
+
+t
+
+2e−κ(T −t)
+
+· ln V IXt · {V IXt }
+· 2κe−κ(T −t) dt
+[
+]
+− 2κθt e−κ(T −t) + 2e−2κ(T −t) σt2 · F V StT dt
+)
+]
+}
+{[(
+σt2
+−κ(T −t)
+T
+·
+θt κ + 2 − κ ln V IXt dt + σt dWt
+= F V St · 2e
+[
+]
+1
++ F V StT · 2κe−κ(T −t) 2κe−κ(T −t) − 1 · σt2 dt
+2
+26
+
+MRLR Model
+
++F V StT · ln V IXt · 2κe−κ(T −t) dt
+]
+[
+− 2κθt e−κ(T −t) + 2e−2κ(T −t) σt2 · F V StT dt
+
+= F V StT · 2e−κ(T −t) · σt dWt
+which concludes proof of eqn. (3.30). 
+
+From eqn. (3.27), the 30-day forward variance swap can be regarded as a contract with
+payoff of quadratic in spot VIX. In contract, VIX future is linear in spot VIX. Therefore,
+forward variance swap has a convexity term compared to VIX future.
+Theorem 3.7：(Convexity Adjustment for VIX Future)
+Under the assumption of MRLR process in Definition 3.1, convexity adjustment of VIX
+future from forward variance swap can be derived as
+FT
+.
+CATt = √ t
+
+{
+
+1
+= exp −
+2
+F V StT
+
+∫ T
+t
+
+e−2κ(T −s) σs2 ds
+
+}
+
+(3.31)
+
+When parameter σt is constant, we have
+CATt = exp
+
+{
+
+]
+σ2 [
+−
+1 − e−2κ(T −t)
+4κ
+
+}
+
+(3.32)
+
+Proof:
+From the pricing formulas of VIX future in eqn. (3.4) and 30-day forward variance swap
+in eqn. (3.28), the convexity adjustment can be derived as
+FT
+CATt = √ t
+F V StT
+
+}
+{ ∫
+∫
+T −κ(T −s)
+1 T −2κ(T −s) 2
+σs ds
+{V IXt }
+· exp κ t e
+θs ds + 2 t e
+}
+{
+=
+∫
+∫
+T −2κ(T −s) 2
+T −κ(T −s)
+e−κ(T −t)
+σs ds
+θs ds + t e
+{V IXt }
+· exp κ t e
+{
+}
+∫ T
+1
+= exp −
+e−2κ(T −s) σs2 ds
+2 t
+e−κ(T −t)
+
+which concludes proof of this theorem. 
+Corollary 3.2：(Parameter Sensitivities of Convexity Adjustment)
+
+27
+
+浙江大学博士学位论文
+
+Under the assumption of MRLR process in Definition 3.1, when parameters are constant
+we have
+]
+σ [
+∂CVtT
+=−
+1 − e−2κ(T −t) · CATt < 0
+∂σ
+2κ
+
+(3.33)
+
+and
+]
+σ [
+∂CVtT
+=−
+1 − e−2κ(T −t) · CATt > 0
+∂κ
+2κ
+
+(3.34)
+
+From the definition of convexity adjustment in (3.27), we have 0 < CATt < 1. The smaller
+CATt is, the more significant convexity effect in forward variance swap is. Therefore, the
+larger σ (smaller κ) is the more significant convexity embedded in forward variance swap.
+This is understandable because σ increases volatility of spot VIX and κ decrease the volof-vol.
+As discussed in this chapter, the calibration of MRLR model is separated into two stages.
+On the first stage of calibration, the vol-of-vol function σt is calibrated. Given this calibration result, the long-term mean function θt is calibrated to VIX future term structure.
+Two strategies are suggested to calibrate σt . As shown in Theorem 3.5, σt is calibrated
+to ATM VIX option term structure because VIX option is sensitive to vol-of-vol of VIX
+index. Alternative, σt can also be calibrated to 30-day forward variance swap term structure
+because Theorem 3.7 shows that the convexity adjustment of VIX future from forward
+variance swap is mainly determined by σt given a pre-specified parameter κ.
+On application side of MRLR model, we conclude that MRLR is not suitable for pricing
+VIX option as it generates no skew for VIX option. In contract, this simple model maybe a
+candidate model for pricing VIX future as the model fits initial VIX future term structure
+by construction and the vol-of-vol information of VIX can be backed out from either ATM VIX implied volatility term structure or 30-day forward variance swap term structure.
+However, the instantaneous correlation of VIX futures with different maturities are perfectly correlated. Therefore, if more exotic contracts on VIX futures that are sensitive to this
+instantaneous correlation are concerned, multi-factor MRLR model need to be applied.
+
+28
+
+MRLRJ Model
+
+4 MRLRJ Model
+As shown in Theorem 3.1, VIX future under MRLR follows a geometric Brownian motion.
+Therefore, MRLR is unable to produce implied volatility skew for VIX option. One way to
+modify MRLR model is to add jump into MRLR dynamics so that we expect VIX future
+follows a jump-diffusion model and thus market VIX skew can be reproduced. Another
+possible choice is to add stochastic volatility to MRLR where the instantaneous stochastic
+volatility is positively correlated to spot VIX so that the positive skew can be captured.
+In this chapter, I present the first extension of MRLR model by adding jump to spot VIX so
+that it follows mean-reverting logarithmic jump model (MRLRJ). Recall the experience of
+skew modeling in equity option market. One significant explanation for the negative skew
+in equity option market is the possible large downside jumps in underlying equity market.
+By adding downward jump into dynamics of underlying stock, the jump-diffusion model is
+able to create negative implied skew in equity market, especially for short-term maturities.
+Similarly, by adding upward jump into spot VIX we expect the MRLRJ model is able to
+capture positive skew observed in VIX option market.
+
+4.1 MRLRJ dynamics and characteristic function
+I first present the dynamics of ln V IXt under MRLRJ model here. In order to calibrate this
+model to initial VIX future curve, I make the long-term mean θt be time-dependent. Also, in
+order to calibrate to VIX ATM implied volatility term structure and VIX implied volatility
+skew, I let the instantaneous volatility-of-volatility (vol-of-vol) to be time dependent and
+use the upward jump in MRLRJ to calibrate to skew.
+Definition 4.1：(MRLRJ Dynamics)
+Under martingale measure Q, the mean-reverting logarithmic jump process is formulated
+as
+d ln V IXt = κ (θt − ln V IX t ) dt + σt dWt + JdNt
+
+(4.1)
+
+29
+
+浙江大学博士学位论文
+
+where κ is mean-reverting speed, time-dependent function θt is the long-term mean of
+logarithm of spot VIX, σt is also a function of time that can be thought as vol-of-vol for
+spot VIX. Nt is Poisson process with jump intensity λ and J is exponentially distributed
+jump size with J ∼ Exp(η) and η > 0.
+Of course parameters θt and σt can either be constant or time-dependent. When θt is timedependent, e.g. piece-wise constant, it can be calibrated to term structure of VIX future.
+The time-dependent vol-of-vol function σt and jump parameters can be used to calibrate to
+VIX implied volatility skew and term structure.
+Unlike MRLR model, we have no analytical transition function available under MRLRJ model. The standard way to get around this is to derive the conditional characteristic
+function and use the standard method of Heston model to get option pricing formula.
+Definition 4.2：(Conditional Characteristic Function)
+For generic mean-reverting logarithmic process, either with jump and/or stochastic volatilityof-volatility or not, we define conditional characteristic function of ln V IXT conditioned
+on the information at time t as below
+]
+[
+]
+[
+.
+ψ (t; s) = EtQ eis ln V IXT = E Q eis ln V IXT Ft
+
+(4.2)
+
+Theorem 4.1：(VIX Characteristic Function)
+Under the assumption of MRLRJ process in Definition 4.1, characteristic function of spot
+VIX logarithm ln V IXT under martingale measure Q conditioned on information at time
+t is given by
+}
+{
+ψ (t; s) = exp A (t; s) + ise−κ(T −t) ln V IXt
+
+(4.3)
+
+where function A(t; s) is given by
+∫
+∫ T
+λ η − ise−κ(T −t)
+1 2 T 2 −2κ(T −u)
+−κ(T −u)
+(4.4)
+du + ln
+σu e
+A (t; s) = κis
+θu e
+du − s
+2
+κ
+η − is
+t
+t
+In particular, if parameters θ and σ are constant, we have function A(t; s) as
+[
+]
+] λ η − ise−κ(T −t)
+1 [
+A (t; s) = isθ 1 − e−κ(T −t) − s2 σ 2
+1 − e−2κ(T −t) + ln
+4κ
+κ
+η − is
+30
+
+(4.5)
+
+MRLRJ Model
+
+Proof:
+Denote Xt = ln V IXt and define the below martingale
+.
+ft = f (Xt , t) = E Q [ g (XT )| Ft ] = E Q [ g (XT )| Xt ]
+
+(4.6)
+
+Then according to eqn. (4.1) dynamics of Xt is given by
+dXt = κ (θt − Xt ) dt + σt dWt + JdNt
+and dynamics of ft is given by
+dft =
+
+=
+
+∂f
+1 ∂ 2f
+∂f
+dt +
+dX c +
+dX c · dX c
+∂t
+∂X
+2 ∂X 2
++ [f (Xt− + J, t) − f (Xt− , t−)] dNt
+
+∂f
+1 ∂ 2f 2
+∂f
+dt +
+[κ (θt − Xt ) dt + σt dWt ] +
+σ dt
+∂t
+∂X
+2 ∂X 2 t
++ [f (Xt− + J, t) − f (Xt− , t−)] dNt
+
++Et [f (Xt− + J, t) − f (Xt− , t−)] λdt − Et [f (Xt− + J, t) − f (Xt− , t−)] λdt
+[
+]
+∂f
+∂f
+1 ∂ 2f 2
+=
++ κ (θt − Xt )
++
+σ dt + Et [f (Xt− + J, t) − f (Xt− , t−)] λdt
+∂t
+∂X 2 ∂X 2 t
+∂f
+σt dW
++
+∂X
++ {[f (Xt− + J, t) − f (Xt− , t−)] dNt − Et [f (Xt− + J, t) − f (Xt− , t−)] λdt}
+Using the martingale property of ft , we conclude the PIDE controlling ft as below
+∂f
+1 ∂ 2f 2
+∂f
++ κ (θt − Xt )
++
+σ + Et [f (Xt− + J, t) − f (Xt− , t−)] λ = 0
+∂t
+∂X 2 ∂X 2 t
+
+(4.7)
+
+In particular, for conditional characteristic function defined in eqn. (4.2), ψ is also determined by the above PIDE and it’s given by solution of the below initial problem
+{ ∂ψ
+∂ψ
+∂2ψ 2
++ κ (θt − Xt ) ∂X
++ 12 ∂X
+2 σt + Et [ψ (Xt− + J, t) − ψ (Xt− , t−)] λ = 0
+∂t
+isXT
+ψ|t=T = e
+
+(4.8)
+
+To solve the characteristic function explicitly, we use the affine feature of MRLRJ model
+to make the below guess of solution
+{
+}
+{
+ψ (t; s) = exp A (t; s) + ise−κ(T −t) Xt
+A (T ; s) ≡ 0
+
+(4.9)
+
+31
+
+浙江大学博士学位论文
+
+For the above guess of solution, we calculate its derivatives w.r.t. to t and Xt
+ ∂ψ [
+]
+∂A
+−κ(T −t)
+
+Xt ψ
+ ∂t = ∂t + isκe
+∂ψ
+= ise−κ(T −t) ψ
+∂Xt
+2
+
+ ∂ ψ2 = −s2 e−2κ(T −t) ψ
+∂X
+t
+
+and the conditional expectation
+
+[
+{
+}
+]
+Et [ψ (Xt− + J, t) − ψ (Xt− , t−)] = Et exp ise−κ(T −t) J − 1 ψ
+
+Plug the above derivatives into eqn. (4.9), we derive the ODE that determines function
+.
+At = A(t; s) as below
+[ −κ(T −t)
+]
+∂A
+1 2 2 −2κ(T −t)
+−κ(T −t)
+ise
+J
++ θt κise
+− σt s e
++ Et e
+−1 λ=0
+(4.10)
+∂t
+2
+Using the exponential distribution of J, we calculate the conditional expectation in the
+above ODE and simplify this ODE to the following one
+∂A
+ise−κ(T −t)
+1
++ θt κise−κ(T −t) − σt2 s2 e−2κ(T −t) +
+λ=0
+∂t
+2
+η − ise−κ(T −t)
+
+(4.11)
+
+which can be written as
+−
+
+∂A
+1
+ise−κ(T −t)
+= θt κise−κ(T −t) − σt2 s2 e−2κ(T −t) +
+λ
+∂t
+2
+η − ise−κ(T −t)
+
+Therefore
+At − AT = κis
+
+∫ T
+
+θu e
+
+−κ(T −u)
+
+t
+
+1
+du − s2
+2
+
+∫ T
+t
+
+σu2 e−2κ(T −u) du + λ
+
+∫ T
+t
+
+ise−κ(T −u)
+du
+η − ise−κ(T −u)
+
+Using the terminal condition AT = 0, we get
+∫
+∫ T
+1 2 T 2 −2κ(T −u)
+−κ(T −u)
+σu e
+du
+A (t; s) = At = κis
+θu e
+du − s
+2
+t
+t
+∫ T
+ise−κ(T −u)
++λ
+du
+η − ise−κ(T −u)
+t
+[
+]
+∫ T
+∫
+∫
+1 2 T 2 −2κ(T −u)
+λ T d η − ise−κ(T −u)
+−κ(T −u)
+= κis
+θu e
+du − s
+σu e
+du −
+2
+κ t
+η − ise−κ(T −u)
+t
+t
+∫
+∫ T
+)T
+λ (
+1 2 T 2 −2κ(T −u)
+−κ(T −u)
+σu e
+du − ln η − ise−κ(T −u) t
+= κis
+θu e
+du − s
+2
+κ
+t
+t
+∫ T
+∫ T
+1
+λ η − ise−κ(T −t)
+= κis
+θu e−κ(T −u) du − s2
+σu2 e−2κ(T −u) du + ln
+2
+κ
+η − is
+t
+t
+
+which proves the general formula for A(t; s) as in eqn. (4.4). In particular, when θ and σ
+
+are constant, we calculate the first and second integrations in above equation and conclude
+the proof of eqn. (4.5). 
+
+32
+
+MRLRJ Model
+
+4.2 VIX Future and VIX Option Pricing
+Based on the conditional characteristic function of spot VIX under martingale measure Q
+as in eqn. (4.3), we can derive the pricing formulas for VIX future and VIX option.
+Theorem 4.2：(VIX Future Pricing)
+Under the assumption of MRLRJ process in Definition 4.1, VIX future FtT can be explicitly
+solved as
+FtT
+
+= {V IXt }
+
+{ ∫ T
+∫
+1 T 2 −2κ(T −u)
+−κ(T −u)
+σ e
+du
+· exp κ
+θu e
+du +
+2 t u
+t
+}
+−κ(T −t)
+
+e−κ(T −t)
+
+λ η−e
++ ln
+κ
+η−1
+
+(4.12)
+
+In particular, when parameters θ and σ are constant, VIX future can be expressed as
+{
+[
+] σ2 [
+]
+e−κ(T −t)
+T
+Ft = {V IXt }
+· exp θ 1 − e−κ(T −t) +
+1 − e−2κ(T −t)
+4κ
+}
+−κ(T −t)
+λ η−e
++ ln
+(4.13)
+κ
+η−1
+Furthermore, dynamics of VIX future under pricing measure Q can be given by
+}
+{[
+]
+e−κ(T −t)
+dFtT
+Je−κ(T −t)
+−κ(T −t)
+− 1 · dNt −
+=e
+· σt dWt + e
+λdt
+T
+η − e−κ(T −t)
+Ft−
+
+(4.14)
+
+Proof:
+VIX future pricing formula (4.12) can be derived from the conditional characteristic function of of ln V IXT under pricing measure Q. From eqn. (4.3) and (4.4), we have conditional characteristic function explicitly given as.
+ise−κ(T −t)
+
+{
+∫ T
+· exp isκ
+θu e−κ(T −u) du
+
+ψ (t; s) = {V IXt }
+t
+}
+2 ∫ T
+s
+λ η − ise−κ(T −t)
+2 −2κ(T −u)
+σ e
+du + ln
+−
+2 t u
+κ
+η − is
+
+(4.15)
+
+Thus VIX future can be derived as
+[
+]
+FtT = EtQ [V IXT ] = EtQ eln V IXT = ψ (t; −i)
+{ ∫ T
+∫
+1 T 2 −2κ(T −u)
+e−κ(T −t)
+−κ(T −u)
+· exp κ
+= {V IXt }
+θu e
+du +
+du
+σ e
+2 t u
+t
+33
+
+浙江大学博士学位论文
+
+λ η − e−κ(T −t)
++ ln
+κ
+η−1
+
+}
+
+In order to derive the risk-neutral dynamics of VIX future, we first derive dynamics of
+V IXt under the pricing measure.
+dV IXt = deln V IXt
+1
+= eln V IXt d ln V IXtc + eln V IXt d ln V IXtc d ln V IXtc
+2
+[ ln V IXt− +J
+]
+ln V IXt−
++ e
+−e
+dNt
+
+[
+]
+V IXt 2
+σt dt + V IXt− eJ − 1 dNt
+= V IXt [κ (θt − ln V IXt ) dt + σt dWt ] +
+2
+)
+]
+[(
+[
+]
+σt2
+= V IXt θt κ + 2 − κ ln V IXt dt + V IXt σt dWt + V IXt− eJ − 1 dNt
+
+Consequently, we get
+]
+)
+[
+]
+dV IXt [(
+σt2
+= θt κ + 2 − κ ln V IXt dt + σt dWt + eJ − 1 dNt
+V IXt−
+
+(4.16)
+
+Using Ito’s lemma to eqn. (4.12) and result in the above equation, we get
+}
+{ ∫ T
+∫
+λ η − e−κ(T −t)
+1 T 2 −2κ(T −u)
+T
+−κ(T −u)
+σ e
+du + ln
+dFt = exp κ
+θu e
+du +
+2 t u
+κ
+η−1
+t
+−κ(T −t)
+
+−1
+·e−κ(T −t) · {V IXt }e
+dV IXtc
+{ ∫ T
+}
+∫
+1
+λ η − e−κ(T −t)
+1 T 2 −2κ(T −u)
+−κ(T −u)
++ exp κ
+du + ln
+θu e
+du +
+σ e
+2
+2 t u
+κ
+η−1
+t
+[ −κ(T −t)
+]
+e−κ(T −t) −2
+c
+−κ(T −t)
+c
+·e
+e
+− 1 · {V IXt }
+dV IXt dV IXt
+{ ∫ T
+}
+∫ T
+1
+λ η − e−κ(T −t)
+−κ(T −u)
+2 −2κ(T −u)
++ exp κ
+θu e
+du +
+σ e
+du + ln
+2 t u
+κ
+η−1
+t
+−κ(T −t)
+
+· ln V IXt · {V IXt }e
+· κe−κ(T −t) dt
+[
+]
+1 −2κ(T −t) 2
+λe−κ(T −t)
+−κ(T −t)
+− κθt e
++ e
+σt +
+· FtT dt
+2
+η − e−κ(T −t)
+[
+]
++ FtT (ln V IXt− + J) − FtT (ln V IXt− ) dNt
+)
+]
+}
+{[(
+σ2
+θt κ + 2t − κ ln V IXt dt + σt dWt
+= FtT · e−κ(T −t) ·
+[
+]
+1
++ FtT · e−κ(T −t) e−κ(T −t) − 1 · σt2 dt
+2
++FtT · ln V IXt · κe−κ(T −t) dt
+]
+[
+λe−κ(T −t)
+1 −2κ(T −t) 2
+−κ(T −t)
+σt +
+· FtT dt
+− κθt e
++ e
+2
+η − e−κ(T −t)
+34
+
+MRLRJ Model
+
+=
+
+[ −κ(T −t)
+]
+Je
+T
++ e
+− 1 · Ft−
+dNt
+
+T
+FtT · e−κ(T −t) · σt dWt + Ft−
+
+{[
+
+e
+
+Je−κ(T −t)
+
+e−κ(T −t)
+− 1 · dNt −
+λdt
+η − e−κ(T −t)
+]
+
+}
+
+which concludes proof of eqn. (4.14). 
+Corollary 4.1：(VIX Future Correlation)
+From the dynamics of VIX future in eqn. (4.14), we get the instantaneous correlation of
+VIX futures with different maturities as
+⟨ T1
+⟩
+) .
+dFt , dFtT2
+= √⟨
+⟩
+⟩⟨
+dFtT1 , dFtT1 dFtT2 , dFtT2
+]
+[
+(
+)(
+)
+−κ(T −t)
+−κ(T −t)
+e−κ(T1 −t) e−κ(T2 −t) σt2 dt + eJe 1 − 1 eJe 1 − 1 dNt
+= √[
+]
+][
+( −κ(T −t)
+)2
+( −κ(T −t)
+)2
+e−2κ(T1 −t) σt2 + eJe 1 − 1 dNt e−2κ(T2 −t) σt2 + eJe 2 − 1 dNt
+
+ρtT1 ,T2 = corr
+
+(
+
+dFtT1 , dFtT2
+
+<1
+
+(4.17)
+
+Proof:
+Given dynamics of VIX future in eqn. (4.14), we have
+⟨ T1
+⟩
+dFt , dFtT2
+T1 ,T2
+ρt
+= √⟨
+⟩
+⟩⟨
+dFtT1 , dFtT1 dFtT2 , dFtT2
+]]
+[
+[
+( −κ(T −t)
+) ( −κ(T −t)
+)
+T1 T2
+= Ft−
+Ft− e−κ(T1 −t) e−κ(T2 −t) σt2 dt + eJe 1 − 1 eJe 1 − 1 dNt
+]
+[
+/{
+)2
+( T1 )2 −2κ(T1 −t) 2 ( Je−κ(T1 −t)
+− 1 dNt
+e
+σt + e
+Ft−
+[
+]}
+)2
+( T2 )2 −2κ(T2 −t) 2 ( Je−κ(T2 −t)
+· Ft−
+e
+σt + e
+− 1 dNt
+]
+[
+(
+)(
+)
+−κ(T1 −t) −κ(T2 −t) 2
+Je−κ(T1 −t)
+Je−κ(T1 −t)
+−1 e
+− 1 dNt
+e
+e
+σt dt + e
+= √[
+]
+][
+( −κ(T −t)
+)2
+( −κ(T −t)
+)2
+e−2κ(T1 −t) σt2 + eJe 1 − 1 dNt e−2κ(T2 −t) σt2 + eJe 2 − 1 dNt
+< 1
+
+which concludes proof of this corollary. 
+For the two-factor MRLRJ model, the instantaneous correlation is less than 1, which is
+more realistic for VIX futures with different maturities.
+35
+
+浙江大学博士学位论文
+
+Theorem 4.3：(VIX Option Pricing)
+Under the assumption of MRLRJ process in Definition 4.1, VIX call option can be explicitly solved as
+CalltT (K)
+
+{ ∫ T
+}
+[
+]
+= exp −
+rs ds · FtT · Π1 − K · Π2
+
+(4.18)
+
+t
+
+where Π1 and Π2 are two tail probabilities
+{
+}
+{
+∫∞
+ψ (s)e−is ln K
+ds,
+Πj = 12 + π1 0 Re j is
+,
+ψ1 (t; s) = ψ(t;s−i)
+ψ(t;−i)
+
+j = 1, 2
+
+ψ2 (t; s) = ψ (t; s)
+
+Furthermore, VIX put option can be explicitly solved as
+{ ∫ T
+}
+[
+]
+T
+P utt (K) = exp −
+rs ds · K · (1 − Π2 ) − FtT · (1 − Π1 )
+
+(4.19)
+
+(4.20)
+
+t
+
+Proof:
+Although VIX call option can be regarded as an option written on VIX future which has the
+same maturity as VIX option, the payoff at maturity is the same as settled using spot VIX.
+Given dynamics of spot VIX under the pricing measure Q of VIX option and VIX future,
+we can further make change of measure so that VIX call option price can be represented in
+a similar formula as Black-Scholes formula as below
+{ ∫ T
+}
+[
+]
+T
+Callt (K) = exp −
+rs ds · EtQ (V IXT − K)+
+t
+{ ∫ T
+}
+[
+]}
+]
+{ Q [ ln V IX
+T
+= exp −
+1{ln V IXT >ln K} − KEtQ 1{ln V IXT >ln K}
+rs ds · Et e
+t
+[
+]
+/ Q [ ln V IX ]
+{ ∫ T
+} {
+ln V IXT
+T
+[
+]
+e
+E
+e
+[
+/
+] 1{ln V IXT >ln K}
+= exp −
+rs ds · EtQ eln V IXT EtQ
+EtQ eln V IXT E Q [eln V IXT ]
+t
+[
+]}
+−KEtQ 1{ln V IXT >ln K}
+{ ∫ T
+}
+[
+[
+]
+[
+{
+]
+]}
+= exp −
+rs ds · EtQ eln V IXT EtQ1 1{ln V IXT >ln K} − KEtQ2 1{ln V IXT >ln K}
+t
+{ ∫ T
+}
+}
+{
+≡ exp −
+rs ds · FtT · Π1 − K · Π2
+(4.21)
+t
+
+where the first measure is defined by the following Esscher transform
+eln V IXt
+dQ1
+= Q ln V IXt
+dQ Ft
+E [e
+]
+36
+
+(4.22)
+
+MRLRJ Model
+
+and the second measure Q2 is the same as Q. In order to calculate the two tail probabilities
+Π1 and Π2 , conditional characteristic functions of lnV IXT on filtration Ft are first derived
+by
+]
+[
+ln V IXT
+[ is ln V IX ]
+e
+Q
+is
+ln
+V
+IX
+T
+T
+e
+e
+= Et
+ψ1 (t; s) =
+EtQ [eln V IXT ]
+[
+]
+EtQ ei(−i+s) ln V IXT
+ψ (t; s − i)
+=
+=
+Q ln V IXT
+ψ (t; −i)
+Et [e
+]
+EtQ1
+
+and
+[
+]
+[
+]
+ψ2 (t; s) = EtQ2 eis ln V IXT = EtQ eis ln V IXT = ψ (t; s)
+Given the conditional characteristic functions above, the two tail probabilities in eqn. (4.18)
+can be recovered by inverse theorem of Gil-Pelaez [7] , as shown in eqn. (4.19).
+Pricing formula (4.20) for VIX put option can be easily derived from put-call parity and
+the VIX call option pricing formula (4.18). 
+
+4.3 VIX Future and VIX Option Calibration
+Theorem 4.4：(Calibration)
+For the MRLRJ model in Definition 4.1, VIX option is priced using a Jump-Diffusion
+underlying FtT with time-dependent volatility. Thus this model is able to produce implied
+volatility skew for VIX option. Furthermore, the jump size is positively distributed and
+thus this model is able to produce positive implied volatility skew for VIX option. Thus
+parameters σt , κ and jump parameters λ and η can be used to calibrate to market implied
+volatility skew for VIX option. As there is no explicit formula for implied volatility in a
+Jump-Diffusion model with time-dependent volatility parameters, the calibration to VIX
+implied volatility skew and term structure needs optimization.
+With calibration result of κ, σt , λ and η from market quotes of VIX implied volatility
+surface, we can move forward to calibrate VIX future term structure.
+θT =
+
+[ 2 ∫ T
+]
+σT
+−2κ(T −s) 2
+−
+e
+σs ds
+2 κ
+0
+
+1
+1 df0T
+−
+f0T +
+κ dT
+
+37
+
+浙江大学博士学位论文
+
+[ −κT
+]
+λ
+e
+η − e−κT
+−
++ ln
+κ η − e−κT
+η−1
+
+(4.23)
+
+.
+where f0T = ln F0T is the initial VIX future term structure.
+
+Proof: According to eqn. (4.12), the initial VIX future term structure F0T is given by
+{ ∫ T
+}
+∫
+1 T 2 −2κ(T −u)
+λ η − e−κT
+e−κT
+T
+−κ(T −u)
+· exp κ
+F0 = {V IX0 }
+θu e
+du +
+du + ln
+σ e
+2 0 u
+κ
+η−1
+0
+Thus
+f0T = ln F0T
+
+= e
+
+−κT
+
+· ln V IX0 + κ
+−κT
+
+λ η−e
++ ln
+κ
+η−1
+
+∫ T
+
+e
+
+−κ(T −s)
+
+0
+
+1
+θs ds +
+2
+
+∫ T
+0
+
+e−2κ(T −s) σs2 ds
+
+Take derivative w.r.t. T on both sides of the above equation, we get
+∫ T
+df0T
+1 2
+e−κT
+−κT
+= −κe
+· ln V IX0 + κθT + σT − κ
+e−2κ(T −s) σs2 ds + λ
+dT
+2
+η − e−κT
+0
+[ ∫ T
+]
+−κ κ
+e−κ(T −s) θs ds
+0
+∫ T
+1 2
+e−κT
+−κT
+= −κe
+· ln V IX0 + κθT + σT − κ
+e−2κ(T −s) σs2 ds + λ
+2
+η − e−κT
+0
+]
+[
+∫ T
+λ η − e−κT
+1
+−2κ(T −s) 2
+T
+−κT
+e
+σs ds − ln
+−κ f0 − e
+· ln V IX0 −
+2 0
+κ
+η−1
+[
+]
+]
+[ −κT
+∫ T
+1 2
+η − e−κT
+e
+−2κ(T −s) 2
+T
+= κθT +
+σ −κ
++ ln
+e
+σs ds − κf0 + λ
+2 T
+η − e−κT
+η−1
+0
+Rearrange the above equation, we get the result in eqn. (4.23). 
+The calibration strategy of MRLRJ model is similar as MRLR model. On the first stage
+of calibration, the vol-of-vol function σt , mean-reverting speed κ and jump parameters are
+calibrated to VIX implied volatility surface using the below optimization.
+min
+
+σt ,κ,λ,η
+
+CallM RLRJ (K, T ) − CallM KT (K, T )
+
+(4.24)
+
+where CallM RLRJ (K, T ) is MRLRJ model price of VIX option and CallM KT (K, T ) is
+market quotes of VIX options.
+On the second stage of calibration, we further calibrate the long-term mean function θt to
+initial VIX future term structure using formula (4.23).
+38
+
+MRLRJ Model
+
+4.4 VIX Future and VIX Option Hedging
+In this section, I calculate sensitivities of VIX futures and VIX options with respect to spot
+VIX and further develop hedging strategies for VIX futures and VIX options with other
+VIX future contracts as hedging instruments.
+Theorem 4.5：(VIX Future Hedging)
+Firstly, we calculate the sensitivities of VIX future price to spot VIX. We are concerned
+with the spot delta and spot gamma
+
+ ∂FtT = e−κ(T −t) · F T
+t
+∂V IXt
+V IXt
+2F T
+e−κ(T −t) ·[1−e−κ(T −t) ]
+∂
+t
+
+=−
+· FtT
+∂V IX 2
+V IX 2
+
+(4.25)
+
+with maturity T2 to another VIX future with shorter maturity T1
+ T
+T2
+2
+
+ ∂FtT1 = e−κ(T2 −T1 ) · FtT1
+∂Ft
+Ft
+T
+[ κ(T −T )
+] FtT2
+∂ 2 Ft 2
+−2κ(T2 −T1 )
+2
+1
+
+=
+−e
+·
+e
+−
+1
+· T1 2
+
+2
+T
+∂ ( Ft 1 )
+( Ft )
+
+(4.26)
+
+t
+
+t
+
+Based on the above formulas, we can move forward to calculate sensitivities of VIX future
+
+Proof:
+
+The characteristic function defined in eqn. (4.3) can be simplified as
+ψ (t; s) = {V IXt }ise
+
+−κ(T −t)
+
+· Z (t; s)
+
+Thus VIX future pricing formula eqn. (4.12) can be denoted as
+FtT = ψ (t; −i) = {V IXt }e
+
+−κ(T −t)
+
+· Z (t; −i)
+
+where Z (t; −i) is function of t and it’s independent from V IXt . Given the pricing formula
+for VIX future as above, we have delta sensitivity of FtT with respect to V IXt as
+−κ(T −t) −1
+∂FtT
+· Z (t; −i)
+= e−κ(T −t) {V IXt }e
+∂V IXt
+e−κ(T −t)
+· FtT
+=
+V IXt
+
+and gamma sensitivity of FtT with respect to V IXt as
+]
+[ −κ(T −t)
+∂
+∂ 2 FtT
+e
+T
+· Ft
+=
+∂V IXt2
+∂V IXt V IXt
+39
+
+浙江大学博士学位论文
+
+e−κ(T −t)
+∂FtT
+−e−κ(T −t)
+·
++
+· FtT
+V IXt ∂V IXt
+V IXt2
+−e−κ(T −t)
+e−κ(T −t) e−κ(T −t)
+·
+· FtT +
+· FtT
+=
+V IXt
+V IXt
+V IXt2
+[
+]
+e−κ(T −t) · 1 − e−κ(T −t)
+= −
+· FtT
+V IXt2
+
+=
+
+We notice the delta and gamma of VIX future with respect to spot VIX as shown in eqn.
+(4.25) is exactly the same as eqn. (3.17) of MRLR model. Furthermore, we notice that the
+proof of delta and gamma of VIX future with respect to another shorter term maturity VIX
+future in eqn. (3.20) and (3.21) is totally based on spot VIX delta and gamma. Consequently, by referring to the proof procedure of eqn. (3.20) and (3.21), we can get the hedging
+formulas (4.26). 
+Theorem 4.6：(VIX Option Hedging)
+Firstly, we calculate the sensitivities of VIX call option price to spot VIX. We are concerned
+with the spot delta and spot gamma.
+{ ∂CallT
+e−(r+κ)(T −t) ·FtT
+t
+=
+· Π1
+∂V IXt
+V IXt
+]
+}
+2
+T
+−(r+κ)(T
+−t)
+∂ Callt
+e
+·FtT {[
+1 − e−κ(T −t) · Π1 − e−κ(T −t) · f1 (ln K)
+=−
+∂V IX 2
+V IX 2
+t
+
+(4.27)
+
+t
+
+where Π1 is defined in eqn. (4.18) and f1 (x) is conditional p.d.f. of ln V IXT under a
+
+martingale measure with V IXt as numeraire and it can be expressed as
+f1 (ln K) = −
+
+dΠ1 (K)
+dΠ1
+=−
+d (ln K)
+d (ln K)
+
+(4.28)
+
+Based on the above formulas, we can move forward to calculate sensitivities of VIX call
+option price with maturity T2 to a VIX future with shorter maturity T1 .
+
+T2
+T2
+
+ ∂CallT1t = e−r(T2 −t) e−κ(T2 −T1 ) · FtT1 · Π1 (T2 )
+∂Ft
+Ft
+T
+[(
+)
+] (4.29)
+2 CallT2
+F 2
+∂
+−r(T
+−t)
+−2κ(T
+−T
+)
+t
+2
+2
+1
+
+=e
+e
+· Tt 1 2 · 1 − eκ(T2 −T1 ) · Π1 + f1 (ln K)
+
+T1 2
+∂ ( Ft )
+( Ft )
+Proof:
+
+Given the functional form of conditional characteristic function in eqn. (4.3), we can easily
+calculate its derivative with respect to spot VIX as
+ise−κ(T −t)
+∂ψ (t; s)
+=
+ψ (t; s)
+∂V IXt
+V IXt
+40
+
+(4.30)
+
+MRLRJ Model
+
+By the definition of ψ1 (t; s) in (4.22) and the derivative of ψ (t; s) in the above equation,
+we have
+∂ψ1 (t; s)
+=
+∂V IXt
+
+∂ψ(t;s−i)
+ψ (t; −i) − ∂ψ(t;−i)
+ψ (t; s − i)
+ise−κ(T −t)
+∂V IXt
+∂V IXt
+=
+ψ1
+ψ 2 (t; −i)
+V IXt
+
+(4.31)
+
+By noticing that ψ2 (t; s) = ψ (t; s), the same form in the above two formulas (4.30) and
+(4.31) concludes the below conditional characteristic functions, i.e.
+ise−κ(T −t)
+∂ψj (t; s)
+=
+ψj (t; s) ,
+∂V IXt
+V IXt
+
+j = 1, 2
+
+(4.32)
+
+Note the upper tail probabilities Πj in (4.19) can also be recovered from their characteristic
+functions in the following form
+1
+Πj =
+2π
+
+∫ ∞
+
+ψj (t; s) e−is ln K
+ds
+is
+−∞
+
+(4.33)
+
+Thus derivative of Πj with respect to V IXt is calculated as
+∫ ∞
+1
+∂ψj (t; s) e−is ln K
+∂Πj
+=
+ds
+∂V IXt
+2π −∞ ∂V IXt
+is
+∫ ∞
+e−κ(T −t) 1
+=
+ψj (t; s) e−is ln K ds
+V IXt 2π −∞
+−κ(T −t)
+e
+fj (ln K)
+=
+V IXt
+
+(4.34)
+
+where fj (x) is the probability density of ln V IXT conditional on Ft . We observe the following relationship between the two conditional p.d.f.
+FtT f1 (x)
+
+=
+=
+=
+=
+
+∫ ∞
+1
+ψ1 (t; s) e−isx ds
+2π −∞
+∫ ∞
+1
+ψ (t; s − i) e−i(s−i)x+x ds
+2π −∞
+∫ ∞
+x 1
+ψ (t; s − i) e−i(s−i) ln K d (s − i)
+e
+2π −∞
+ex f2 (x)
+FtT
+
+(4.35)
+
+Therefore, we have the following equality
+FtT
+
+]
+∂Π2
+e−κ(T −t) [ T
+∂Π1
+Ft f1 (ln K) − K · f2 (ln K)
+−K ·
+=
+∂V IXt
+∂V IXt
+V IXt
+41
+
+浙江大学博士学位论文
+
+]
+e−κ(T −t) [ ln K
+e f2 (ln K) − K · f2 (ln K)
+V IXt
+= 0
+(4.36)
+=
+
+Consequently, we have
+∂CalltT
+∂V IXt
+
+[
+
+∂Π1
+∂Π2
+∂Ft
+= e
+· Π1 + Ft
+−K ·
+∂V IXt
+∂V IXt
+∂V IXt
+−(r+κ)(T −t)
+e
+Ft
+=
+· Π1
+V IXt
+−r(T −t)
+
+]
+(4.37)
+
+Given the above formula for delta of VIX option with respect to spot VIX, we can move
+forward to calculate the spot gamma
+( −(r+κ)(T −t)
+)
+∂ 2 CalltT
+e
+· FtT
+e−(r+κ)(T −t) · FtT
+∂Π1
+∂
+·
+Π
++
+·
+=
+1
+2
+∂V IXt
+∂V IXt
+V IXt
+V IXt
+∂V IXt
+]
+[ −(r+κ)(T −t)
+T
+−(r+κ)(T −t) −κ(T −t)
+T
+−e
+· Ft
+e
+· Ft
+e
++
+· Π1
+=
+2
+V IXt
+V IXt
+V IXt
+e−(r+κ)(T −t) · FtT e−κ(T −t)
+·
+· f1 (ln K)
++
+V IXt
+V IXt
+]
+e−(r+κ)(T −t) · FtT [
+1 − e−κ(T −t) · Π1
+= −
+2
+V IXt
+−(r+κ)(T −t)
+e
+· FtT −κ(T −t)
++
+·e
+· f1 (ln K)
+V IXt2
+]
+}
+e−(r+κ)(T −t) · FtT {[
+−κ(T −t)
+−κ(T −t)
+1
+−
+e
+·
+Π
+−
+e
+·
+f
+(ln
+K)
+(4.38)
+= −
+1
+1
+V IXt2
+We notice the delta and gamma of VIX option with respect to spot VIX as shown in eqn.
+(4.27) is exactly the same as eqn. (3.22) of MRLR model. Furthermore, we notice that the
+proof of delta and gamma of VIX option with respect to another shorter term maturity VIX
+future in eqn. (3.25) and (3.26) is totally based on spot VIX delta and gamma. Consequently, by referring to the proof procedure in eqn. (3.25) and (3.26), we can get the hedging
+formulas (4.29). 
+
+4.5 Forward Variance Swap and Convexity
+In this section I extend the 30-day forward variance swap pricing formula in MRLR to
+MRLRJ model.
+42
+
+MRLRJ Model
+
+Theorem 4.7：(Forward Variance Swap Pricing)
+Under the assumption of MRLRJ process in Definition 4.1, the 30-day forward variance
+]
+[
+swap F V StT = EtQ RVTT +30days = EtQ [V IXT2 ] can be explicitly solved as
+{ ∫ T
+∫ T
+−κ(T −u)
+· exp 2κ
+= {V IXt }
+θu e
+du + 2
+σu2 e−2κ(T −u) du
+t
+t
+}
+−κ(T −t)
+λ η − 2e
+(4.39)
++ ln
+κ
+η−2
+2e−κ(T −t)
+
+F V StT
+
+In particular, when parameters θ and σ are constant, VIX future can be expressed as
+F V StT
+
+= {V IXt }
++
+
+[
+] σ2 [
+]
+· exp 2θ 1 − e−κ(T −t) +
+1 − e−2κ(T −t)
+κ
+}
+−κ(T −t)
+
+2e−κ(T −t)
+
+λ η − 2e
+ln
+κ
+η−2
+
+{
+
+(4.40)
+
+Furthermore, dynamics of the 30-day forward variance swap under pricing measure Q can
+be given by
+}
+{[
+]
+2e−κ(T −t)
+dF V StT
+2Je−κ(T −t)
+−κ(T −t)
+− 1 · dNt −
+λdt (4.41)
+= 2e
+· σt dWt + e
+T
+η − 2e−κ(T −t)
+F V St−
+Proof:
+Forward variance swap pricing formula (4.39) can be derived from the conditional characteristic function of of ln V IXT under pricing measure Q. From eqn. (4.15), forward
+variance swap can be derived as
+[
+[
+]
+]
+F V StT = EtQ V IXT2 = EtQ e2 ln V IXT = ψ (ln V IXt , t; −2i)
+{ ∫ T
+∫ T
+2e−κ(T −t)
+−κ(T −u)
+· exp 2κ
+θu e
+du + 2
+σu2 e−2κ(T −u) du
+= {V IXt }
+t
+t
+}
+−κ(T −t)
+λ η − 2e
++ ln
+κ
+η−2
+Using Ito’s lemma to eqn. (4.39) and dynamics of V IXt in eqn. (4.16), we get
+dF V StT
+
+{ ∫ T
+}
+∫ T
+λ η − 2e−κ(T −t)
+−κ(T −u)
+2 −2κ(T −u)
+du + ln
+= exp 2κ
+θu e
+du + 2
+σu e
+κ
+η−2
+t
+t
+−κ(T −t)
+
+−1
+·2e−κ(T −t) · {V IXt }2e
+dV IXtc
+}
+{ ∫ T
+∫ T
+λ η − 2e−κ(T −t)
+1
+−κ(T −u)
+2 −2κ(T −u)
+θu e
+du + 2
++ exp 2κ
+du + ln
+σu e
+2
+κ
+η−2
+t
+t
+
+43
+
+浙江大学博士学位论文
+
+[
+]
+−κ(T −t) −2
+·2e−κ(T −t) 2e−κ(T −t) − 1 · {V IXt }2e
+dV IXtc dV IXtc
+}
+{ ∫ T
+∫ T
+λ η − 2e−κ(T −t)
+−κ(T −u)
+2 −2κ(T −u)
++ exp 2κ
+θu e
+du + 2
+du + ln
+σu e
+κ
+η−2
+t
+t
+−κ(T −t)
+
+· 2κe−κ(T −t) dt
+· ln V IXt · {V IXt }2e
+[
+]
+λ2e−κ(T −t)
+−κ(T −t)
+−2κ(T −t) 2
+− 2κθt e
++ 2e
+σt +
+· F V StT dt
+η − 2e−κ(T −t)
+[
+]
++ F V StT (ln V IXt− + J) − F V StT (ln V IXt− ) dNt
+}
+]
+)
+{[(
+σ2
+= F V StT · 2e−κ(T −t) ·
+θt κ + 2t − κ ln V IXt dt + σt dWt
+[
+]
+1
++ F V StT · 2e−κ(T −t) 2e−κ(T −t) − 1 · σt2 dt
+2
++F V StT · ln V IXt · 2κe−κ(T −t) dt
+[
+]
+λ2e−κ(T −t)
+−κ(T −t)
+−2κ(T −t) 2
+− 2κθt e
++ 2e
+σt +
+· F V StT dt
+η − 2e−κ(T −t)
+[
+]
+−κ(T −t)
+T
+dNt
++ e2Je
+− 1 · F V St−
+= F V StT · 2e−κ(T −t) · σt dWt
+{[
+]
+−κ(T −t)
+T
+− 1 · dNt −
++F V St− e2Je
+
+2e−κ(T −t)
+λdt
+η − 2e−κ(T −t)
+
+}
+
+which concludes proof of eqn. (4.41). 
+Below we derive the convexity adjustment for VIX future from 30-day forward variance
+swap.
+Theorem 4.8：(Convexity Adjustment for VIX Future)
+Under the assumption of MRLRJ process in Definition 4.1, convexity adjustment of VIX
+future from 30-day forward variance swap can be derived as
+FT
+.
+CATt = √ t
+
+F V StT
+
+∫
+1 T −2κ(T −s) 2
+= exp −
+e
+σs ds
+2 t
+
+
+√
+−κ(T −t)
+η − 2e−κ(T −t) 
+λ η−e
+ln
+− ln
++
+
+κ
+η−1
+η−2
+{
+
+When parameter σt is constant, we have
+CATt
+
+44
+
+{
+
+= exp −
+
+]
+σ2 [
+1 − e−2κ(T −t)
+4κ
+
+(4.42)
+
+MRLRJ Model
+
+−κ(T −t)
+
+λ η−e
++ ln
+κ
+η−1
+
+− ln
+
+√
+
+
+η − 2e−κ(T −t) 
+
+Proof:
+
+η−2
+
+(4.43)
+
+
+
+From the pricing formulas of VIX future in eqn. (4.12) and 30-day forward variance swap
+in eqn. (4.39), the convexity adjustment can be derived as
+FT
+CATt = √ t
+F V StT
+
+{ ∫
+}
+∫
+T
+η−e−κ(T −t)
+1 T 2 −2κ(T −u)
+λ
+−κ(T −u)
+{V IXt }
+· exp κ t θu e
+du + 2 t σu e
+du + κ ln
+η−1
+{
+}
+=
+∫
+∫
+−κ(T
+−t)
+T
+T
+e−κ(T −t)
+η−2e
+λ
+−κ(T
+−u)
+2
+−2κ(T
+−u)
+{V IXt }
+· exp κ t θu e
+du + t σu e
+du + 2κ ln
+η−2
+
+
+
+√
+ 1∫ T
+λ  η − e−κ(T −t)
+η − 2e−κ(T −t) 
+−2κ(T −s) 2
+ln
+− ln
+e
+σs ds +
+= exp −
+
+ 2 t
+κ
+η−1
+η−2
+e−κ(T −t)
+
+which concludes proof of this theorem. 
+
+45
+
+浙江大学博士学位论文
+
+5
+
+MRLRSV Model
+
+In last chapter, I present the first extension of MRLR model by adding upward jump into spot VIX in order to produce positive implied volatility skew for VIX option. Another
+popular method to create implied volatility skew in addition to jump diffusion is to include stochastic volatility into the underlying dynamics. In this chapter, I further present
+this second version extension of MRLR model, i.e. mean-reverting logarithmic stochastic
+volatility model (MRLRSV). In order to create positive implied volatility skew for VIX
+option, we need to make the instantaneous correlation between spot VIX and its stochastic
+volatility positively correlated, in contrast to the negative correlation in stochastic volatility
+model for equity option where negative implied volatility skew is observed.
+
+5.1 MRLRSV dynamics and characteristic function
+I first present the dynamics of ln V IXt under MRLRSV model in this section.
+Definition 5.1：(MRLRSV Dynamics)
+Under martingale measure Q, the mean-reverting logarithmic stochastic volatility process
+is formulated as
+{
+
+d ln V IXt = κ (θt − ln V IX
+√t ) dt +
+dVt = κv (θv − Vt ) dt + σv Vt dZt
+
+√
+
+Vt dWt
+
+(5.1)
+
+where κ is mean-reverting speed, time-dependent function θt is the long-term mean of
+√
+logarithm of spot VIX, Vt is vol-of-vol for spot VIX and Vt is assumed to follow a squareroot process.
+Of course, parameters θt can either be constant or time-dependent. When θt is time-dependent,
+e.g. piece-wise constant, it can be calibrated to term structure of VIX future. All parameters
+for var-of-vol process Vt can be used to calibrate to VIX implied volatility surface.
+Again, in this model the transition function of spot VIX is not available and the VIX future
+and option pricing formulas need to be priced using characteristic function method.
+46
+
+MRLRSV Model
+
+Theorem 5.1：(VIX Characteristic Function)
+Under the assumption of MRLRSV process in Definition 5.1, characteristic function of
+spot VIX logarithm ln V IXT under martingale measure Q conditioned on information at
+time t is given by
+}
+{
+ψ (t; s) = exp A (t; s) + B (t; s) Vt + ise−κ(T −t) ln V IXt
+where functions A(t; s) and B(t; s) are given by
+{
+[
+]
+∫T
+v θv
+1 − e−κ(T −t)
+A (t; s) = C (t; s) + is t e−κ(T −h) κθh dh − isρκ
+σv κ
+−κ(T −t)
+B (t; s) = D (t; s) − isρe σv
+
+(5.2)
+
+(5.3)
+
+and functions C(t; s) and D(t; s) satisfy the below ODE system
+{
+
+= κv θv D
+− dC
+dt
+dD
+v ) −κ(T −t)
+− dt = 12 σv2 D2 − κv D − isρ(κ−κ
+e
+− 21 s2 (1 − ρ2 ) e−2κ(T −t)
+σv
+
+(5.4)
+
+The second ODE of D in (5.4) is a Riccati equation with exponentially time-dependent
+coefficients, which can be solved explicitly to the extent represented by first and second
+kind Kummer functions. Because function C can be represented as integration of D with
+respect to t, it can also be expressed by Kummer functions.
+Firstly, we change variable from t to τ = T − t. Then for the case of κκv ̸= 1, 2, ..., we have
+
+(
+)
+√
+2
+
+1
+−
+ρ
+φσ
+2κ
+θ
+gM
+(a,
+b;
+z)
++
+U
+(a,
+b;
+z)
+
+v
+v
+v
+
+(1 − e−κτ ) + ln
+
+ C(τ ) = − σ 2
+2κ
+gM (a, b; z0 ) + U (a, b; z0 )
+v
+√
+} (5.5)
+{
+2a
+
+2 e−κτ
+
+g
+M
+(a
++
+1,
+b
++
+1;
+z)
+−
+2aU
+(a
++
+1,
+b
++
+1;
+z)
+1
+−
+ρ
+φ
+
+
+−1 + b
+ D(τ ) =
+σv
+gM (a, b; z) + U (a, b; z)
+and for the case of κκv = 1, 2, ..., we have
+( √
+
+φσv 1−ρ2
+
+2κ
+θ
+v
+v
+
+C(τ
+)
+=
+−
+(1 − e−κτ ) − (1 − b)κτ
+
+2
+σ
+2κ
+
+v
+
+)
+
+
+
+g̃M (a−b+1,2−b;z)+U (a−b+1,2−b;z)
+
++ ln g̃M (a−b+1,2−b;z0 )+U (a−b+1,2−b;z0 )
+√
+φ 1−ρ2 −κτ
+
+
+D(τ ) = σv e
+{−1 + 2 [(1 − b)z −1
+
+
+]}
+
+a−b+1
+
+M (a−b+2,3−b;z)−(a−b+1)U (a−b+2,3−b;z)
+g̃
+
+2−b
+
+
++
+g̃M (a−b+1,2−b;z)+U (a−b+1,2−b;z)
+
+where M (a, b; z) and U (a, b; z) stand for the first and second kind Kummer functions. The
+
+47
+
+浙江大学博士学位论文
+
+constants and variables used in equations (5.5) and (5.6) are defined by
+√
+
+1−ρ2 −ρ
+κ−κv i √
+
+a= κ
+
+
+2i 1−ρ2
+
+
+ b = κ−κv
+κ
+/
+√
+−κτ
+2
+
+z = e φσv 1 − ρ κ
+
+
+/
+
+
+ z = φσ √1 − ρ2 κ
+0
+v
+
+(5.6)
+
+and
+
+aU (a + 1, b + 1; z0 ) + 12 U (a, b; z0 )
+
+
+g
+=
+
+a
+
+M (a + 1, b + 1; z0 ) − 12 M (a, b; z0 )
+b
+[
+]
+(5.7)
+
+(a − b + 1)U (a − b + 2, 3 − b; z0 ) + 21 − (1 − b)z0−1 U (a − b + 1, 2 − b; z0 )
+
+
+[
+]
+ g̃ = a−b+1
+M (a − b + 2, 3 − b; z0 ) − 21 − (1 − b)z0−1 M (a − b + 1, 2 − b; z0 )
+2−b
+
+Kummer functions M (a, b; z) and U (a, b; z) are two solutions of the following ODE
+′′
+
+′
+
+zuzz + (b − z)uz − au = 0
+where a is complex constant in this thesis.
+Proof:
+In order to solve conditional characteristic function for XT = lnV IXT from (5.1), we
+derive dynamics of eκt Xt by Ito’s lemma as
+√
+(
+)
+d eκt Xt = eκt κθt dt + eκt Vt dWt
+Therefore, XT can be represented by
+XT = e
+
+−κ(T −t)
+
+Xt +
+
+∫ T
+
+e
+
+−κ(T −h)
+
+κθh dh +
+
+t
+
+∫ T
+t
+
+e−κ(T −h)
+
+√
+Vh dWh
+
+Put the above equation (5.8) into ψ (t; s) = EtQ [exp {isXT }], we get
+{[
+] }
+∫ T
+−κ(T −t)
+−κ(T −h)
+ψ (t; s) = exp e
+Xt +
+e
+κθh dh is
+t
+[
+{ ∫ T
+}]
+√
+Q
+−κ(T −h)
+·Et exp is
+Vh dWh
+e
+t
+
+Denote the conditional expectation in the above equation as
+}]
+[
+{ ∫ T
+√
+Q
+−κ(T −h)
+Vh dWh
+Ω (t; s) = Et exp is
+e
+t
+
+48
+
+(5.8)
+
+(5.9)
+
+MRLRSV Model
+
+According to Cholesky decomposition of standard Brownian motion Wt , there is a SBM
+√
+Wt3 that is independent from Zt such that Wt = ρZt + (1 − ρ2 )Wt3 . Conditioned on
+realization of path {Zh }t≤h≤T , we have
+
+}]
+{ ∫ T
+∫ T
+√ √
+√
+3
+−κ(T −h)
+−κ(T −h)
+2
+Vh ρdZh + is
+Vh 1 − ρ dWh
+e
+Ω (t; s) =
+exp is
+e
+t
+t
+[
+{ ∫ T
+}
+√
+Q
+−κ(T −h)
+= Et exp is
+e
+Vh ρdZh
+t
+}
+[
+{ ∫ T
+]]
+√ √
+Q
+3
+−κ(T −h)
+2
+Vh 1 − ρ dWh Zh , t ⩽ h ⩽ T
+· Et exp is
+e
+t
+}]
+[
+{ ∫ T
+∫ T
+√
+s2 (1−ρ2 )
+Q
+−2κ(T −h)
+−κ(T −h)
+Vh dZh −
+e
+Vh dh
+(5.10)
+= Et exp isρ
+e
+2
+EtQ
+
+[
+
+t
+
+t
+
+√ √
+−κ(T −h)
+Vh 1 − ρ2 dWh3 is cone
+t
+∫T
+ditionally normally distributed with mean 0 and variance t (1 − ρ2 ) e−2κ(T −h) Vh dh. Use
+
+where the third equality holds due to the fact that
+
+∫T
+
+Ito’s Lemma, we get
+
+√
+)
+(
+d e−κ(T −h) Vh = e−κ(T −h) [κv θv + (κ − κv ) Vh ] dh + e−κ(T −h) σv Vh dZh
+Thus we get
+∫ T
+t
+
+e
+
+−κ(T −h)
+
+√
+
+Vh dZh
+
+[
+]
+κv θv [
+1
+1 − e−κ(T −t)
+=
+VT − e−κ(T −t) Vt −
+σv
+κ
+]
+∫ T
+−κ(T −h)
+− (κ − κv )
+e
+Vh dh
+
+(5.11)
+
+t
+
+Plug the above equation into eqn. (5.10), we get
+] }
+]
+ρe−κ(T −t) Vt ρκv θv [
+−κ(T −t)
+Ω (t; s) = exp −
+−
+1−e
+is
+σv
+σv κ
+]
+[
+{ [
+∫
+ρ (κ − κv ) T −κ(T −h)
+ρ
+Q
+VT −
+e
+Vh dh
+·Et exp is
+σv
+σv
+t
+}]
+∫ T
+s2 (1−ρ2 )
+−2κ(T −h)
+e
+Vh dh
+− 2
+{[
+
+(5.12)
+
+t
+
+Put the above equation back into (5.9), we can reduce ψ(t; s) to
+ψ (t; s) = exp {u0 (t)} EtQ
+
+[
+
+{
+
+exp u1 · VT −
+
+∫ T
+t
+
+u2 (h) · Vh dh
+
+}]
+
+(5.13)
+
+49
+
+浙江大学博士学位论文
+
+where the three functions u0 , u1 and u2 are given by
+
+)[
+[
+(
+] ρe−κ(T −t) Vt ]
+ρκv θv
+−κ(T −t)
+−κ(T −t)
+
+is
+1
+−
+e
+−
+u
+(t)
+=
+e
+X
++
+θ
+−
+
+0
+t
+σv κ
+σv
+
+isρ
+u 1 = σv
+
+
+ u (t) = isρ(κ−κv ) e−κ(T −t) + s2 (1−ρ2 ) e−2κ(T −t)
+2
+σv
+2
+
+(5.14)
+
+Decomposition (5.13) is simpler than (5.9) in the aspect that the conditional expectation
+here only involves path of the stochastic volatility Vt , and the expectation is denoted by
+[
+{
+}]
+∫ T
+Q
+Φ (t; s) ≡ Et exp u1 · VT −
+u2 (h) · Vh dh
+(5.15)
+t
+
+Due to Feynman-Kac theorem and dynamics of Vt under martingale measure Q, the discounted expectation Φ (t; s) satisfies the following initial problem of PDE
+
+1
+∂ 2Φ
+∂Φ
+∂Φ
+
+
+= σv2 V
++ κv (θv − V )
+− u2 (t) V Φ
+−
+2
+∂t
+2 { ∂V
+∂V
+}
+isρ
+
+
+·V
+ Φ(T ) = exp
+σv
+
+(5.16)
+
+Duffie et al. [5] indicates that the Feynman-Kac PDE (5.16) for the affine process Vt has the
+
+following exponential affine form solution
+Φ (t; s) = exp {C (t; s) + D (t; s) Vt }
+
+(5.17)
+
+Plug equation (5.17) back into (5.16), it can be shown that functions C and D satisfies
+ODE system (5.4). The Riccati function in (5.4) can be explicitly solved and represented
+by Kummer’s functions. Alternatively, the ODE system (5.4) can be solved numerically by
+Runge-Kutta algorithm. Below I present the analytical solution for C and D.
+The conditional expectation with respect to V defined in (5.15) has the exponential affine
+form solution (5.17), with the two coefficient functions C and D solving PDE system (5.4).
+Function D is controlled by a Riccati equation, and the first step to solve D is to define the
+following function transform
+′
+
+u
+1 2
+σv D = − τ
+2
+u
+Therefore, u satisfies the following second-order ODE
+[
+]
+) −2κτ
+1 2 2(
+1
+′′
+′
+2
+−κτ
+uτ τ + κv uτ − isρσv (κ − κv ) e
++ σv s 1 − ρ e
+u=0
+2
+4
+50
+
+MRLRSV Model
+
+Then we define the following variable transform to change the ODE coefficients to constants.
+x = ise−κτ
+Then
+[ 2
+]
+σv (1 − ρ2 )
+(κ − κv ) ρσv
+κ − κv ′
+ux +
+x−
+u=0
+xuxx +
+κ
+4κ2
+2κ2
+′′
+
+or
+′′
+
+′
+
+[a2 x + b2 ] uxx + [a1 x + b1 ] ux + [a0 x + b0 ] u = 0
+
+(5.18)
+
+with
+
+2
+2)
+
+a0 = σv (1−ρ
+2
+
+4κ
+
+
+−(κ−κv )ρσv
+
+
+2κ2
+ b0 =
+a1 = 0
+v
+
+b1 = κ−κ
+
+κ
+
+
+
+a =1
+
+ 2
+b2 = 0
+
+Equation (5.18) is of the type ODE 2.1.2-108 in Polyanin [20] , and the general solution of u
+can be represented as
+u(x) = ekx J (a, b; z)
+
+(5.19)
+
+where J (a, b; z) is general solution of degenerate hyper-geometric equation
+′′
+
+′
+
+zJzz + (b − z)Jz − aJ = 0
+a, b are two constants and z is a new variable. Denote D = a21 − 4a0 a2 =
+
+(5.20)
+−σv2 (1−ρ2 )
+and
+κ2
+
+v
+k − (κ−κ2κv2)ρσv , then for the case of D ̸= 0, or equivalently ρ ̸= ±1 which is
+B (k) = κ−κ
+κ
+
+assumed to always holds, we have
+
+√
+√
+iσv 1−ρ2
+
+D−a
+1
+
+ k ≡ 2a2 =
+2κ
+−κ
+2
+√
+=
+λ ≡ − 2a2ak+a
+1
+iσv 1−ρ2
+
+
+ µ ≡ − b2 = 0
+a2
+
+51
+
+浙江大学博士学位论文
+
+and consequently
+
+√
+1−ρ2 −ρ
+
+B(k)
+κ−κv i √
+
+=
+a
+≡
+
+2a
+k+a
+κ
+
+2
+1
+2i 1−ρ2
+
+
+
+
+
+v
+1 b2
+b ≡ a2 b1a−a
+= κ−κ
+2
+2
+√ κ
+1−ρ2 −κτ
+φσ
+= v κ
+e
+z ≡ x−µ
+λ
+
+Solution of second order ODE (5.20) is given in ODE 2.1.2-70 of Polyanin [? ] . More specifically, the general solution can be expressed as
+
+
+
+C1 M (a, b; z) + C2 U (a, b; z) , κκv ̸= 1, 2, ...
+
+
+
+
+[
+]
+J (a, b; z) = z 1−b C̃1 M (a − b + 1, 2 − b; z) + C̃2 U (a − b + 1, 2 − b; z) (5.21)
+
+
+
+
+
+
+, κκv = 1, 2, ...
+where M and U are the first and second kind Kummer functions. Plug the general solution
+(5.21) of J back into (5.19), for the case of κκv ̸= 1, 2, ... we get
+}
+{
+′
+′
+√
+2isκe−κτ
+gMz (a, b; z) + Uz (a, b; z)
+iσv
+2
+D(τ ) =
+k− κ 1−ρ
+σv2
+gM (a, b; z) + U (a, b; z)
+
+(5.22)
+
+and when κκv = 1, 2, ... we get
+
+√
+[
+2isκe−κτ {
+iσv
+2 (1 − b)z −1
+k
+−
+1
+−
+ρ
+D(τ ) =
+κ
+σv2
+]}
+′
+′
+g̃Mz (a − b + 1, 2 − b; z) + Uz (a − b + 1, 2 − b; z)
++
+g̃M (a − b + 1, 2 − b; z) + U (a − b + 1, 2 − b; z)
+
+(5.23)
+
+g and g̃ are two constants determined by initial condition of D. In order to simplify the
+expressions (5.22) and (5.23), we need the following properties of Kummer functions
+
+d
+a
+
+ M (a, b; z) = M (a + 1, b + 1; z)
+dz
+b
+(5.24)
+d
+
+ U (a, b; z) = −aU (a + 1, b + 1; z)
+dz
+Applying (5.24) to (5.22) and (5.23) we can obtain expression of D as (5.5) and (5.6). and
+the two constants g and g̃ can be attained accordingly.
+= θv κv D, we have to integrate D from 0 to τ . Note D =
+To solve function C from ∂C
+∂τ
+′
+
+− σ22 uuτ , thus we have
+v
+∫ τ
+
+2
+D(v)dv = − 2
+σv
+0
+
+∫ τ
+0
+
+′
+
+2
+u(τ )
+uv
+dv = − 2 ln
+u
+σv u(0)
+
+and thus expressions for C can be easily expressed as (5.5) and (5.6). 
+52
+
+MRLRSV Model
+
+The Kummer functions M and U can be implemented in symbolic math toolbox of Matlab.
+However, the calculation is not so stable and rather time-consuming. An alternative resolution of this problem is directly solving ODE system (5.4) numerically by Runge-Kutta
+algorithm. We compare the two methods in Matlab on calculating characteristic function,
+and find that the Runge-Kutta algorithm is much more stable than Kummer functions represented closed-form formula. Moreover, we find the Runge-Kutta algorithm in computing
+characteristic function once is at least 7 times faster than the Kummer function formula.
+Therefore, we recommend using Runge-Kutta numerical solution for MRLRSV model instead of the Kummer function represented explicit formula, unless a more stable and faster
+routine is developed in Matlab.
+
+5.2 VIX Future and VIX Option Pricing
+Based on the conditional characteristic function of spot VIX under martingale measure Q
+as in eqn. (5.2), we can derive the pricing formulas for VIX future and VIX option.
+Theorem 5.2：(VIX Future Pricing)
+Under the assumption of MRLRSV process in Definition 5.1, VIX future FtT can be explicitly solved as
+FtT = ψ (t; −i) = {V IXt }e
+
+−κ(T −t)
+
+· exp {A (t; −i) + B (t; −i) · Vt }
+
+(5.25)
+
+where functions A(t; s) and B(t; s) are defined as eqn. (5.3).
+Furthermore, dynamics of VIX future under pricing measure Q can be given by
+dFtT
+
+=
+
+FtT ·
+
+]
+[
+√
+√
+−κ(T −t)
+Vt dWt + B (t; −i) σv Vt dZt
+e
+
+√
+√
+∂FtT
+∂FtT
+· V IXt Vt dWt +
+· σv Vt dZt
+∂V IXt
+∂Vt
+√
+T
+= Ft Vt · dMt
+
+=
+
+where standard Brownian Motion dMt is defined as
+
+−κ(T −t) dW +Bσ dZ
+t
+v
+t
+ dMt = √ e
+
+e−2κ(T −t) +2ρe−κ(T −t) Bσv +B 2 σv2
+v
+ dMt dZt = √ −2κ(T −t) Bσ
+dt
+e
++2ρe−κ(T −t) Bσv +B 2 σv2
+
+(5.26)
+(5.27)
+
+(5.28)
+
+53
+
+浙江大学博士学位论文
+
+Proof:
+VIX future pricing formula (5.25) can be derived from the conditional characteristic function of of ln V IXT under pricing measure Q.
+In order to derive the risk-neutral dynamics of VIX future, we first derive dynamics of
+V IXt under the pricing measure.
+dV IXt = deln V IXt
+1
+= eln V IXt d ln V IXt + eln V IXt d ln V IXt d ln V IXt
+2
+[
+] V IX
+√
+t
+= V IXt κ (θt − ln V IXt ) dt + Vt dWt +
+Vt dt
+2
+√
+]
+)
+[(
+= V IXt θt κ + V2t − κ ln V IXt dt + V IXt Vt dWt
+Consequently, we get
+√
+]
+)
+dV IXt [(
+= θt κ + V2t − κ ln V IXt dt + Vt dWt
+V IXt
+Using Ito’s lemma to eqn. (5.25) and result in the above equation, we get
+−κ(T −t)
+
+−1
+dFtT = exp {A + B · Vt } · e−κ(T −t) · {V IXt }e
+dV IXt
+[
+]
+1
++ exp {A + B · Vt } · e−κ(T −t) e−κ(T −t) − 1
+2
+−κ(T −t) −2
+·{V IXt }e
+dV IXt · dV IXt
+
++B · {V IXt }e
+
+−κ(T −t)
+
+· exp {A + B · Vt } dVt
+
+−κ(T −t)
+1
++ B 2 · {V IXt }e
+· exp {A + B · Vt } dVt · dVt
+2
+−κ(T −t)
+· exp {A + B · Vt } dt
++κe−κ(T −t) ln V IXt · {V IXt }e
+( ′
+)
+−κ(T −t)
+′
++ At + Bt · Vt {V IXt }e
+· exp {A + B · Vt } dt
+]
+[[(
+√
+]
+)
+= e−κ(T −t) · FtT
+θt κ + V2t − κ ln V IXt dt + Vt dWt
+[
+]
+1
++ e−κ(T −t) e−κ(T −t) − 1 FtT · Vt dt
+2
+]
+[
+√
+T
++B · Ft κv (θv − Vt ) dt + σv Vt dZt
+
+1
++ B 2 · FtT · σv2 Vt dt
+2 [
+)]
+( ′
+′
++FtT κe−κ(T −t) ln V IXt + At + Bt · Vt dt
+
+54
+
+(5.29)
+
+MRLRSV Model
+
+= e
+
+=
+
+=
+=
+=
+
+−κ(T −t)
+
+· FtT
+
+(
+
+θt κ + V2t
+
+)
+
+dt + FtT
+
+(
+
+′
+
+′
+
+)
+
+At + Bt · Vt dt + B · FtT κv (θv − Vt ) dt
+
+[
+]
+1
+1
++ e−κ(T −t) e−κ(T −t) − 1 FtT · Vt dt + B 2 · FtT · σv2 Vt dt
+2
+2
+√
+√
+T
+−κ(T −t)
+T
++e
+· Ft Vt dWt + B · Ft σv Vt dZt
+)
+}
+{
+) ( ′
+(
+′
+−κ(T −t)
+T
+Vt
+· θt κ + 2 + At + Bt · Vt + Bκv (θv − Vt ) dt
+Ft · e
+{
+}
+]
+1 −κ(T −t) [ −κ(T −t)
+1 2 2
+T
++Ft ·
+e
+e
+− 1 Vt + B · σv Vt dt
+2
+2
+√
+√
++e−κ(T −t) · FtT Vt dWt + B · FtT σv Vt dZt
+√
+√
+e−κ(T −t) · FtT Vt dWt + B · FtT σv Vt dZt
+√
+√
+∂FtT
+∂FtT
+· V IXt Vt dWt +
+· σv Vt dZt
+∂V IXt
+∂Vt
+√
+T
+Ft Vt · dMt
+
+where the 5t h equality holds due to the fact that FtT is martingale under the pricing measure Q. dMt in the 6t h equality as defined in (5.28) is a continuous martingale and it has
+quadratic variation
+dMt dMt = √
+
+e−κ(T −t) dWt + Bσv dZt
+
+e−κ(T −t) dWt + Bσv dZt
+√
+
+e−2κ(T −t) + 2ρe−κ(T −t) Bσv + B 2 σv2 e−2κ(T −t) + 2ρe−κ(T −t) Bσv + B 2 σv2
+e−2κ(T −t) dWt dWt + 2e−κ(T −t) Bσv dWt dZt + B 2 σv2 dZt dZt
+=
+[e−2κ(T −t) + 2ρe−κ(T −t) Bσv + B 2 σv2 ]
+e−2κ(T −t) dt + 2e−κ(T −t) Bσv ρdt + B 2 σv2 dt
+=
+[e−2κ(T −t) + 2ρe−κ(T −t) Bσv + B 2 σv2 ]
+= dt
+
+Therefore, dMt is a standard Brownian Motion. 
+Corollary 5.1：(VIX Future Correlation)
+From the dynamics of VIX future in eqn. (5.26) under MRLRSV model, we get the instantaneous correlation of VIX futures with different maturities as
+⟨ T1
+⟩
+) .
+( T1
+dFt , dFtT2
+T1 ,T2
+T2
+ρt
+= corr dFt , dFt = √⟨
+⟩⟨
+⟩
+dFtT1 , dFtT1 dFtT2 , dFtT2
+(
+)
+]}
+{[ −κ(T1 −t) −κ(T2 −t)
+=
+e
+e
++ B 2 σv2 + e−κ(T1 −t) + e−κ(T2 −t) Bσv ρ
+/{√
+[e−2κ(T1 −t) + B 2 σv2 + 2e−κ(T1 −t) Bσv ρ]
+55
+
+浙江大学博士学位论文
+
+< 1
+
+}
+√
+· [e−2κ(T2 −t) + B 2 σv2 + 2e−κ(T2 −t) Bσv ρ]
+
+(5.30)
+
+with B = B (t; −i).
+Proof:
+Given dynamics of VIX future in eqn. (5.26), we have
+{
+Thus
+
+[
+]
+√
+dFtT1 = FtT1 √Vt · [e−κ(T1 −t) dWt + B (t; −i) σv dZt ]
+dFtT2 = FtT2 Vt · e−κ(T2 −t) dWt + B (t; −i) σv dZt
+
+[
+dFtT1 dFtT2 = FtT1 FtT2 Vt · e−κ(T1 −t) e−κ(T2 −t) dWt dWt + B 2 (t; −i) σv2 dZt dZt
+]
+(
+)
++ e−κ(T1 −t) + e−κ(T2 −t) B (t; −i) σv dWt dZt
+[
+= FtT1 FtT2 Vt e−κ(T1 −t) e−κ(T2 −t) + B 2 σv2
+)
+(
+]
++ e−κ(T1 −t) + e−κ(T2 −t) Bσv ρ dt
+Consequently,
+ρTt 1 ,T2
+
+⟩
+dFtT1 , dFtT2
+= √⟨
+⟩⟨
+⟩
+dFtT1 , dFtT1 dFtT2 , dFtT2
+{[ −κ(T1 −t) −κ(T2 −t)
+(
+)
+]}
+=
+e
+e
++ B 2 σv2 + e−κ(T1 −t) + e−κ(T2 −t) Bσv ρ
+/{√
+[e−2κ(T1 −t) + B 2 σv2 + 2e−κ(T1 −t) Bσv ρ]
+}
+√
+· [e−2κ(T2 −t) + B 2 σv2 + 2e−κ(T2 −t) Bσv ρ]
+⟨
+
+< 1
+
+which concludes proof of this corollary. 
+For the two-factor MRLRSV model, the instantaneous correlation is less than 1, which is
+more realistic for VIX futures with different maturities.
+Theorem 5.3：(VIX Option Pricing)
+Under the assumption of MRLRSV process in Definition 5.1, VIX call option CalltT (K)
+56
+
+MRLRSV Model
+
+can be explicitly solved as
+CalltT (K)
+
+{ ∫ T
+}
+]
+[
+= exp −
+rs ds · FtT · Π1 − K · Π2
+
+(5.31)
+
+t
+
+where Π1 and Π2 are two tail probabilities
+{
+}
+{
+∫∞
+ψ (s)e−is ln K
+ds,
+Πj = 21 + π1 0 Re j is
+
+j = 1, 2
+
+(5.32)
+ψ2 (t; s) = ψ (t; s)
+{ ∫
+}
+[
+]
+.
+T
+T
+Furthermore, VIX put option P utt (K) = exp − t rs ds · EtQ (K − V IXT )+ can be
+,
+ψ1 (t; s) = ψ(t;s−i)
+ψ(t;−i)
+
+explicitly solved as
+
+P utTt (K) = exp
+Proof:
+
+{ ∫ T
+}
+]
+[
+−
+rs ds · K · (1 − Π2 ) − FtT · (1 − Π1 )
+
+(5.33)
+
+t
+
+Although VIX call option can be regarded as an option written on VIX future that has the
+same maturity as VIX option, the payoff at maturity is the same as settled using spot VIX.
+Given dynamics of spot VIX under the pricing measure Q, we can further make change
+of measure so that VIX call option price can be represented in a similar formula as BlackScholes formula
+
+=
+=
+
+=
+
+≡
+
+{ ∫ T
+}
+[
+]
+C (T − t, V IXt , K) = exp −
+rs ds · EtQ (V IXT − K)+
+t
+{ ∫ T
+}
+[
+]
+]}
+[
+{
+exp −
+rs ds · EtQ eln V IXT 1{ln V IXT >ln K} − KEtQ 1{ln V IXT >ln K}
+t
+{ ∫ T
+}
+[
+]
+{
+exp −
+rs ds · −KEtQ 1{ln V IXT >ln K}
+t
+]}
+[
+/ Q [ ln V IX ]
+ln V IXT
+T
+[ ln V IX ] Q
+e
+e
+E
+Q
+T
+[
+/
+] 1{ln V IXT >ln K}
+Et
+Et e
+EtQ eln V IXT E Q [eln V IXT ]
+{ ∫ T
+}
+[
+[
+]
+{
+]
+exp −
+rs ds · EtQ eln V IXT EtQ1 1{ln V IXT >ln K}
+[t
+]}
+Q2
+−KEt 1{ln V IXT >ln K}
+{ ∫ T
+}
+}
+{
+exp −
+rs ds · FtT · Π1 − K · Π2
+(5.34)
+t
+
+where the first measure is defined by the following Esscher transform
+eln V IXt
+dQ1
+= Q ln V IXt
+dQ Ft
+E [e
+]
+
+(5.35)
+
+57
+
+浙江大学博士学位论文
+
+and the second measure Q2 is the same as Q. In order to calculate the two tail probabilities
+Π1 and Π2 , conditional characteristic functions of lnV IXT on filtration Ft are derived as
+]
+[
+[ is ln V IX ]
+eln V IXT
+Q
+is ln V IXT
+T
+e
+= Et
+e
+ψ1 (t; s) =
+EtQ [eln V IXT ]
+[
+]
+EtQ ei(−i+s) ln V IXT
+ψ (t; s − i)
+=
+=
+Q ln V IXT
+ψ (t; −i)
+Et [e
+]
+EtQ1
+
+and
+[
+]
+[
+]
+ψ2 (t; s) = EtQ2 eis ln V IXT = EtQ eis ln V IXT = ψ (t; s)
+Given the conditional characteristic functions above, the two tail probabilities in eqn. (5.31)
+can be recovered by inverse theorem of Gil-Pelaez [7] , as shown in eqn. (5.32).
+Pricing formula (5.33) for VIX put option can be easily derived from put-call parity and
+the pricing formula for VIX call option. 
+
+5.3 VIX Future and VIX Option Calibration
+Theorem 5.4：(Calibration)
+For the MRLRSV model in Definition 5.1, VIX option is priced using a Stochastic Volatility (Heston) underlying FtT with time-dependent parameters. Thus this model is able to
+produce implied volatility skew for VIX option. Furthermore, the instantaneous correlation in this stochastic volatility model is positive and thus this model is able to produce
+positive implied volatility skew for VIX option. As there is no explicit formula for implied
+volatility in a stochastic volatility model with time-dependent parameters. Thus parameters
+of Vt can be used to calibrate to market implied volatility skew for VIX option.
+With calibration result of parameters of Vt from market quotes of VIX implied volatility
+skew, we can move forward to calibrate VIX future term structure.
+1
+1 df0T
+−
+θT = f0T +
+κ dT
+
+58
+
+[
+
+]
+[
+]
+dC
+1 dB
+1 ρκv θv
++ κC −
++ κB · V0 +
+κ dT
+κ dT
+κ σv
+
+(5.36)
+
+MRLRSV Model
+
+.
+where f0T = ln F0T is the initial VIX future term structure, C and D are defined as
+
+C = C (0; −i)
+
+
+ D = D (0; −i)
+dC
+= κv θv D
+
+dT
+
+ dD
+v ) −κT
+= 21 σv2 D2 − κv D − ρ(κ−κ
+e
++ 12 (1 − ρ2 ) e−2κT
+dT
+σv
+
+Proof: According to eqn. (5.25), the initial VIX future term structure F0T is given by
+F0T = {V IX0 }e
+
+−κT
+
+· exp {A + B · V0 }
+
+where
+{
+
+[
+]
+∫T
+A = A (0; −i) = C + 0 θh e−κ(T −g) dh − ρκσvvκθv 1 − e−κT
+−κT
+B = B (0; −i) = D − ρeσv
+
+Thus
+f0T = e−κT · ln V IX0 + A + B · V0
+}
+{
+∫ T
+]
+ρκv θv [
+−κT
+−κT
+−κ(T −g)
+1−e
++ B · V0
+= e
+· ln V IX0 + C +
+θh e
+dh −
+σv κ
+0
+
+Take derivative w.r.t. T on both sides of the above equation, we get
+df0T
+dT
+
+dA dB
++
+· V0
+dT
+[dT
+]
+∫ T
+dC
+−κT
+2
+−κ(T −g)
+−κT ρκv θv
+−κe
+· ln V IX0 +
++ κθT − κ
++ B · V0
+θh e
+dh − e
+dT
+σv
+0
+[ ∫ T
+]
+dC dB
+−κT ρκv θv
+−κ(T −g)
+−κT
++
+· V0 − e
+−κ κ
+θh e
+dh
+κθT − κe
+· ln V IX0 +
+dT
+dT
+σv
+0
+dC dB
+ρκv θv
++
+· V0 − e−κT
+κθT − κe−κT · ln V IX0 +
+dT
+dT
+σv
+]
+[
+[
+]
+ρκ
+θ
+v v
+−κT
+T
+−κT
+1−e
+− B · V0
+−κ f0 − e
+· ln V IX0 − C +
+σv κ
+[
+] [
+]
+dC
+dB
+ρκv θv
+κθT +
++ κC +
++ κB · V0 −
+− κf0T
+dT
+dT
+σv
+
+= −κe−κT · ln V IX0 +
+=
+=
+=
+
+=
+
+Rearrange the above equation, we get the result in eqn. (5.36). 
+
+5.4 VIX Future and VIX Option Hedging
+In this section, I calculate sensitivities of VIX futures and VIX options with respect to spot
+VIX and further develop hedging strategies for VIX futures and VIX options with other
+VIX future contracts as hedging instruments.
+59
+
+浙江大学博士学位论文
+
+Theorem 5.5：(VIX Future Hedging)
+Firstly, we calculate the sensitivities of VIX future price to spot VIX. We are concerned
+with the spot delta and spot gamma.
+
+ ∂FtT = e−κ(T −t) · F T
+t
+∂V IXt
+V IXt
+−κ(T −t) · 1−e−κ(T −t)
+2 T
+[
+]
+ ∂ Ft 2 = − e
+· FtT
+∂V IX
+V IX 2
+
+(5.37)
+
+with maturity T2 to another VIX future with shorter maturity T1 .
+ T
+T2
+2
+
+ ∂FtT1 = e−κ(T2 −T1 ) · FtT1
+∂Ft
+Ft
+[
+] F T2
+2 F T2
+∂
+t
+
+= −e−2κ(T2 −T1 ) · eκ(T2 −T1 ) − 1 · Tt 1 2
+
+T1 2
+∂ ( Ft )
+( Ft )
+
+(5.38)
+
+t
+
+t
+
+Based on the above formulas, we can move forward to calculate sensitivities of VIX future
+
+Proof:
+
+Like the case in MRLRJ model, the characteristic function defined in eqn. (5.2) can also
+be simplified as
+ψ (t; s) = {V IXt }ise
+
+−κ(T −t)
+
+· Z (t; s)
+
+where Z (t; s) is function of t and it’s independent from V IXt . Thus VIX future pricing
+formula eqn. (5.25) can also be denoted as
+FtT = ψ (ln V IXt , t; −i) = {V IXt }e
+
+−κ(T −t)
+
+· Z (t; −i)
+
+Therefore, by using the same proof procedure as in last chapter we can easily derive the
+hedging formulas (5.37) and (5.38). 
+Theorem 5.6：(VIX Option Hedging)
+Firstly, we calculate the sensitivities of VIX call option price to spot VIX. We are concerned
+with the spot delta and spot gamma.
+{ ∂CallT
+e−(r+κ)(T −t) ·FtT
+t
+=
+· Π1
+∂V IXt
+V IXt
+]
+}
+∂ 2 CalltT
+e−(r+κ)(T −t) ·FtT {[
+−κ(T −t)
+−κ(T −t)
+1
+−
+e
+·
+Π
+−
+e
+·
+f
+(ln
+K)
+=
+−
+2
+2
+1
+1
+∂V IX
+V IX
+t
+
+(5.39)
+
+t
+
+Based on the above formulas, we can move forward to calculate sensitivities of VIX call
+option price with maturity T2 to a VIX future with shorter maturity T1 .
+
+T2
+T2
+
+ ∂CallT1t = e−r(T2 −t) e−κ(T2 −T1 ) · FtT1 · Π1 (T2 )
+∂Ft
+Ft
+T
+[(
+)
+] (5.40)
+2 CallT2
+∂
+Ft 2
+κ(T2 −T1 )
+−r(T2 −t) −2κ(T2 −T1 )
+t
+
+·
+1
+−
+e
+·
+Π
++
+f
+(ln
+K)
+=
+e
+e
+·
+
+2
+2
+1
+1
+T
+∂ ( Ft 1 )
+(FtT1 )
+60
+
+MRLRSV Model
+
+Proof:
+This theorem can be proved with the exact procedure as in Theorem 4.6. 
+
+5.5 Forward Variance Swap and Convexity
+Finally, in this section I extend the 30-day forward variance swap pricing formula in MRLR
+and MRLRJ models to MRLRSV model.
+Theorem 5.7：(Forward Variance Swap Pricing)
+Under the assumption of MRLRSV process in Definition 5.1, the 30-day forward variance
+[
+]
+swap F V StT = EtQ RVTT +30days = EtQ [V IXT2 ] can be explicitly solved as
+F V StT = ψ (ln V IXt , Vt , t; −2i)
+= {V IXt }2e
+
+−κ(T −t)
+
+· exp {A (t; −2i) + B (t; −2i) · Vt }
+}
+{
+.
+2e−κ(T −t)
+= {V IXt }
+· exp Ã + B̃ · Vt
+
+(5.41)
+
+Furthermore, dynamics of forward variance under pricing measure Q can be given by
+√
+√
+dF V StT = F V StT · 2e−κ(T −t) Vt dWt + F V StT · B (t; −2i) σv Vt dZt
+√
+√
+∂F V StT
+∂F V StT
+=
+(5.42)
+· V IXt Vt dWt +
+· σv Vt dZt
+∂V IXt
+∂Vt
+Proof:
+Forward variance swap pricing formula (5.41) can be derived from the conditional characteristic function of of ln V IXT under pricing measure Q.
+Using Ito’s lemma to eqn. (5.41) and dynamics of V IXt in eqn. (5.29), we get
+dF V StT
+
+{
+
+}
+
+−κ(T −t)
+
+−1
+= exp Ã + B̃ · Vt · 2e−κ(T −t) · {V IXt }2e
+dV IXt
+{
+}
+[
+]
+1
++ exp Ã + B̃ · Vt · 2e−κ(T −t) 2e−κ(T −t) − 1
+2
+−κ(T −t) −2
+·{V IXt }2e
+dV IXt · dV IXt
+}
+{
+2e−κ(T −t)
++B̃ · {V IXt }
+· exp Ã + B̃ · Vt dVt
+{
+}
+−κ(T −t)
+1
++ B̃ 2 · {V IXt }2e
+· exp Ã + B̃ · Vt dVt · dVt
+2
+
+61
+
+浙江大学博士学位论文
+
+−κ(T −t)
+
+2e−κ(T −t)
+
+{
+
+}
+
+· exp Ã + B̃ · Vt dt
++2κe
+ln V IXt · {V IXt }
+( ′
+{
+)
+}
+−κ(T −t)
+′
++ Ãt + B̃t · Vt {V IXt }2e
+· exp Ã + B̃ · Vt dt
+[[(
+]
+√
+]
+)
+θt κ + V2t − κ ln V IXt dt + Vt dWt
+= 2e−κ(T −t) · F V StT
+[
+]
++e−κ(T −t) 2e−κ(T −t) − 1 F V StT · Vt dt
+[
+]
+√
++B̃ · F V StT κv (θv − Vt ) dt + σv Vt dZt
+
+1
++ B̃ 2 · F V StT · σv2 Vt dt
+2
+)]
+[
+( ′
+′
++F V StT 2κe−κ(T −t) ln V IXt + Ãt + B̃t · Vt dt
+( ′
+)
+)
+(
+′
+= 2e−κ(T −t) · F V StT θt κ + V2t dt + F V StT Ãt + B̃t · Vt dt
+
+=
+
+=
+=
+=
+
++B̃ · F V StT κv (θv − Vt ) dt
+[
+]
+1
++e−κ(T −t) 2e−κ(T −t) − 1 F V StT · Vt dt + B̃ 2 · F V StT · σv2 Vt dt
+2
+√
+√
+−κ(T −t)
+T
+T
++2e
+· F V St Vt dWt + B̃ · F V St σv Vt dZt
+{
+)
+}
+(
+) ( ′
+′
+F V StT · 2e−κ(T −t) · θt κ + V2t + Ãt + B̃t · Vt + B̃κv (θv − Vt ) dt
+{
+}
+[ −κ(T −t)
+]
+1 2 2
+−κ(T −t)
+T
+2e
+− 1 Vt + B̃ · σv Vt dt
++F V St · e
+2
+√
+√
++2e−κ(T −t) · F V StT Vt dWt + B̃ · F V StT σv Vt dZt
+√
+√
+2e−κ(T −t) · F V StT Vt dWt + B̃ · F V StT σv Vt dZt
+√
+√
+2e−κ(T −t) · F V StT Vt dWt + B (t; −2i) · F V StT σv Vt dZt
+√
+√
+∂F V StT
+∂F V StT
+· V IXt Vt dWt +
+· σv Vt dZt
+∂V IXt
+∂Vt
+
+where the 5t h equality holds due to the fact that F V StT is martingale under the pricing
+measure Q and the above equation concludes proof of eqn. (5.42). 
+Below we derive the convexity adjustment for VIX future from 30-day forward variance
+swap.
+Theorem 5.8：(Convexity Adjustment for VIX Future)
+Under the assumption of MRLRSV process in Definition 5.1, convexity adjustment of VIX
+
+62
+
+MRLRSV Model
+
+future from forward variance swap can be derived as
+FT
+.
+CATt = √ t
+
+F V StT
+
+{ [
+]
+1
+= exp − A (t; −2i) − A (t; −i)
+2
+[
+]
+}
+1
+− B (t; −2i) − B (t; −i) · Vt
+2
+
+(5.43)
+
+Proof:
+From the pricing formulas of VIX future in eqn. (5.25) and 30-day forward variance swap
+in eqn. (5.41), the convexity adjustment can be derived as
+CATt = √
+
+FtT
+F V StT
+{V IXt }e
+
+−κ(T −t)
+
+· exp {A (t; −i) + B (t; −i) · Vt }
+{
+}
+{V IXt }
+· exp 21 A (t; −2i) + 21 B (t; −2i) · Vt
+] [
+]
+}
+{ [
+1
+1
+= exp − A (t; −2i) − A (t; −i) − B (t; −2i) − B (t; −i) · Vt
+2
+2
+=
+
+e−κ(T −t)
+
+with T1 < T2 . 
+
+63
+
+浙江大学博士学位论文
+
+6
+
+MRLRSVJ Model
+
+In this chapter, I combine MRLRJ and MRLRSV models together so that both upward
+jump and positively correlated stochastic volatility present in dynamics of spot VIX. This
+model is called mean-reverting logarithmic stochastic volatility jump model (MRLRSVJ).
+
+6.1 MRLRSVJ dynamics and characteristic function
+The dynamics of ln V IXt under MRLRSVJ model is defined as below.
+Definition 6.1：(MRLRSVJ Dynamics)
+Under martingale measure Q, the mean-reverting logarithmic stochastic volatility process
+is formulated as
+{
+
+d ln V IXt = κ (θt − ln V IX
+√t ) dt +
+dVt = κv (θv − Vt ) dt + σv Vt dZt
+
+√
+
+Vt dWt + JdNt
+
+(6.1)
+
+where κ is mean-reverting speed, time-dependent function θt is the long-term mean of
+√
+logarithm of spot VIX, Vt is vol-of-vol for spot VIX and Vt is assumed to follow a
+square-root process. Nt is Poisson process with jump intensity λ and J is exponentially
+distributed jump size with J ∼ Exp(η) and η > 0.
+Conditional characteristic function of ln V IXt under MRLRSVJ model can be derived as
+below.
+Theorem 6.1：(VIX Characteristic Function)
+Under the assumption of MRLRSVJ process in Definition 6.1, characteristic function of
+spot VIX logarithm ln V IXT under martingale measure Q conditioned on information at
+time t is given by
+}
+{
+ψ (t; s) = exp A (t; s) + B (t; s) Vt + ise−κ(T −t) ln V IXt
+
+64
+
+(6.2)
+
+MRLRSVJ Model
+
+where functions A(t; s) and B(t; s) are given by
+{
+[
+]
+∫T
+v θv
+1 − e−κ(T −t) + H (t; s)
+A (t; s) = C (t; s) + is t e−κ(T −h) κθh dh − isρκ
+σv κ
+−κ(T −t)
+B (t; s) = D (t; s) − isρe σv
+
+(6.3)
+
+and functions C(t; s) and D(t; s) are defined in eqn. (5.4) and can be solved as in eqn. (5.5)
+and (5.6). The function H(t; s) comes from the jump term and can be given as
+(
+)
+λ
+η − ise−κ(T −t)
+H (t; s) = ln
+κ
+η − is
+
+(6.4)
+
+Proof:
+In order to solve conditional characteristic function for XT = lnV IXT from (6.1), we
+derive dynamics of eκt Xt by Ito’s lemma as
+√
+)
+(
+d eκt Xt = eκt κθt dt + eκt Vt dWt + eκt JdNt
+
+Therefore, XT can be represented by
+∫ T
+∫ T
+√
+−κ(T −t)
+−κ(T −h)
+XT = e
+Xt +
+e
+κθh dh +
+e−κ(T −h) Vh dWh
+t
+t
+∫ T
++
+e−κ(T −h) JdNh
+
+(6.5)
+
+t
+
+Put the above equation (6.5) into ψ (t; s) = EtQ [exp {isXT }], we get
+{[
+] }
+∫ T
+−κ(T −t)
+−κ(T −h)
+Xt +
+ψ (t; s) = exp e
+e
+κθh dh is
+t
+}]
+[
+{ ∫ T
+√
+Q
+−κ(T −h)
+Vh dWh
+·Et exp is
+e
+t
+[
+{ ∫ T
+}]
+Q
+−κ(T −h)
+·Et exp is
+e
+JdNh
+
+(6.6)
+
+t
+
+The first conditional expectation in the above equation is denoted Ω (t; s) as in Theorem
+5.1 of last chapter and it has been solved explicitly in that theorem. The second conditional
+expectation in the above equation can be denoted as
+[
+{ ∫ T
+}]
+Q
+−κ(T −h)
+Υ (t; s) = Et exp is
+e
+JdNh
+t
+
+and Poisson jump times in the interval (t, T ] are denoted as {Tk }≥1 . Then Υ (t; s) can be
+simplified as
+[
+
+Υ (t; s) = EtQ exp
+
+{N −N
+t
+T
+∑
+k=1
+
+ise−κ(T −Tk ) Jk
+
+}]
+65
+
+浙江大学博士学位论文
+
+=
+
+EtQ
+
+[N −N
+T
+∏t
+
+EtQ
+
+k=1
+[N −N [
+T
+∏t
+
+[
+
+exp ise−κ(T −Tk ) Jk
+{
+
+}
+
+]
+N
+
+FT
+
+]
+
+]]
+η
+= EtQ
+η − ise−κ(T −Tk )
+k=1
+]
+[ n [
+]
+∞
+∑
+η
+e−λ(T −t) (λ(T − t))n Q ∏
+Et
+NT − Nt = n
+(6.7)
+=
+−κ(T −Tk )
+n!
+η
+−
+ise
+n=0
+k=1
+where FTN stands for all information of Poisson process N up to time T . The second equality utilizes the independence between jump size random variables J and Poisson process
+η
+for exponential variable J.
+N , and the third equality holds due to E Q [exp {αJ}] = η−α
+
+Because jump times {Tk }nk=1 of homogeneous Poisson process N is uniformly distributed
+over (t, T ) conditioned on realization of jump number NT − Nt = n, we have
+[
+
+η
+NT − Nt = n
+η − ise−κ(T −Tk )
+∫ T
+η
+1
+=
+ds
+−κT
+κs
+η − ise
+e T −t
+t
+(
+)
+1
+η − is
+= 1−
+ln
+κ(T − t)
+η − ise−κ(T −t)
+EtQ
+
+]
+
+(6.8)
+
+Plug the above (6.8) into (6.7), and simple calculation leads to
+Υ (t; s) =
+
+[
+∞
+∑
+e−λ(T −t) (λ(T − t))n
+n=1
+
+=
+
+(
+
+n!
+
+η − is
+η − ise−κ(T −t)
+
+1
+1−
+ln
+κ(T − t)
+
+(
+
+η − is
+η − ise−κ(T −t)
+
+)]n
+
+) −λ
+κ
+
+(6.9)
+
+Put the above equation back into eqn. (6.6) we conclude proof of formula (6.3). 
+
+6.2 VIX Future and VIX Option Pricing
+Based on the conditional characteristic function of spot VIX under martingale measure Q
+as in eqn. (6.2), we can derive the pricing formulas for VIX future and VIX option.
+Theorem 6.2：(VIX Future Pricing)
+Under the assumption of MRLRSVJ process in Definition 6.1, VIX future FtT can be ex-
+
+66
+
+MRLRSVJ Model
+
+plicitly solved as
+FtT = ψ (t; −i) = {V IXt }e
+
+−κ(T −t)
+
+· exp {A (t; −i) + B (t; −i) · Vt }
+
+(6.10)
+
+where functions A(t; s) and B(t; s) are defined as eqn. (6.3).
+Furthermore, dynamics of VIX future under pricing measure Q can be given by
+]
+[
+√
+√
+dFtT = FtT · e−κ(T −t) Vt dWt + B (t; −i) σv Vt dZt
+}
+{[
+]
+e−κ(T −t)
+Je−κ(T −t)
+T
+λdt
+− 1 · dNt −
++Ft− e
+η − e−κ(T −t)
+√
+√
+∂FtT
+∂FtT
+=
+· V IXt Vt dWt +
+· σv Vt dZt
+∂V IXt
+∂Vt
+[
+{
+] }
+Q
+T
+T
++ ∆Ft dNt − λEt ∆Ft dt
+
+(6.11)
+
+Proof:
+Given the same form of conditional characteristic function of eqn. (6.10) as eqn. (5.25) of
+MRLRSV model, proof of the VIX future pricing formula (6.10) is exactly the same of
+Theorem 5.2.
+In order to derive the risk-neutral dynamics of VIX future, we first derive dynamics of
+V IXt under the pricing measure.
+dV IXt = deln V IXt
+1
+= eln V IXt d ln V IXtc + eln V IXt d ln V IXtc d ln V IXtc
+2
+[ ln V IXt− +J
+]
+ln V IXt−
++ e
+−e
+dNt
+] V IX
+[
+√
+[
+]
+t
+Vt dt + V IXt− eJ − 1 dNt
+= V IXt κ (θt − ln V IXt ) dt + Vt dWt +
+2
+√
+[
+]
+[(
+)
+]
+Vt
+= V IXt θt κ + 2 − κ ln V IXt dt + V IXt Vt dWt + V IXt− eJ − 1 dNt
+Consequently, we get
+√
+]
+)
+[
+]
+dV IXt [(
+= θt κ + V2t − κ ln V IXt dt + Vt dWt + eJ − 1 dNt
+V IXt−
+
+(6.12)
+
+Using Ito’s lemma to eqn. (6.10) and result in the above equation, we get
+−κ(T −t) −1
+
+dFtT = exp {A + B · Vt } · e−κ(T −t) · {V IXt }e
+
+dV IXtc
+67
+
+浙江大学博士学位论文
+
+[
+]
+1
++ exp {A + B · Vt } · e−κ(T −t) e−κ(T −t) − 1
+2
+−κ(T −t) −2
+·{V IXt }e
+dV IXtc · dV IXtc
++B · {V IXt }e
+
+−κ(T −t)
+
+· exp {A + B · Vt } dVt
+
+−κ(T −t)
+1
+· exp {A + B · Vt } dVt · dVt
++ B 2 · {V IXt }e
+2
+−κ(T −t)
+· exp {A + B · Vt } dt
++κe−κ(T −t) ln V IXt · {V IXt }e
+( ′
+)
+−κ(T −t)
+′
+· exp {A + B · Vt } dt
++ At + Bt · Vt {V IXt }e
+[
+]
++ FtT (ln V IXt− + J) − FtT (ln V IXt− ) dNt
+[[(
+]
+√
+)
+]
+= e−κ(T −t) · FtT
+θt κ + V2t − κ ln V IXt dt + Vt dWt
+[
+]
+1
++ e−κ(T −t) e−κ(T −t) − 1 FtT · Vt dt
+2
+]
+[
+√
++B · FtT κv (θv − Vt ) dt + σv Vt dZt
+
+1
++ B 2 · FtT · σv2 Vt dt
+2 [
+( ′
+)]
+′
+−κ(T −t)
+T
+ln V IXt + At + Bt · Vt dt
++Ft κe
+[ −κ(T −t)
+]
+T
+dNt
++ eJe
+− 1 · Ft−
+)
+( ′
+)
+(
+′
+= e−κ(T −t) · FtT θt κ + V2t dt + FtT At + Bt · Vt dt + B · FtT κv (θv − Vt ) dt
+[
+]
+1
+1
++ e−κ(T −t) e−κ(T −t) − 1 FtT · Vt dt + B 2 · FtT · σv2 Vt dt
+2
+2
+−κ(T −t)
+e
+λdt
+−FtT
+η − e−κ(T −t)
+√
+√
++e−κ(T −t) · FtT Vt dWt + B · FtT σv Vt dZt
+{[
+}
+]
+e−κ(T −t)
+Je−κ(T −t)
+T
+− 1 · dNt −
++Ft− e
+λdt
+η − e−κ(T −t)
+√
+√
+= e−κ(T −t) · FtT Vt dWt + B · FtT σv Vt dZt
+{[
+}
+]
+e−κ(T −t)
+Je−κ(T −t)
+T
+λdt
++Ft− e
+− 1 · dNt −
+η − e−κ(T −t)
+√
+√
+∂FtT
+∂FtT
+· V IXt Vt dWt +
+· σv Vt dZt
+=
+∂V IXt
+∂Vt
+[
+{
+] }
+Q
+T
+T
++ ∆Ft dNt − λEt ∆Ft dt
+which concludes proof of eqn. (6.11). 
+Theorem 6.3：(VIX Option Pricing)
+
+68
+
+MRLRSVJ Model
+
+Under the assumption of MRLRSVJ process in Definition 6.1, VIX call option CalltT (K)
+can be explicitly solved as
+CalltT (K)
+
+{ ∫ T
+}
+]
+[
+= exp −
+rs ds · FtT · Π1 − K · Π2
+
+(6.13)
+
+t
+
+where Π1 and Π2 are two tail probabilities
+{
+}
+{
+∫∞
+ψ (s)e−is ln K
+ds,
+Πj = 21 + π1 0 Re j is
+ψ1 (t; s) = ψ(t;s−i)
+,
+ψ(t;−i)
+
+j = 1, 2
+
+ψ2 (t; s) = ψ (t; s)
+
+(6.14)
+
+Furthermore, VIX put option P utTt (K) can be explicitly solved as
+P utTt (K) = exp
+
+{ ∫ T
+}
+]
+[
+−
+rs ds · K · (1 − Π2 ) − FtT · (1 − Π1 )
+
+(6.15)
+
+t
+
+Proof:
+Proof of this theorem is same as theorem 6.3. 
+
+6.3 VIX Future and VIX Option Calibration
+Theorem 6.4：(Calibration)
+For the MRLRSVJ model in Definition 6.1, VIX option is priced using a Stochastic Volatility with jump underlying FtT with time-dependent parameters. The stochastic volatility and
+jump parameters are calibrated to VIX implied volatility surface.
+With calibration result of parameters of Vt and Nt from market quotes of VIX implied
+volatility skew, we can move forward to calibrate VIX future term structure.
+θT
+
+1
+1 df0T
+−
+f0T +
+
+[
+
+]
+[
+]
+1 dB
+dC
++ κC −
++ κB · V0
+=
+κ dT
+κ dT
+κ dT
+(
+)
+1 ρκv θv λ
+1
+η − e−κT
++
+−
+− λ ln
+κ σv
+κ η − e−κT
+η−1
+
+(6.16)
+
+.
+where f0T = ln F0T is the initial VIX future term structure, C and D are defined as
+
+C = C (0; −i)
+
+
+ D = D (0; −i)
+dC
+= κv θv D
+
+dT
+
+ dD
+v ) −κT
+= 21 σv2 D2 − κv D − ρ(κ−κ
+e
++ 12 (1 − ρ2 ) e−2κT
+dT
+σv
+69
+
+浙江大学博士学位论文
+
+Proof: According to eqn. (6.10), the initial VIX future term structure F0T is given by
+F0T = {V IX0 }e
+
+−κT
+
+· exp {A + B · V0 }
+
+where
+( −κT )
+{
+[
+]
+∫T
+A = A (0; −i) = C + 0 θh e−κ(T −g) dh − ρκσvvκθv 1 − e−κT + λκ ln η−e
+η−1
+−κT
+
+B = B (0; −i) = D − ρeσv
+
+Thus
+f0T = e−κT · ln V IX0 + A + B · V0
+= e−κT · ln V IX0 + B · V0
+(
+)}
+{
+∫ T
+] λ
+η − e−κT
+ρκv θv [
+−κT
+−κ(T −g)
+1−e
++ ln
++ C+
+θh e
+dh −
+σv κ
+κ
+η−1
+0
+Take derivative w.r.t. T on both sides of the above equation, we get
+df0T
+dA dB
+= −κe−κT · ln V IX0 +
++
+· V0
+dT
+dT
+dT
+= −κe−κT · ln V IX0 + B · V0
+]
+[
+∫ T
+λ
+dC
+2
+−κ(T −g)
+−κT ρκv θv
++ κθT − κ
++
+θh e
+dh − e
++
+dT
+σv
+η − e−κT
+0
+ρκv θv
+dC dB
+λ
+= κθT − κe−κT · ln V IX0 +
++
+· V0 − e−κT
++
+dT
+dT
+σv
+η − e−κT
+[ ∫ T
+]
+−κ κ
+θh e−κ(T −g) dh
+0
+
+ρκv θv
+λ
+dC dB
++
+· V0 − e−κT
++
+= κθT − κe−κT · ln V IX0 +
+dT
+dT
+σv
+η − e−κT
+[
+(
+)
+]
+] λ
+ρκv θv [
+η − e−κT
+T
+−κT
+−κT
+−κ f0 − e
+· ln V IX0 − C +
+1−e
+− ln
+− B · V0
+σv κ
+κ
+η−1
+] [
+]
+[
+dB
+dC
+ρκv θv
++ κC +
++ κB · V0 −
+− κf0T
+= κθT +
+dT
+dT
+σv
+(
+)
+η − e−κT
+λ
++ λ ln
++
+η − e−κT
+η−1
+
+Rearrange the above equation, we get the result in eqn. (6.16). 
+
+70
+
+MRLRSVJ Model
+
+6.4 VIX Future and VIX Option Hedging
+In this section, I calculate sensitivities of VIX futures and VIX options with respect to spot
+VIX and further develop hedging strategies for VIX futures and VIX options with other
+VIX future contracts as hedging instruments.
+Theorem 6.5：(VIX Future Hedging)
+Firstly, we calculate the sensitivities of VIX future price to spot VIX. We are concerned
+with the spot delta and spot gamma.
+
+ ∂FtT = e−κ(T −t) · F T
+t
+∂V IXt
+V IXt
+2F T
+e−κ(T −t) ·[1−e−κ(T −t) ]
+∂
+t
+
+=−
+· FtT
+∂V IX 2
+V IX 2
+
+(6.17)
+
+with maturity T2 to another VIX future with shorter maturity T1 .
+ T
+T2
+2
+
+ ∂FtT1 = e−κ(T2 −T1 ) · FtT1
+∂Ft
+Ft
+T
+[ κ(T −T )
+] F T2
+∂ 2 Ft 2
+−2κ(T2 −T1 )
+2
+1
+
+=
+−e
+·
+e
+−
+1
+· Tt 1 2
+
+2
+T
+∂ ( Ft 1 )
+( Ft )
+
+(6.18)
+
+t
+
+t
+
+Based on the above formulas, we can move forward to calculate sensitivities of VIX future
+
+Proof:
+
+Proof of this theorem is same as theorem 4.5. 
+Theorem 6.6：(VIX Option Hedging)
+Firstly, we calculate the sensitivities of VIX call option price to spot VIX. We are concerned
+with the spot delta and spot gamma.
+{ ∂CallT
+e−(r+κ)(T −t) ·FtT
+t
+=
+· Π1
+∂V IXt
+V IXt
+]
+}
+e−(r+κ)(T −t) ·FtT {[
+∂ 2 CalltT
+1 − e−κ(T −t) · Π1 − e−κ(T −t) · f1 (ln K)
+=−
+∂V IX 2
+V IX 2
+t
+
+(6.19)
+
+t
+
+Based on the above formulas, we can move forward to calculate sensitivities of VIX call
+option price with maturity T2 to a VIX future with shorter maturity T1 .
+
+T2
+T2
+
+ ∂CallT1t = e−r(T2 −t) e−κ(T2 −T1 ) · FtT1 · Π1 (T2 )
+∂Ft
+Ft
+T
+[(
+)
+] (6.20)
+2 CallT2
+∂
+F 2
+−r(T
+−t)
+−2κ(T
+−T
+)
+t
+2
+2
+1
+
+=e
+e
+· Tt 1 2 · 1 − eκ(T2 −T1 ) · Π1 + f1 (ln K)
+
+T1 2
+∂ ( Ft )
+(Ft )
+Proof:
+
+This theorem can be proved with the exact procedure as in Theorem 4.6. 
+
+71
+
+浙江大学博士学位论文
+
+6.5 Forward Variance Swap and Convexity
+Finally, in this section I extend the 30-day forward variance swap pricing formula in MRLR
+and MRLRJ models to MRLRSVJ model.
+Theorem 6.7：(Forward Variance Swap Pricing)
+Under the assumption of MRLRSVJ process in Definition 6.1, the 30-day forward variance
+]
+[
+swap F V StT = EtQ RVTT +30days = EtQ [V IXT2 ] can be explicitly solved as
+F V StT = ψ (ln V IXt , Vt , t; −2i)
+= {V IXt }2e
+
+−κ(T −t)
+
+· exp {A (t; −2i) + B (t; −2i) · Vt }
+}
+{
+−κ(T −t)
+.
+· exp Ã + B̃ · Vt
+= {V IXt }2e
+
+(6.21)
+
+Furthermore, dynamics of forward variance under pricing measure Q can be given by
+
+Proof:
+
+√
+√
+dF V StT = F V StT · 2e−κ(T −t) Vt dWt + F V StT · B (t; −2i) σv Vt dZt
+{[
+}
+]
+2e−κ(T −t)
+2Je−κ(T −t)
+T
+− 1 · dNt −
+λdt
++F V St− e
+η − 2e−κ(T −t)
+√
+√
+∂F V StT
+∂F V StT
+=
+· V IXt Vt dWt +
+· σv Vt dZt
+∂V IXt
+∂Vt
+[
+{
+]
+}
+Q
+T
++ ∆F V St dNt − Et ∆F V StT λdt
+(6.22)
+
+This theorem can be proved with the same procedure as Theorem 5.7 and Theorem 6.2. 
+Below we derive the convexity adjustment for VIX future from 30-day forward variance
+swap.
+Theorem 6.8：(Convexity Adjustment for VIX Future)
+Under the assumption of MRLRSVJ process in Definition 6.1, convexity adjustment of
+VIX future from forward variance swap can be derived as
+]
+{ [
+1
+FtT
+T .
+= exp − A (t; −2i) − A (t; −i)
+CAt = √
+2
+F V StT
+]
+}
+[
+1
+− B (t; −2i) − B (t; −i) · Vt
+2
+72
+
+(6.23)
+
+MRLRSVJ Model
+
+Proof:
+This theorem can be proved with the exact procedure as in Theorem 5.8. 
+
+73
+
+浙江大学博士学位论文
+
+7
+
+Numerical Analysis
+
+This chapter performs several calibrations and comparative studies of the four models presented in this thesis. I use VIX option data in a single day for analysis. Calibration is
+conducted for each maturity across all strikes starting from at the money to deep in the
+money and deep out of the money unless the bid or ask price is unavailable.
+
+7.1 Market Data and Data Processing
+VIX option prices used in this thesis are the delayed market quotes downloaded from
+CBOE website www.cboe.com on September 26, 2011 at time 10:01 ET. The underlying VIX quote is 42.3 when I downloaded the option data. There are 6 maturities available
+in the market at this time, and they are October 18, 2011, November 15, 2011, December
+20, 2011, January 17, 2012, February 14, 2012 and March 20, 2012.
+Table 7.1 reports some key features of the option data, as well as the data processing procedure. For each maturity, there are 33 or 35 call option quotes in the market, with strikes
+ranging from 10 to 100 for all maturities. For those deep out-of-the-money call options, bid
+price may be zero, thus I preclude those options from the sample. The number of options
+with positive bid quotes are then reported for each maturity in Table 7.1. Another criteria I
+consider when choosing the option sample is open interest (OI), which represents the number of all option contracts that have not been settled. The quotes with zero open interest
+are kicked out from the positive bid sample. From Table 7.1, we can see that the first four
+maturities have non-trivial number of open interest for each positive bid quote. When the
+time to maturity exceeds the fourth month, some quotes have no open interest exist, especially for those deep in the money or out of the money options. Average OI among those
+quotes with non-zero open interest are also reported in Table 7.1. The numbers in Table 7.1
+show that average open interest declines as the time to maturity grows. In order to make the
+sample more liquid and reliable, the last two maturities are not included because some of
+
+74
+
+Numerical Analysis
+
+Table 7.1
+
+Maturities
+All Quotes
+Positive Bid Quotes
+Positive OI Quotes
+Average OI
+Effective Quotes
+
+18-Oct-11
+33
+30
+30
+(35805)
+30
+
+Calibration data description
+
+15-Nov-11
+33
+31
+31
+(19474)
+31
+
+20-Dec-11
+33
+32
+32
+(15273)
+32
+
+17-Jan-12
+35
+35
+35
+(2695)
+35
+
+14-Feb-12
+35
+35
+28
+(914)
+0
+
+20-Mar-12
+35
+33
+11
+(167)
+0
+
+Note. The table only presents call option data. The number in table without brackets are number of option
+quotes, while the fourth line with brackets are the numbers of average open interest (OI) for those options
+that has positive OI. ’All Quotes’ represents the number of all available quotes from CBOE website, while
+’Positive Bid Quotes’ is the number of all quotes with non-zero bid price. ’Positive OI Quotes’ is further
+refinement of the ’Positive Bid Quotes’ by kicking out those with zero open interest. ’Effective Quotes’ is
+the number of option quotes that has been chosen into sample for our calibration for each maturity. The zero
+effective quotes for maturities 14-Feb-2012 and 20-Mar-2012 mean that those maturities are not taken into
+sample.
+
+the positive bid quotes have no open interest and the average open interest is much smaller
+than the short and medium maturities.
+
+7.2 Loss Function
+In the calibration, model parameters are backed out by minimizing a loss function that
+measures the sum of pricing errors between model prices and mid prices of bid and ask
+quotes. A quite often used loss function is the mean square error (MSE) function, which is
+defined as the sum of squares of difference between model prices and market prices. For
+} Ni
+{
+arket
+across the strikes
+each fixed maturity Ti , suppose there are Ni market prices CTMi ,K
+j
+j=1
+} Ni
+{
+i
+M odel
+. Then the
+,
+and
+the
+corresponding
+market
+prices
+are
+computed
+as
+C
+{Kj }N
+Ti ,Kj
+j=1
+j=1
+
+loss function MSE is given by
+Loss
+
+M SE
+
+=
+
+Ni (
+∑
+j=1
+
+odel
+arket
+CTMi ,K
+− CTMi ,K
+j
+j
+
+)2
+
+(7.1)
+
+Calibrating with MSE as loss function is equivalent to directly fitting model prices to market prices. As indicated in Rebonato [23] , this method tends to overweight in the money
+
+75
+
+浙江大学博士学位论文
+
+call options and underweight out of the money call options. A possible rescue proposed
+in Rebonato [23] is to fit model implied volatilities to market volatilities, which is actually
+widely used by many practitioners and scholars. Although calculation of implied volatility
+needs Newton’s iteration, this cost is negligible because only few iterations are needed for
+each implied volatility. However, calculation of VIX implied volatility itself is an unsettled problem and for some deep in-of-money VIX call options the implied volatilities are
+not available. Different data sources such as iVolatility.com and International Securities
+Exchange (ISE) often calculate VIX implied volatilities significantly different. I try to use
+Whaley formula from Whaley [28] , which is a Black-Scholes formula for VIX option, to
+inverse VIX option prices to VIX implied volatilities, and I find that not all option prices
+can be converted to implied volatilities. This situation is often encountered for in the money call options. Therefore, calibration using implied volatilities as loss function is not so
+stable and sometimes not feasible. An alternative improvement of the MSE method as indicated in Rebonato [23] is to fit log model prices to log market prices, which is equivalent
+to defining the following loss function MLSE,
+Loss
+
+M LSE
+
+=
+
+Ni (
+∑
+j=1
+
+odel
+arket
+log CTMi ,K
+− log CTMi ,K
+j
+j
+
+)2
+
+(7.2)
+
+Although MLSE significantly increases the weight of deep out of the money call options,
+in the money call options become underweighted under this measure. This is because ITM
+call prices are far greater than OTM call prices, and the log function is almost insensitive to
+small change of VIX option prices. This will inevitably cause considerable absolute error
+that is greater than bid-ask spread for in the money calls. In order to balance the weights,
+I suggest combine MSE and MLSE together to construct a new loss function MMLSE as
+follows
+LossM M LSE =
+
+Ni (
+∑
+j=1
+
+arket
+odel
+− CTMi ,K
+CTMi ,K
+j
+j
+
+)2
+
++α·
+
+Ni (
+∑
+j=1
+
+arket
+odel
+− log CTMi ,K
+log CTMi ,K
+j
+j
+
+)2
+
+(7.3)
+
+where α is a pre-given weighting factor that balances the contributions of MSE and MLSE
+in MMLSE. In our experience, α = 8 is suitable to ensure good fitting quality.
+
+76
+
+Numerical Analysis
+
+7.3 Calibration Results
+In this chapter, we calibrate all parameters to VIX option prices, including the long-term
+mean θ. By using this calibration strategy, we suppose the underlying of VIX option is spot
+VIX and input the current spot VIX in VIX option pricing formula. For each maturity, we
+calibrate all parameters to VIX implied volatility skew at that maturity. In this section, we
+discuss the calibration results in terms of fitting error, positive implied volatility skew and
+term structure of parameters.
+Table 7.2
+
+MRLR
+MRLRJ
+MRLRSV
+MRLRSVJ
+
+Table 7.3
+
+MRLR
+MRLRJ
+MRLRSV
+MRLRSVJ
+
+Fitting quality: Percentage Error (PE)
+
+18-Oct-11
+6.91%
+3.25%
+3.18%
+3.18%
+
+15-Nov-11
+4.66%
+3.81%
+3.68%
+3.68%
+
+20-Dec-11
+6.61%
+5.21%
+5.07%
+5.07%
+
+17-Jan-12
+5.73%
+3.11%
+2.98%
+2.99%
+
+Fitting quality: Mean Absolute Error (MAE)
+18-Oct-11
+0.4334
+0.1162
+0.1214
+0.1217
+
+15-Nov-11
+0.3287
+0.1843
+0.1752
+0.1753
+
+20-Dec-11
+0.3566
+0.2097
+0.1995
+0.1999
+
+17-Jan-12
+0.3569
+0.1322
+0.1286
+0.1294
+
+7.3.1 Fitting Quality
+The fitting quality is measured by average error of model prices from market middle quotes
+over all maturities and strikes in sample. Two types of pricing error measures are used in
+this thesis, percentage error (PE) and mean absolute error (MAE). The percentage error is
+defined as
+(
+)
+(
+)
+NK
+NT ∑
+C M odel Ti , Kji − C M kt Ti , Kji
+1 ∑
+(
+)
+PE =
+NT NK i=1 j=1
+C M kt Ti , Kji
+
+and mean absolute error is defined as
+NK
+NT ∑
+(
+)
+(
+)
+1 ∑
+C M odel Ti , Kji − C M kt Ti , Kji
+M AE =
+NT NK i=1 j=1
+
+(7.4)
+
+(7.5)
+
+77
+
+浙江大学博士学位论文
+
+18−Oct−2011
+
+20
+15
+10
+
+Bid
+Ask
+MRLRSVJ
+MRLRSV
+MRLRJ
+MRLR
+
+20
+VIX prices
+
+Bid
+Ask
+MRLRSVJ
+MRLRSV
+MRLRJ
+MRLR
+
+25
+
+VIX prices
+
+15−Nov−2011
+25
+
+15
+10
+5
+
+5
+
+20
+
+40
+Strikes
+
+60
+
+80
+
+20
+
+10
+5
+
+Bid
+Ask
+MRLRSVJ
+MRLRSV
+MRLRJ
+MRLR
+
+20
+VIX prices
+
+VIX prices
+
+80
+
+17−Jan−2012
+Bid
+Ask
+MRLRSVJ
+MRLRSV
+MRLRJ
+MRLR
+
+15
+
+60
+Strikes
+
+20−Dec−2011
+20
+
+40
+
+15
+10
+5
+
+20
+
+40
+
+Figure 7.1
+
+60
+Strikes
+
+80
+
+20
+
+40
+
+60
+Strikes
+
+80
+
+100
+
+Fitting quality of VIX models to VIX option quotes
+
+T
+where {Ti }N
+i=1 are all liquid maturities. In this chapter, they represent October 18, 2011,
+
+November 15, 2011, December 20, 2011 and January 17, 2012. For each maturity Ti , there
+{ }NK M kt
+are market quotes at strikes Kji j=1
+.C
+(Ti , Kj ) is the middle quote of VIX option and
+C M odel (Ti , Kj ) is VIX option price given by one of the four VIX models.
+
+Table 7.2 and Table 7.3 report the fitting quality of the four models for each liquid maturity
+in terms of PE and MAE. Several observations from the two tables are in order. Firstly,
+we note that MRLR has largest fitting error. This is understandable because MRLR model
+implies a log-normal distribution for both spot VIX and VIX future and the Black-Scholes
+pricing formula for VIX option is unable to produce the positive implied volatiliy skew
+observed in VIX option market.
+
+78
+
+Numerical Analysis
+
+Secondly, the three models MRLRJ, MRLRSV and MRLRSVJ including jumps and/or
+stochastic volatility significantly improve the fitting quality. In terms of PE as shown in
+Table 7.2, MRLRSV and MRLRSVJ model perform equally well with each other. This
+concludes that adding SV to MRLR is sufficient and additionally adding jump to the model
+is unnecessary. This observation is very important because the MRLRSVJ model is more
+complicated and has more parameters than both MRLRJ and MRLRSV models. In order
+to get same order of accuracy, the simpler models MRLRJ and MRLRSV are sufficient.
+Thirdly, the other observation from Table 7.3 is worth mentioning. For the shortest maturity October 18, 2011, MRLRJ has smaller MAE than the two stochastic volatility models.
+This is consistent from observation in equity option market. The reason of why jump model
+serves better than stochastic volatility model in short-term maturity is that the possible sudden downward jump is able to create more significant terminal correlation than stochastic
+volatility model, where the terminal correlation is achieved by accumulating instantaneous
+correlation between spot VIX and instantaneous variance.
+Figure 7.1 is plot of calibration results in terms of VIX call option prices. The plot shows
+that MRLR model has largest fitting error and for most of the strikes the model prices
+lie outside the band of bid-ask quotes in VIX option market. For MRLRJ, MRLRSV and
+MRLRSVJ models, most model prices lie in the bid-ask band of quotes.
+7.3.2 Positive Skew
+In this subsection, I investigate the ability of the four models in generating implied volatility skews for VIX options. One important thing we have to notice is that the implied
+volatility inverted from VIX option price depends on what formula we use in the inversion. Unlike the situation in equity option market, where the underlying asset is a tradable
+asset with interest rate as drift and Black-Scholes formula can serve as formula to invert
+implied volatility, the underlying spot VIX of VIX option is not a tradable asset and using
+Black-Scholes formula with spot VIX as underlying is not appropriate.
+Recall the simple Black-Scholes formula (2.21) for VIX option with spot VIX as underly-
+
+79
+
+浙江大学博士学位论文
+
+15−Nov−2011
+
+18−Oct−2011
+1.3
+
+0.9
+
+1.2
+
+1
+Bid
+Ask
+MRLRSVJ
+MRLRSV
+MRLRJ
+MRLR
+
+0.9
+0.8
+0.7
+40
+
+50
+
+60
+Strikes
+
+70
+
+VIX imp. vol.
+
+VIX imp. vol.
+
+0.8
+1.1
+
+0.7
+Bid
+Ask
+MRLRSVJ
+MRLRSV
+MRLRJ
+MRLR
+
+0.6
+0.5
+0.4
+40
+
+80
+
+50
+
+60
+
+70
+
+80
+
+90
+
+Strikes
+
+20−Dec−2011
+
+17−Jan−2012
+
+0.8
+0.7
+0.7
+
+0.5
+
+Bid
+Ask
+MRLRSVJ
+MRLRSV
+MRLRJ
+MRLR
+
+0.4
+0.3
+40
+
+50
+
+60
+
+Figure 7.2
+
+70
+Strikes
+
+80
+
+VIX imp. vol.
+
+VIX imp. vol.
+
+0.6
+0.6
+
+0.5
+Bid
+Ask
+MRLRSVJ
+MRLRSV
+MRLRJ
+MRLR
+
+0.4
+0.3
+
+90
+
+40
+
+50
+
+60
+
+70
+Strikes
+
+80
+
+90
+
+100
+
+VIX implied volatility skew with spot VIX as underlying.
+
+ing in Whaley1993. In this model, the spot VIX is assumed to follow
+dV IXt
+= rdt + σdWt
+V IXt
+
+(7.6)
+
+and the Black-Scholes pricing formula for VIX option is given by
+
+with
+
+]
+[
+CalltT = e−r(T −t) FtT · N (d1 ) − K · N (d2 )
+
+(7.7)
+
+FtT = V IXt er(T −t)
+
+(7.8)
+
+and
+σ2T
+FT
+d1,2 = ln t ±
+K
+2
+[
+
+80
+
+]/
+
+√
+σ T
+
+(7.9)
+
+Numerical Analysis
+
+18−Oct−2011
+1.8
+
+Bid
+Ask
+MRLRSVJ
+MRLRSV
+MRLRJ
+MRLR
+
+1.6
+
+1.3
+
+Bid
+Ask
+MRLRSVJ
+MRLRSV
+MRLRJ
+MRLR
+
+1.25
+VIX imp. vol.
+
+1.7
+VIX imp. vol.
+
+15−Nov−2011
+
+1.5
+1.4
+
+1.2
+1.15
+1.1
+
+1.3
+1.05
+1.2
+40
+
+50
+
+60
+Strikes
+
+70
+
+80
+
+40
+
+50
+
+60
+
+20−Dec−2011
+1.2
+
+1.05
+
+1
+
+1
+
+0.95
+0.9
+0.85
+
+0.95
+
+0.8
+
+0.9
+
+0.75
+
+40
+
+50
+
+60
+
+70
+Strikes
+
+90
+
+Bid
+Ask
+MRLRSVJ
+MRLRSV
+MRLRJ
+MRLR
+
+1.05
+
+VIX imp. vol.
+
+VIX imp. vol.
+
+1.1
+
+80
+
+17−Jan−2012
+1.1
+
+Bid
+Ask
+MRLRSVJ
+MRLRSV
+MRLRJ
+MRLR
+
+1.15
+
+70
+Strikes
+
+80
+
+90
+
+0.7
+40
+
+50
+
+60
+
+70
+Strikes
+
+80
+
+90
+
+100
+
+Figure 7.3 VIX implied volatility skew with VIX future as underlying.
+
+The problem with this model is that it treats underlying spot VIX as tradable asset and
+suppose it has interest rate as drift under pricing martingale measure. A direct consequence
+of assumption of this model is the problematic pricing formula for VIX future as shown in
+eqn. (7.8) because there is no cost-of-carry relationship between spot VIX and VIX future.
+A more appropriate pricing formula to invert VIX implied volatility from VIX option price
+is to treat VIX option with VIX future as underlying. The advantage of this model is that
+VIX future is tradable asset and at the option’s maturity VIX future converges to spot VIX.
+Therefore, we assume the below geometric Brownian motion for VIX future FtT under
+pricing measure Q
+dFtT
+= σdWt
+FtT
+
+(7.10)
+
+81
+
+浙江大学博士学位论文
+
+and the Black pricing formula for VIX option is given by
+[
+]
+CalltT = e−r(T −t) FtT · N (d1 ) − K · N (d2 )
+
+(7.11)
+
+where FtT is market price of VIX future and is input to the pricing formula and
+FT
+σ2T
+d1,2 = ln t ±
+K
+2
+[
+
+]/
+
+√
+σ T
+
+(7.12)
+
+In this thesis, I use the above two pricing formulas to invert VIX option market quotes to
+VIX implied volatility.
+Figure 7.2 plots the implied volatility skew from formula (7.7) for the four liquid maturities.
+This figure confirms and amplifies the fitting results in Figure 7.1 that most of MRLR implied volatilities lie outside the bid-ask band and most MRLRJ, MRLRSV and MRLRSVJ
+implied volatilities lie within the bid-ask band. Furthermore, the three skew models have
+similar fitting quality in terms of implied volatility.
+One prominent observation from this figure is that all four models create positive implied
+volatility skews. However, this is just illusion because there is problematic assumption in
+this model as discussed above. The input of current underlying in this formula is spot VIX
+and the resulted VIX future is obtained by the problematic formula (7.8). Therefore, this
+formula maybe a good candidate in inverting VIX option to a volatility quantity to check
+fitting quality but not a good formula to investigate the real implied volatility skew.
+Figure 7.3 plots the implied volatility skew from formula (7.11) for the four liquid maturities. In this formula, the input of current underlying is current price of VIX future and thus
+we get around the problem of formula (7.7).
+One clear observation in Figure 7.3 is that the implied volatility skew under MRLR model
+is almost flat and is unable to generate skew for VIX option. Another observation is that
+MRLRJ, MRLRSV and MRLRSVJ models have almost the same fitting quality and they
+all serves well in generating positive implied volatility skew.
+Based on the above analysis, I conclude that mean-reverting logarithmic models with just
+jump or stochastic volatility is sufficient in generating positive implied volatility skew.
+
+82
+
+Numerical Analysis
+
+Table 7.4 Calibrated parameters for each maturity under MRLR model.
+
+κ
+θ
+σ
+
+Table 7.5
+
+18-Oct-11
+11.05
+3.38
+1.97
+
+15-Nov-11
+11.43
+3.39
+2.07
+
+20-Dec-11
+9.88
+3.29
+2.18
+
+17-Jan-12
+12.58
+3.34
+2.48
+
+Calibrated parameters for each maturity under MRLRJ model.
+
+κ
+θ
+σ
+λ
+η
+
+18-Oct-11
+29.84
+3.00
+1.46
+169.45
+9.94
+
+15-Nov-11
+28.78
+3.00
+2.44
+138.89
+10.09
+
+20-Dec-11
+29.55
+3.00
+2.97
+84.76
+7.74
+
+17-Jan-12
+21.86
+3.00
+2.31
+59.53
+6.71
+
+Combining jump and stochastic volatility together in one model adds no value in fitting
+quality and generating positive skew but with the cost of more parameters to calibrate.
+7.3.3 Calibrated Parameters
+In this subsection, I present the reports on calibrated parameters for the four models at four
+liquid maturities. Table 7.4∼7.7 display all calibrated parameters. In order to better understand the calibration results, we recall the meaning of parameters in all mean-reverting
+logarithmic models.
+θ is the long-term mean of ln V IXt . Thus eθ can be interpreted as long-term mean of V IXt .
+At the time of calibration, the current spot VIX is at the level of 42.3. For the four models, long-term mean of V IXt implied from θ ranges from 20 to 30. This understandable
+because at the time of calibration, 25 September 2011, VIX future curve was in backwardation thus market consensus expect VIX to fall in the future. Actually, ever since spot
+VIX fell below 30 on 1 December 2011, spot VIX stayed in the interval [20, 30] in period 1
+December 2011 to 19 January 2012, which is the period that VIX option’s maturities cover.
+In contrast, θv is the long-term mean of instantaneous variance Vt in MRLRSV and MRLRSVJ models. The calibrated parameters show that θv stay around 100%. This is consistent with the calculated market implied volatility-of-volatility in Figure 7.3. Furthermore,
+
+83
+
+浙江大学博士学位论文
+
+Table 7.6
+
+Calibrated parameters for each maturity under MRLRSV model.
+
+κ
+θ
+ρ
+κv
+θv
+σv
+V0
+
+Table 7.7
+
+18-Oct-11
+4.27
+3.14
+1.00
+1.68
+1.11
+1.98
+1.81
+
+15-Nov-11
+5.10
+3.25
+1.00
+1.89
+1.12
+0.71
+2.00
+
+20-Dec-11
+3.48
+3.11
+1.00
+1.67
+1.08
+0.57
+1.63
+
+17-Jan-12
+3.53
+3.26
+1.00
+1.56
+1.03
+0.65
+1.37
+
+Calibrated parameters for each maturity under MRLRSVJ model.
+
+κ
+θ
+ρ
+κv
+θv
+σv
+V0
+λ
+η
+
+18-Oct-11
+5.93
+3.21
+1.00
+1.72
+1.11
+2.05
+1.99
+30.43
+69.58
+
+15-Nov-11
+4.99
+3.15
+1.00
+1.77
+1.14
+0.71
+1.95
+31.94
+68.05
+
+20-Dec-11
+3.81
+3.03
+1.00
+1.73
+1.07
+0.58
+1.74
+30.53
+69.43
+
+17-Jan-12
+4.11
+3.19
+1.00
+1.77
+1.06
+0.69
+1.59
+29.92
+69.88
+
+V0 as initial value of Vt is much larger than than the calibrated θv . This is also in line with
+the backwardation observed in VIX future market on the calibration date.
+κ is mean-reverting speed of spot VIX and κv is mean-reverting speed of var-of-vol Vt .
+Table 7.4∼7.7 show that mean-reverting speed in spot VIX is much larger than in Vt .
+In addition to the table reports, below I plot term structures of parameters in the four models
+as show in Figure 7.4∼7.13.
+From Figure 7.4 to Figure 7.13, we notice that parameters κ and θ of mean-reversion of
+V IXt and parameters λ and η of jump in V IXt are rather stable over all maturities. In contrast, parameters for stochastic volatility are not so stable and some parameters show clear
+term structure. For example, θv has clear downward term structure and this phenomenon is
+in line with the fact of backwardation observed in VIX future market.
+
+84
+
+Numerical Analysis
+
+Calibrated term structure of parameter κ
+MRLR
+MRLRJ
+MRLRSV
+MRLRSVJ
+
+35
+30
+25
+
+κ
+
+20
+15
+10
+5
+0
+18−Oct−2011
+
+15−Nov−2011
+20−Dec−2011
+Maturities
+
+Figure 7.4
+
+17−Jan−2012
+
+Parameter term structure
+
+Calibrated term structure of parameter θ
+MRLR
+MRLRJ
+MRLRSV
+MRLRSVJ
+
+3.45
+3.4
+3.35
+3.3
+
+θ
+
+3.25
+3.2
+3.15
+3.1
+3.05
+3
+2.95
+18−Oct−2011
+
+15−Nov−2011
+20−Dec−2011
+Maturities
+
+Figure 7.5
+
+17−Jan−2012
+
+Parameter term structure
+
+85
+
+浙江大学博士学位论文
+
+Calibrated term structure of parameter σ
+MRLR
+MRLRJ
+
+3.2
+3
+2.8
+2.6
+
+σ
+
+2.4
+2.2
+2
+1.8
+1.6
+1.4
+1.2
+18−Oct−2011
+
+15−Nov−2011
+20−Dec−2011
+Maturities
+
+17−Jan−2012
+
+Figure 7.6 Parameter term structure
+
+Calibrated term structure of parameter ρ
+MRLRSV
+MRLRSVJ
+0.999
+
+ρ
+
+0.9985
+
+0.998
+
+0.9975
+
+0.997
+18−Oct−2011
+
+15−Nov−2011
+20−Dec−2011
+Maturities
+
+Figure 7.7 Parameter term structure
+
+86
+
+17−Jan−2012
+
+Numerical Analysis
+
+Calibrated term structure of parameter κ
+
+v
+
+MRLRSV
+MRLRSVJ
+
+1.95
+1.9
+1.85
+1.8
+
+κ
+
+v
+
+1.75
+1.7
+1.65
+1.6
+1.55
+1.5
+18−Oct−2011
+
+15−Nov−2011
+20−Dec−2011
+Maturities
+
+Figure 7.8
+
+17−Jan−2012
+
+Parameter term structure
+
+Calibrated term structure of parameter θv
+MRLRSV
+MRLRSVJ
+
+1.16
+1.14
+1.12
+
+θ
+
+v
+
+1.1
+1.08
+1.06
+1.04
+1.02
+18−Oct−2011
+
+15−Nov−2011
+20−Dec−2011
+Maturities
+
+Figure 7.9
+
+17−Jan−2012
+
+Parameter term structure
+
+87
+
+浙江大学博士学位论文
+
+Calibrated term structure of parameter σ
+
+v
+
+MRLRSV
+MRLRSVJ
+2
+
+σ
+
+v
+
+1.5
+
+1
+
+0.5
+
+18−Oct−2011
+
+15−Nov−2011
+20−Dec−2011
+Maturities
+
+Figure 7.10
+
+17−Jan−2012
+
+Parameter term structure
+
+Calibrated term structure of parameter V0
+MRLRSV
+MRLRSVJ
+
+2.1
+2
+1.9
+
+V
+
+0
+
+1.8
+1.7
+1.6
+1.5
+1.4
+1.3
+18−Oct−2011
+
+15−Nov−2011
+20−Dec−2011
+Maturities
+
+Figure 7.11
+
+88
+
+Parameter term structure
+
+17−Jan−2012
+
+Numerical Analysis
+
+Calibrated term structure of parameter λ
+200
+
+MRLRJ
+MRLRSVJ
+
+180
+160
+140
+
+λ
+
+120
+100
+80
+60
+40
+20
+0
+18−Oct−2011
+
+15−Nov−2011
+20−Dec−2011
+Maturities
+
+Figure 7.12
+
+17−Jan−2012
+
+Parameter term structure
+
+Calibrated term structure of parameter η
+MRLRJ
+MRLRSVJ
+
+80
+70
+60
+
+η
+
+50
+40
+30
+20
+10
+0
+18−Oct−2011
+
+15−Nov−2011
+20−Dec−2011
+Maturities
+
+Figure 7.13
+
+17−Jan−2012
+
+Parameter term structure
+
+89
+
+浙江大学博士学位论文
+
+8
+
+Conclusion
+
+This thesis focuses on mathematical modeling of spot VIX with standalone approach. Unlike the consistent modeling approach, which starts with specifying joint dynamics for SPX
+index and its instantaneous stochastic volatility then derives expression for spot VIX and
+price VIX derivatives based on this expression, standalone approach starts with directly
+specifying dynamics for spot VIX and price VIX derivatives in this simpler framework.
+Given the good fitting quality of mean-reverting logarithmic VIX model both under physical measure and martingale measure in literature, this thesis present the basic meanreverting logarithmic model and it’s three extensions. The basic MRLR model is unable
+to generate implied volatility skew for VIX option. Therefore, we extend MRLR model by
+adding Poisson jump and stochastic volatility to VIX dynamics. In order to match the positive skew observed in VIX option market, we let the jump to be upward and the stochastic
+volatility to be positively correlated with spot VIX.
+What separates my analysis from that in literature is that I not only focus on deriving
+static pricing formula for VIX future and VIX option, but also on dynamics of VIX future,
+convexity adjustment of VIX future from forward variance swap and hedging ratios of VIX
+future and VIX option with short-term VIX future as hedging instruments.
+The analysis in chapter 3∼6 shows impact of spot VIX features such mean-reversion, jump,
+stochastic volatility on VIX future pricing and its dynamics. Presence of mean-reversion
+makes spot VIX less possibly to deviate from its long-term mean and thus decrease the
+volatility of VIX future. By making the long-term mean of mean-reverting VIX dynamics
+be time-dependent function, we are able to fit initial VIX future curve by construction.
+Although spot VIX displays mean-reversion in its dynamics, the impact of mean-reversion
+presents in VIX future pricing formula and does not present in drift of VIX future dynamics
+because VIX future is martingale under the pricing measure.
+By deriving dynamics of VIX future under the four models, I show that VIX future follows
+
+90
+
+Conclusion
+
+geometric Brownian motion under MRLR model, jump-diffusion dynamics under MRLRJ
+model, stochastic volatility dynamics under MRLRSV model and stochastic volatility with
+jump dynamics under MRLRSVJ model.
+The calibration results in chapter 7 show that MRLR model is unable to generate positive
+implied volatility skew for VIX option. In contrast, by adding jump and stochastic volatility
+model to MRLR, the MRLRJ, MRLRSV and MRLRSVJ models are able to fit the positive skew. Moreover, the results show that MRLRJ and MRLRSV perform equally well in
+fitting positive skew and adding jump into MRLRSV adds no value in fitting quality but
+could potentially incur the cost of estimating more parameters.
+In further work, we could compare the four mean-reverting logarithmic models with consistent VIX approach in calibration and hedging efficiency from a practitioner’s view. Moreover, by using the connection between VIX future and forward variance swap as well as
+the liquid market of variance swap, we could test the calibration strategy making use of
+information from variance swap market. Calibrating model to VIX option market and forward variance swap market can both back out the vol-of-vol of VIX. Thus the test of the
+two calibration strategies are also necessary.
+
+91
+
+浙江大学博士学位论文
+
+参考文献
+[1] Q. Bao, S. Li. Pricing VIX option with stochastic vol-of-vol model. Zhejiang University, working paper.
+[2] P. Carr, D. Madan. Option valuation using the fast fourier transform. Journal of
+Computational Finance, 1999, 2: 61-73.
+[3] J. Detemple, C. Osakwe. The valuation of volatility options. European Finance Review, 2000, 4, 21-50.
+[4] G. Dotsis, D. Psychoyios, G. Skiadopoulos. An empirical comparison of continuoustime models of implied volatility indices. Journal of Banking & Finance, 2007, 31,
+3584-3603.
+[5] D. Duffie, J. Pan and K. Singleton. Transform analysis and asset pricing for affine
+jump-diffusion, Econometrica, 2000, 68, 1343-1376.
+[6] J. Gatheral. The volatility surface: A practitioner’s guide. New Jersey: John Wiley &
+Sons, 2006.
+[7] J. Gil-Pelaez. A note on the Inversion Theorem. Biometrika, 1996, 38(4), 443-458.
+[8] A. Grunbichler, F. Longstaff. Valuing futures and options on volatility. Journal of
+Banking & Finance, 1996, 20, 985-1001.
+[9] S. Heston. A closed-form solution for options with stochastic volatility with applications to bond and currency options. Review of Financial Studies, 1993, 6, 327-343.
+[10] A. Kaeck, C. Alexander. VIX dynamics with stochastic volatility of volatility. University of Reading, working paper.
+[11] F. Kilin. Accelerating the calibration of stochastic volatility models. Frankfurt
+School of Finance & Management and Quanteam AG, working paper.
+[12] S. Kou. A jump-diffusion model for option pricing. Management Science, 2002,
+48(8), 1086-1101.
+92
+
+参考文献
+
+[13] S. Kou, H. Wang. Option pricing under a double exponential jump diffusion model.
+Management Science, 2004, 50(9), 1178-1192.
+[14] R. Lee. Option pricing by transform methods: extensions, unification and error control. Journal of Computational Finance, 2004, 7(3), 51-86.
+[15] G. Lian. Pricing volatility derivatives with stochastic volatility. University of Wollongong, 2010, Phd Thesis.
+[16] Y. Lin. Pricing VIX futures: Evidence from integrated physical and risk-neutral
+probability measures. Journal of Futures Markets, 2007, 27, 1175-1217.
+[17] Y. Lin, C. Chang. VIX option pricing. Journal of Futures Markets, 2009, 29, 523543.
+[18] Y. Lin, C. Chang. Consistent modeling of S&P 500 and VIX derivatives. Journal of
+Economic Dynamics & Control, 2010, 34, 2302-2319.
+[19] Z. Lu, Y. Zhu. Volatility components: The term structure dynamics of VIX future.
+Journal of Futures Markets, 2010, 30(3), 230-256.
+[20] A. Polyanin, V. Zaitsev. Handbook of Exact Solutions for ODEquations. USA:
+Chapman & Hall/CRC, 2003.
+[21] D. Psychoyios, G. Dotsis, R. Markellos. A jump diffusion model for VIX volatility
+options and futures. Review of Quantitative Finance and Accounting, 2009, 35(3),
+245-269.
+[22] D. Psychoyios, G. Skiadopoulos. Volatility options: Hedging effectiveness, pricing,
+and model error. The Journal of Futures Markets, 2006, 26, 1-31.
+[23] R. Rebonato. Volatility and correlation: The perfect hedger and the fox. Chichester:
+John Wiley & Sons, 2004.
+[24] A. Sepp. VIX option pricing with jump-diffusion model. Risk, 2008, 4, 84-89.
+[25] D. Simon, J. Campasano. The VIX futures: evidence and trading strategies. Bentley
+University, 2012, working paper.
+
+93
+
+浙江大学博士学位论文
+
+[26] O. Vasicek. An equilibrium characterization of the term structure. Journal of Financial Economics, 1977 ,5: 177-188.
+[27] Z. Wang, R. Daigler. The performance of VIX option pricing models: Empirical
+evidence beyond simulation. The Journal of Futures Markets, 2010, 00, 1-31.
+[28] R. Whaley. Derivatives on market volatility: Hedging tools long overdue. Journal of
+Derivatives, 1993, 1, 71-84.
+[29] J. Zhang, Y. Huang. The CBOE S&P 500 three-month variance futures. Journal of
+Future Markets, 2010, 30(1), 48-70.
+[30] J. Zhang, J. Shu, M. Brenner. The new market for volatility trading. Journal of Futures Markets, 2010, 30(9), 809-833.
+[31] J. Zhang, Y. Zhu. VIX Futures. Journal of Futures Markets, 2006, 26, 521-531.
+[32] C. Zhou. A jump-diffusion approach to modeling credit risk and valuing defaultable
+securities. Federal Reserve Board Working Paper, 1997.
+[33] S. Zhu, G. Lian. An analytical formula for VIX futures and its applications. Journal
+of Futures Markets, 2011, 00, 1-25.
+[34] Y. Zhu, J. Zhang. Variance term structure and VIX future pricing. International Journal of Theoretical and Applied Finance, 2007, 10, 111-127.
+[35] Zhu, J. W. (2010). Applicatios of Fourier transform to smile modeling: theroy and
+implementation. New York: Springer, 2010.
+[36] 鲍群芳, 李胜宏. VIX期权定价与校正. 金融理论与实践, 2012, 393, 67-70.
+
+94
+
+
