@@ -1,35 +1,29 @@
 # Mean-Reverting Logarithmic Modeling of VIX (Bao, 2013)
 
 This repository contains the implementation of the algorithms presented in the paper *Mean-Reverting Logarithmic Modeling of VIX* by Qunfang Bao (2013).
+Authored by Julian Philip Henry.
 
 ## Motivation
 
 The initial attempt to model the characteristic functions and complex integration for the VIX pricing options was done in Python. However, due to precision issues when handling exponential jumps and mean-reverting properties inherent to the equations (especially high powers and logs), **Julia is chosen as the primary backend for precision computation**. The Julia implementation natively leverages `BigFloat` where precision bottlenecks were occurring in Python (`float64` underflow/overflow).
 
-The Python code has been retained, refactored, and organized for utility (e.g., historical data fetching, basic diffusion models, Black-Scholes approximations), while the core pricing and option algorithms using the high-precision characteristic functions and jump-diffusion models (MRLR, MRLRJ, MRLRSV) reside in Julia.
+The codebase is a pure Julia implementation, providing high-precision characteristic functions and jump-diffusion models (MRLR, MRLRJ, MRLRSV).
 
 ## Repository Structure
 
 - `documents/`: Contains the original MPRA paper.
-- `python_impl/`: Refactored and consolidated Python code.
-  - `models/`: Basic MRLR implementations and SciPy optimization logic.
-  - `utils/`: Option pricing utilities, including Black-Scholes.
-  - `scripts/`: Data grabbing scripts for VIX using Selenium.
-  - `tests/`: Original unit tests.
 - `julia_impl/`: The core high-precision implementation of the paper's models using Julia.
   - `src/VIXModels.jl`: Core implementations for `MRLR` and `MRLRJ` taking advantage of `BigFloat`.
   - `test/runtests.jl`: Unit tests for the models.
+  - `csvs/`: Historical VIX and options data.
 
 ## Fetching Historical VIX Data
 
-Since the models require historical VIX data for calibration, a Python script using `yfinance` has been added.
+Since the models require historical VIX data for calibration, standard CSV files are used in the `csvs` directory.
 
 ```bash
-cd python_impl
-pip install -r requirements.txt
-python scripts/fetch_vix.py --start 2004-01-01 --output ../data/vix_historical.csv
+cd julia_impl
 ```
-This will create a `data/vix_historical.csv` containing Open, High, Low, Close, and Volume for the `^VIX` index.
 
 ## How to Install and Run Julia
 
