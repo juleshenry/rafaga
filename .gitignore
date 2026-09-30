@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+pyvenv.cfg
+.idea/
+.DS_Store
+results/*.log

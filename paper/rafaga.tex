@@ -1,0 +1,129 @@
+\documentclass[10pt,twocolumn]{article}
+\usepackage[letterpaper,margin=0.7in,columnsep=0.28in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage[font=small,labelfont=bf,skip=4pt]{caption}
+\usepackage[hidelinks]{hyperref}
+\usepackage[numbers,sort&compress]{natbib}
+\setlength{\bibsep}{1pt}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+
+\newcommand{\VIX}{\mathrm{VIX}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{\vspace{-1.6em}Mean-Reverting Logarithmic Models of the VIX, Revisited:\\
+a Reproduction of Bao (2013) and an Out-of-Sample Test on the 2026 Option Chain}
+\author{Julian Philip Henry}
+\date{\vspace{-0.6em}September 2026\vspace{-1.2em}}
+
+\begin{document}
+\maketitle
+
+%%ABSTRACT%%
+
+\section{Introduction}
+Options on the VIX are written on an index that cannot be traded, that mean-reverts
+strongly, and whose distribution has a heavy right tail. Bao~\citep{bao2013} models
+$\ln\VIX_t$ directly as a mean-reverting process and studies four specifications:
+pure diffusion (MRLR), diffusion with upward exponential jumps (MRLRJ), stochastic
+vol-of-vol (MRLRSV) and both (MRLRSVJ). Using CBOE quotes from 26~September~2011,
+the thesis reports that MRLR cannot produce the positive VIX skew, that jumps
+\emph{or} stochastic volatility each fix this, and that combining them adds nothing.
+
+This note (i)~provides an open Julia implementation of MRLR, MRLRJ and MRLRSV;
+(ii)~checks it against the parameter tables published in the thesis, since the
+original quotes are not public; (iii)~re-runs the thesis' calibration procedure,
+unchanged, on the CBOE VIX chain of 29~September~2026; and (iv)~tests what the
+original study did not: out-of-sample strikes, consistency with VIX futures, parameter
+identification and a single set of parameters for the whole term structure.
+
+\section{Models and pricing}
+All three models share the mean-reverting log drift,
+\begin{align*}
+d\ln\VIX_t &= \kappa(\theta-\ln\VIX_t)\,dt + \sigma\,dW_t
+  && \text{(MRLR)}\\
+d\ln\VIX_t &= \kappa(\theta-\ln\VIX_t)\,dt + \sigma\,dW_t + J\,dN_t
+  && \text{(MRLRJ)}\\
+d\ln\VIX_t &= \kappa(\theta-\ln\VIX_t)\,dt + \sqrt{V_t}\,dW_t, && \\
+dV_t &= \kappa_v(\theta_v-V_t)\,dt+\sigma_v\sqrt{V_t}\,dZ_t
+  && \text{(MRLRSV)}
+\end{align*}
+with $N_t$ Poisson($\lambda$), $J\sim\mathrm{Exp}(\eta)$ and
+$d\langle W,Z\rangle_t=\rho\,dt$. Let $\phi=e^{-\kappa\tau}$ and
+$\psi(s)=\E_t[e^{is\ln\VIX_T}]$. For MRLRJ,
+\begin{equation*}
+\ln\psi(s) = is\mu - \tfrac12 s^2 v + \tfrac{\lambda}{\kappa}
+  \ln\frac{\eta-is\phi}{\eta-is},
+\end{equation*}
+$\mu=\phi\ln\VIX_t+(1-\phi)\theta$, $v=\sigma^2(1-\phi^2)/2\kappa$; MRLR is the case
+$\lambda=0$. For MRLRSV, $\psi=\exp(a+bV_t+is\phi\ln\VIX_t)$ where, with
+$u(h)=is\,e^{-\kappa h}$, $b'=\tfrac12u^2+\rho\sigma_v u b+\tfrac12\sigma_v^2b^2-\kappa_v b$
+and $a=is\theta(1-\phi)+\kappa_v\theta_v\!\int_0^\tau b$, solved by RK4 as the thesis
+recommends. The VIX future is $F=\psi(-i)$ (finite for MRLRJ only if $\eta>1$) and
+a call is $C=D\,(F\Pi_1-K\Pi_2)$ with the Gil-Pelaez probabilities
+\begin{equation*}
+\Pi_{2}=\tfrac12+\tfrac1\pi\!\int_0^\infty\!\!\frac{\operatorname{Im}\!\big(e^{-iuk}\psi(u)\big)}{u}\,du,
+\quad k=\ln K,
+\end{equation*}
+and $\Pi_1$ the same with $\psi(u-i)/\psi(-i)$. The integrals use composite
+Gauss--Legendre quadrature on one grid shared by all strikes of a maturity.
+
+\paragraph{Verification.} A test suite checks that the Fourier pricer reproduces the
+MRLR closed form ($10^{-8}$), that MRLRJ and MRLRSV collapse to MRLR in their nested
+limits, that prices are decreasing, convex and within arbitrage bounds, that Euler
+Monte Carlo prices (200k paths) agree within four standard errors for MRLRJ and
+MRLRSV, and that the RK4 step is converged. A 25-digit \texttt{BigFloat} quadrature
+agrees with the double-precision pricer to $10^{-9}$, so extended precision is not needed.
+
+\section{Consistency with the published tables}
+The 2011 quotes are not available, so the fitting errors of the thesis cannot be
+recomputed. The published parameters can still be tested: Tables~7.5 (MRLRJ) and
+7.6 (MRLRSV) were fitted separately to the \emph{same} quotes, with reported mean
+absolute errors (MAE) of 0.12--0.21. Priced with our code ($\VIX_t=42.3$, strikes
+20--90), the two structurally different models agree to within 2--3.5 cents at every
+maturity (Table~\ref{tab:2011}), well inside the band implied by the reported
+errors, while MRLR (Table~7.4) differs by 8--17 cents. Implied volatilities against
+the model future are flat for MRLR and upward-sloping for MRLRJ and MRLRSV, at the
+levels shown in the thesis' Figure~7.3. We conclude that the implementation follows
+the thesis' conventions.
+
+\begin{table}[t]
+\centering\small
+\caption{Published 2011 parameters priced with our implementation: mean absolute
+price difference over strikes 20--90 and the thesis' reported MAE vs.\ market.}
+\label{tab:2011}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Expiry & $|\text{J}-\text{SV}|$ & MAE$_\text{J}$+MAE$_\text{SV}$ & $|\text{MRLR}-\text{J}|$ & MAE$_\text{MRLR}$\\
+\midrule
+18 Oct 2011 & 0.035 & 0.238 & 0.173 & 0.433\\
+15 Nov 2011 & 0.019 & 0.359 & 0.105 & 0.329\\
+20 Dec 2011 & 0.022 & 0.409 & 0.079 & 0.357\\
+17 Jan 2012 & 0.022 & 0.261 & 0.121 & 0.357\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%%RESULTS2026%%
+
+{\footnotesize
+\begin{thebibliography}{9}
+\bibitem{bao2013} Q.~Bao. \emph{Mean-Reverting Logarithmic Modeling of VIX}. PhD
+thesis, Zhejiang University, 2013. MPRA Paper No.~46413.
+\bibitem{psychoyios2010} D.~Psychoyios, G.~Dotsis, R.~Markellos. A jump diffusion
+model for VIX volatility options and futures. \emph{Rev.\ Quant.\ Finance Account.},
+35(3):245--269, 2010.
+\bibitem{whaley1993} R.~Whaley. Derivatives on market volatility: hedging tools long
+overdue. \emph{J.\ Derivatives}, 1:71--84, 1993.
+\bibitem{rebonato2004} R.~Rebonato. \emph{Volatility and Correlation}. Wiley, 2004.
+\bibitem{gilpelaez1951} J.~Gil-Pelaez. Note on the inversion theorem.
+\emph{Biometrika}, 38:481--482, 1951.
+\bibitem{cboe} Cboe Global Markets. Delayed quotes, VIX index options,
+\url{https://www.cboe.com/delayed_quotes/vix/quote_table}. Retrieved 29~Sep~2026.
+\end{thebibliography}}
+\end{document}
