@@ -25,7 +25,7 @@ const DASH = Dict("MRLR" => "densely dotted", "MRLRJ" => "solid", "MRLRSV" => "d
 Implied Black volatility (VIX future as underlying) vs strike: market bid-ask
 as vertical bars, the three calibrated models as lines.
 """
-function skew_figure(s::OptionSlice; kmax, W = 7.0, H = 4.6)
+function skew_figure(s::OptionSlice; kmax, W = 6.3, H = 4.2)
     iv(c, K) = black_iv(c, s.F, K, s.τ; D = s.D)
     sel = findall(K -> K <= kmax, s.K)
     bars = [(s.K[i], iv(s.bid[i], s.K[i]), iv(s.ask[i], s.K[i])) for i in sel]
@@ -50,7 +50,7 @@ function skew_figure(s::OptionSlice; kmax, W = 7.0, H = 4.6)
     end
     @printf(io, "\\node at (%.3f,-0.55) {strike};\n", W / 2)
     @printf(io, "\\node[rotate=90] at (-0.75,%.3f) {Black implied vol.};\n", H / 2)
-    @printf(io, "\\node[anchor=north west] at (0.05,%.3f) {\\textbf{%s} ($\\tau$=%.3f, $F$=%.2f)};\n",
+    @printf(io, "\\node[anchor=north west] at (0.05,%.3f) {\\textbf{%s} (\$\\tau\$=%.3f, \$F\$=%.2f)};\n",
             H - 0.02, Dates.format(s.expiry, "d u yyyy"), s.τ, s.F)
     println(io, "\\begin{scope}\\clip (0,0) rectangle ($W,$H);")
     for (k, lo, hi) in bars

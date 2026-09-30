@@ -4,3 +4,6 @@ pyvenv.cfg
 .idea/
 .DS_Store
 results/*.log
+paper/*.aux
+paper/*.log
+paper/*.out

@@ -87,7 +87,7 @@ for M in MODELS, (i, s) in enumerate(slices)
     println(io, "- ", modelname(M), " ", s.expiry, ": ", fmtp(fits[M][i].model))
 end
 
-println(io, "\n## 3. Futures consistency of the chapter-7 fits\n")
+println(io, "\n## 2. Futures consistency of the chapter-7 fits\n")
 println(io, "The chapter-7 procedure never looks at the VIX future. Model future ",
         "(ψ(−i) with spot VIX as input) vs the market future implied by put-call parity:\n")
 println(io, "| Expiry | Market | MRLR | MRLRJ | MRLRSV |\n|---|---|---|---|---|")
@@ -99,7 +99,7 @@ end
 # ---------------------------------------------------------------------------
 # 2. Out-of-sample strikes
 # ---------------------------------------------------------------------------
-println(io, "\n## 2. Out-of-sample strikes\n")
+println(io, "\n## 3. Out-of-sample strikes\n")
 println(io, "Fit on strikes with odd rank, evaluate on the others (paper procedure otherwise unchanged).\n")
 println(io, "| Expiry | Model | in-sample PE | out-of-sample PE | out-of-sample MAE | out-of-sample in-band |")
 println(io, "|---|---|---|---|---|---|")

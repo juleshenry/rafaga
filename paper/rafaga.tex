@@ -1,5 +1,5 @@
 \documentclass[10pt,twocolumn]{article}
-\usepackage[letterpaper,margin=0.7in,columnsep=0.28in]{geometry}
+\usepackage[letterpaper,margin=0.75in,columnsep=0.28in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{microtype}
@@ -12,94 +12,186 @@
 \setlength{\bibsep}{1pt}
 \setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
 \setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{8pt plus 2pt minus 2pt}
 
 \newcommand{\VIX}{\mathrm{VIX}}
 \newcommand{\E}{\mathbb{E}}
+\newcommand{\Q}{\mathbb{Q}}
 
-\title{\vspace{-1.6em}Mean-Reverting Logarithmic Models of the VIX, Revisited:\\
-a Reproduction of Bao (2013) and an Out-of-Sample Test on the 2026 Option Chain}
+\title{\vspace{-1.8em}Mean-Reverting Logarithmic Models of the VIX, Revisited:\\
+\large A Reproduction of Bao (2013) and an Out-of-Sample Test on the 2026 VIX Option Chain}
 \author{Julian Philip Henry}
-\date{\vspace{-0.6em}September 2026\vspace{-1.2em}}
+\date{\vspace{-0.6em}September 2026\vspace{-1.4em}}
 
 \begin{document}
 \maketitle
 
-%%ABSTRACT%%
+\begin{abstract}
+\noindent
+Bao (2013) models the logarithm of the VIX as a mean-reverting process, with and without
+upward jumps (MRLRJ) and stochastic vol-of-vol (MRLRSV), and calibrates the models to
+VIX options from September 2011. Neither the quotes nor the calibration protocol were
+published. We give an open implementation, verify it against the thesis'
+published parameter tables, and re-run the thesis' calibration procedure unchanged on
+the Cboe VIX option chain of 29 September 2026. The central qualitative claims survive:
+the pure-diffusion MRLR model cannot produce the VIX skew (pricing errors 28--38\%),
+while jumps \emph{or} stochastic vol-of-vol each fit it (errors 1.6--2.8\%, 92--100\%
+of model prices inside the bid--ask spread, and similar errors on held-out strikes).
+Three further findings qualify them. First, the fitted parameters are largely not
+identified: in MRLR the mean-reversion speed has no effect on the fit at all, and the
+jump model's per-maturity fits drift to $\kappa\approx0.01$, $\theta\approx-20$.
+Second, the 2026 smile needs rare, large jumps ($\lambda\approx2$--$5$/yr, mean log-jump
+0.3) or vol-of-vol three to seven times the 2011 estimates, far from the 2011
+regime of frequent small jumps. Third, no model fits the four maturities
+with one set of parameters: the best (MRLRJ) prices only half the quotes inside the
+spread. The models work as per-maturity smile interpolators, not as a
+consistent description of VIX dynamics. Code, data snapshot and all fitted parameters
+are released.
+\end{abstract}
 
 \section{Introduction}
-Options on the VIX are written on an index that cannot be traded, that mean-reverts
-strongly, and whose distribution has a heavy right tail. Bao~\citep{bao2013} models
-$\ln\VIX_t$ directly as a mean-reverting process and studies four specifications:
-pure diffusion (MRLR), diffusion with upward exponential jumps (MRLRJ), stochastic
-vol-of-vol (MRLRSV) and both (MRLRSVJ). Using CBOE quotes from 26~September~2011,
-the thesis reports that MRLR cannot produce the positive VIX skew, that jumps
-\emph{or} stochastic volatility each fix this, and that combining them adds nothing.
+Options on the VIX are among the most liquid volatility derivatives, yet their
+underlying is unusual: the index is not traded, it reverts quickly toward a long-run
+level, and it jumps up in market stress far more readily than it falls. VIX options
+therefore trade with a \emph{positive} implied-volatility skew, the reverse of equity
+index options, and VIX futures carry a term structure that is usually in contango and
+flips to backwardation in crises.
 
-This note (i)~provides an open Julia implementation of MRLR, MRLRJ and MRLRSV;
-(ii)~checks it against the parameter tables published in the thesis, since the
-original quotes are not public; (iii)~re-runs the thesis' calibration procedure,
-unchanged, on the CBOE VIX chain of 29~September~2026; and (iv)~tests what the
-original study did not: out-of-sample strikes, consistency with VIX futures, parameter
-identification and a single set of parameters for the whole term structure.
+Bao~\citep{bao2013} builds on the direct-VIX approach of
+Whaley~\citep{whaley1993}, Gr\"unbichler and Longstaff~\citep{grunbichler1996} and
+Psychoyios et al.~\citep{psychoyios2010}: instead of deriving the VIX from a model of
+the S\&P~500, it specifies dynamics for $\ln\VIX_t$ directly and prices futures and
+options in closed form or through the characteristic function. The thesis
+studies four nested specifications, derives futures, options, hedging ratios and
+convexity adjustments for each, and ends with an empirical comparison on Cboe quotes
+from 26~September~2011 (spot VIX 42.3). Its conclusions are that the log-normal MRLR
+model cannot generate the skew, that adding jumps \emph{or} stochastic vol-of-vol is
+enough, and that combining both adds nothing.
 
-\section{Models and pricing}
-All three models share the mean-reverting log drift,
-\begin{align*}
-d\ln\VIX_t &= \kappa(\theta-\ln\VIX_t)\,dt + \sigma\,dW_t
-  && \text{(MRLR)}\\
-d\ln\VIX_t &= \kappa(\theta-\ln\VIX_t)\,dt + \sigma\,dW_t + J\,dN_t
-  && \text{(MRLRJ)}\\
-d\ln\VIX_t &= \kappa(\theta-\ln\VIX_t)\,dt + \sqrt{V_t}\,dW_t, && \\
-dV_t &= \kappa_v(\theta_v-V_t)\,dt+\sigma_v\sqrt{V_t}\,dZ_t
-  && \text{(MRLRSV)}
-\end{align*}
-with $N_t$ Poisson($\lambda$), $J\sim\mathrm{Exp}(\eta)$ and
-$d\langle W,Z\rangle_t=\rho\,dt$. Let $\phi=e^{-\kappa\tau}$ and
-$\psi(s)=\E_t[e^{is\ln\VIX_T}]$. For MRLRJ,
-\begin{equation*}
-\ln\psi(s) = is\mu - \tfrac12 s^2 v + \tfrac{\lambda}{\kappa}
-  \ln\frac{\eta-is\phi}{\eta-is},
-\end{equation*}
-$\mu=\phi\ln\VIX_t+(1-\phi)\theta$, $v=\sigma^2(1-\phi^2)/2\kappa$; MRLR is the case
-$\lambda=0$. For MRLRSV, $\psi=\exp(a+bV_t+is\phi\ln\VIX_t)$ where, with
-$u(h)=is\,e^{-\kappa h}$, $b'=\tfrac12u^2+\rho\sigma_v u b+\tfrac12\sigma_v^2b^2-\kappa_v b$
-and $a=is\theta(1-\phi)+\kappa_v\theta_v\!\int_0^\tau b$, solved by RK4 as the thesis
-recommends. The VIX future is $F=\psi(-i)$ (finite for MRLRJ only if $\eta>1$) and
-a call is $C=D\,(F\Pi_1-K\Pi_2)$ with the Gil-Pelaez probabilities
-\begin{equation*}
-\Pi_{2}=\tfrac12+\tfrac1\pi\!\int_0^\infty\!\!\frac{\operatorname{Im}\!\big(e^{-iuk}\psi(u)\big)}{u}\,du,
-\quad k=\ln K,
-\end{equation*}
-and $\Pi_1$ the same with $\psi(u-i)/\psi(-i)$. The integrals use composite
-Gauss--Legendre quadrature on one grid shared by all strikes of a maturity.
+The empirical chapter cannot be reproduced as published: the option quotes, the
+optimizer, the starting values and the parameter bounds are not reported. This note
+(i)~releases an open Julia implementation of MRLR, MRLRJ and MRLRSV; (ii)~tests it
+against the parameter tables published in the thesis; (iii)~applies the thesis'
+calibration procedure, unchanged, to the Cboe VIX chain of 29~September~2026 (spot
+VIX 16.04); and (iv)~asks four questions the original study did not: do the fits
+hold on held-out strikes, are they consistent with VIX futures, are the parameters
+identified, and can one set of parameters explain the whole term structure?
 
-\paragraph{Verification.} A test suite checks that the Fourier pricer reproduces the
-MRLR closed form ($10^{-8}$), that MRLRJ and MRLRSV collapse to MRLR in their nested
-limits, that prices are decreasing, convex and within arbitrage bounds, that Euler
-Monte Carlo prices (200k paths) agree within four standard errors for MRLRJ and
-MRLRSV, and that the RK4 step is converged. A 25-digit \texttt{BigFloat} quadrature
-agrees with the double-precision pricer to $10^{-9}$, so extended precision is not needed.
+\section{The models and why each exists}
+\label{sec:models}
+
+\paragraph{Why logarithms, why mean reversion.}
+A model of the VIX must keep it positive, pull it back toward a long-run level after
+spikes, and let its volatility scale with its level. The mean-reverting square-root
+(MRSR) process of Gr\"unbichler and Longstaff~\citep{grunbichler1996} satisfies the
+first two, but its volatility grows only with $\sqrt{\VIX}$ and it has a thin right
+tail. Modelling $X_t=\ln\VIX_t$ as an Ornstein--Uhlenbeck process instead makes the
+VIX log-normal with level-proportional volatility:
+\begin{equation}
+dX_t=\kappa(\theta-X_t)\,dt+\sigma\,dW_t.\tag{MRLR}
+\end{equation}
+Here $\kappa$ is the speed of mean reversion, $e^\theta$ the long-run VIX level and
+$\sigma$ the vol-of-vol. With $\phi=e^{-\kappa\tau}$, $X_T$ is Gaussian with mean
+$\mu=\phi X_t+(1-\phi)\theta$ and variance $v=\sigma^2(1-\phi^2)/(2\kappa)$, so the
+VIX future is $F=e^{\mu+v/2}$ and a call is a Black formula on $F$. The thesis lets
+$\theta_t$ and $\sigma_t$ depend on time so that the model reproduces the futures
+curve and the at-the-money volatility term structure by construction.
+
+\paragraph{Why jumps.}
+Because MRLR is log-normal, its implied volatility against the future is the same at
+every strike: it cannot produce a skew. The VIX's defining feature is sudden upward
+jumps, so the thesis (following Psychoyios et al.~\citep{psychoyios2010}) adds
+compound-Poisson jumps with exponential sizes:
+\begin{equation}
+dX_t=\kappa(\theta-X_t)\,dt+\sigma\,dW_t+J\,dN_t,\tag{MRLRJ}
+\end{equation}
+with $N_t\sim\text{Poisson}(\lambda)$ and $J\sim\text{Exp}(\eta)$, i.e.\ mean
+log-jump $1/\eta$. Upward jumps fatten the right tail and create a positive skew,
+most strongly at short maturities before mean reversion dampens them. The
+characteristic function $\psi(s)=\E^\Q_t[e^{isX_T}]$ stays in closed form:
+\begin{equation}
+\ln\psi(s)=is\mu-\tfrac12s^2v+\tfrac{\lambda}{\kappa}\ln\frac{\eta-is\phi}{\eta-is}.
+\label{eq:cfj}
+\end{equation}
+The jumps are not compensated, so $F=\psi(-i)$ is finite only if $\eta>1$.
+
+\paragraph{Why stochastic vol-of-vol.}
+Vol-of-vol itself varies: it rises when the VIX rises. MRLRSV replaces the constant
+$\sigma$ by a square-root variance process correlated with the VIX shocks:
+\begin{align}
+dX_t&=\kappa(\theta-X_t)\,dt+\sqrt{V_t}\,dW_t,\notag\\
+dV_t&=\kappa_v(\theta_v-V_t)\,dt+\sigma_v\sqrt{V_t}\,dZ_t,\tag{MRLRSV}
+\end{align}
+with $d\langle W,Z\rangle=\rho\,dt$. A positive $\rho$ means that VIX rallies come with
+higher vol-of-vol, which fattens the right tail as jumps do but builds up
+gradually, so its effect grows with maturity. The model is affine:
+$\psi=\exp(a+bV_t+is\phi X_t)$, where, with $u(h)=is\,e^{-\kappa h}$,
+\begin{equation}
+\begin{aligned}
+b'&=\tfrac12u^2+\rho\sigma_vub+\tfrac12\sigma_v^2b^2-\kappa_vb,\\
+a&=is\theta(1-\phi)+\kappa_v\theta_v\textstyle\int_0^\tau b\,dh,
+\end{aligned}
+\label{eq:riccati}
+\end{equation}
+$b(0)=0$. The Riccati equation has time-dependent coefficients; its Kummer-function
+solution is unstable, so the thesis, and we, solve it by Runge--Kutta.
+
+\paragraph{Why not both.}
+MRLRSVJ combines jumps and stochastic vol-of-vol. In the thesis it fits no better than
+MRLRSV (percentage errors within 0.01 points) at the cost of two more parameters,
+so we do not implement it.
+
+\section{Pricing and verification}
+Calls follow the Heston-type formula of the thesis (Theorem~4.3), $C=D(F\Pi_1-K\Pi_2)$,
+with the Gil-Pelaez~\citep{gilpelaez1951} probabilities
+\[
+\Pi_2=\tfrac12+\tfrac1\pi\!\int_0^\infty\!\!\frac{\operatorname{Im}\big(e^{-iuk}\psi(u)\big)}{u}du,
+\qquad k=\ln K,
+\]
+and $\Pi_1$ the same with $\psi(u-i)/\psi(-i)$. The integrals use composite 16-point
+Gauss--Legendre quadrature on $[0,U]$, with $U$ grown until $|\psi(U)|<10^{-12}$ and
+one grid shared by all strikes of a maturity. For MRLRSV, (\ref{eq:riccati}) is solved
+by RK4 at each node, with a step that resolves $e^{-\kappa h}$ and keeps
+$h(\sigma_v|s|+\kappa_v)\le1$ inside the stability region of this stiff equation.
+
+A test suite (34 assertions) checks that the Fourier pricer reproduces the MRLR closed
+form to $10^{-8}$; that MRLRJ ($\lambda\to0$) and MRLRSV ($\sigma_v\to0$,
+$V_0=\theta_v$) reduce to MRLR; that $F=\psi(-i)$ matches the closed-form futures;
+that prices are decreasing, convex and within arbitrage bounds; that Euler Monte
+Carlo prices (200k paths) agree within four standard errors for MRLRJ and MRLRSV;
+and that a tenfold smaller RK4 step changes prices by less than $10^{-4}$. A
+25-digit \texttt{BigFloat} quadrature agrees with the double-precision pricer to
+$10^{-9}$, so extended precision is unnecessary.
 
 \section{Consistency with the published tables}
-The 2011 quotes are not available, so the fitting errors of the thesis cannot be
-recomputed. The published parameters can still be tested: Tables~7.5 (MRLRJ) and
-7.6 (MRLRSV) were fitted separately to the \emph{same} quotes, with reported mean
-absolute errors (MAE) of 0.12--0.21. Priced with our code ($\VIX_t=42.3$, strikes
-20--90), the two structurally different models agree to within 2--3.5 cents at every
-maturity (Table~\ref{tab:2011}), well inside the band implied by the reported
-errors, while MRLR (Table~7.4) differs by 8--17 cents. Implied volatilities against
-the model future are flat for MRLR and upward-sloping for MRLRJ and MRLRSV, at the
-levels shown in the thesis' Figure~7.3. We conclude that the implementation follows
-the thesis' conventions.
+The 2011 quotes are not public, so the thesis' errors cannot be recomputed. Its
+parameter tables can still be tested. Tables~7.5 (MRLRJ) and 7.6 (MRLRSV) were fitted
+separately to the \emph{same} quotes, with reported mean absolute errors (MAE)
+of 0.12--0.21 each. Priced with our code ($\VIX_t=42.3$, strikes 20--90), the two
+structurally different models agree to 2--3.5 cents at every maturity
+(Table~\ref{tab:2011}), well inside that tolerance; MRLR (Table~7.4) differs by
+8--17 cents. Against the model future, the MRLR implied volatility is flat and the
+MRLRJ and MRLRSV curves slope upward, at the levels plotted in the thesis'
+Figure~7.3 (e.g.\ 1.27/1.39/1.48 for MRLRJ at $K=40/60/80$ in October). A
+convention error in the jump or Riccati terms would break this agreement, so the
+implementation matches the thesis.
+
+The tables also imply numbers the thesis never reports: model VIX futures of
+37.8--38.5 (Oct-2011), 35.0--35.4 (Nov), 31.7--32.6 (Dec) and 32.2--33.4 (Jan-2012),
+a backwardated curve consistent with the text. They also show that the calibration
+ran into undisclosed bounds: $\theta=3.00$ in all four MRLRJ fits and $\rho=1.00$ in
+all four MRLRSV fits are boundary values, not estimates.
 
 \begin{table}[t]
 \centering\small
 \caption{Published 2011 parameters priced with our implementation: mean absolute
-price difference over strikes 20--90 and the thesis' reported MAE vs.\ market.}
+price difference between models (strikes 20--90) and the thesis' reported MAE
+against the market (Table~7.3).}
 \label{tab:2011}
+\footnotesize\setlength{\tabcolsep}{3pt}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
-Expiry & $|\text{J}-\text{SV}|$ & MAE$_\text{J}$+MAE$_\text{SV}$ & $|\text{MRLR}-\text{J}|$ & MAE$_\text{MRLR}$\\
+Expiry & $|\mathrm{J}-\mathrm{SV}|$ & MAE$_\mathrm{J}{+}$MAE$_\mathrm{SV}$ & $|\mathrm{LR}-\mathrm{J}|$ & MAE$_\mathrm{LR}$\\
 \midrule
 18 Oct 2011 & 0.035 & 0.238 & 0.173 & 0.433\\
 15 Nov 2011 & 0.019 & 0.359 & 0.105 & 0.329\\
@@ -109,21 +201,239 @@ Expiry & $|\text{J}-\text{SV}|$ & MAE$_\text{J}$+MAE$_\text{SV}$ & $|\text{MRLR}
 \end{tabular}
 \end{table}
 
-%%RESULTS2026%%
+\section{Data and calibration protocol}
+\label{sec:protocol}
+\paragraph{Data.} We use the Cboe delayed-quote snapshot of the full VIX option chain
+at the close of 29~September~2026 (spot VIX 16.04 at 16:15 ET; 1{,}520 contracts;
+SHA-256 \texttt{c404ecd5\ldots ae5f9})~\citep{cboe}. As in the thesis we take the first
+four monthly maturities (21~Oct, 18~Nov, 16~Dec 2026 and 20~Jan 2027; open interest
+falls sharply after January), keep calls with positive bid \emph{and} positive open
+interest (55, 63, 58 and 59 quotes) and fit mid quotes. Time to expiry runs to the
+09:30~ET settlement on the expiry date (ACT/365).
+
+\paragraph{Futures and rate.} VIX options settle on the same quotation as VIX
+futures, so put--call parity holds against the future:
+$C-P=e^{-r\tau}(F-K)$. Fitting this jointly over all call--put pairs gives
+$r=4.46\%$ and futures of 17.59, 18.28, 18.67 and 19.41, a contango curve
+above the spot. The thesis instead used spot VIX with no discounting adjustment.
+
+\paragraph{Loss and fit measures.} Exactly as in the thesis (Eq.~7.3):
+$\mathcal L=\sum_j(C^\text{mod}_j-C^\text{mkt}_j)^2+\alpha\sum_j(\ln C^\text{mod}_j-\ln C^\text{mkt}_j)^2$
+with $\alpha=8$, which balances in- and out-of-the-money quotes. We report the
+percentage error $\text{PE}=\text{mean}\,|C^\text{mod}-C^\text{mkt}|/C^\text{mkt}$, the
+MAE and, as a stricter test, the share of model prices inside the bid--ask band.
+
+\paragraph{Optimisation.} This is the part the thesis omits.
+Parameters are mapped to unconstrained coordinates: $\log$ for positive parameters,
+$\eta=1+e^x$, $\rho=\tanh x$. MRLRSV uses logistic box bounds
+$\kappa\in[0.1,50.1]$, $\theta\in[1,5]$, $\kappa_v,\theta_v\in(0,50)$ and
+$\sigma_v,V_0\in(0,30)$, which rule out a degenerate ridge ($\kappa\to0$,
+$\theta\to-\infty$) and extreme stiffness. Our first bounds, $\sigma_v,V_0\le5$, were
+binding on the October slice and were widened, since a 2026 short-dated smile needs
+far more vol-of-vol than in 2011. Each fit runs Nelder--Mead from 10 random starts
+(6 for MRLRSV), with seeds $1+k$ and log-uniform ranges, followed by one restart from
+the optimum; each run is capped at 3{,}000 iterations and 300\,s. The ``paper
+procedure'' fits every parameter, including $\theta$, per maturity with spot VIX
+as input, as in the thesis.
+
+\section{Results on the 2026 chain}
+
+\paragraph{Fit quality.} Table~\ref{tab:fit} repeats the thesis' Tables~7.2--7.3 on the
+2026 data. The ranking is the same and the gaps are much larger. MRLR misses by
+28--38\% and prices only about a fifth of the quotes inside the spread. MRLRJ and
+MRLRSV are essentially tied, with errors of 1.6--2.8\% (lower than the thesis'
+3.0--5.2\% in 2011) and 92--100\% of prices inside the spread. As in 2011, the
+difference between jump and stochastic-vol models is within noise.
+Figure~\ref{fig:skew} shows why: the 2026 skew is steep, rising from about 0.7 in implied volatility at the money to about 2.0 at $K=50$ for the
+October expiry.
+MRLR's smile is flat against its \emph{own} future, so it can match either the
+level or the slope of this curve but not both.
+
+\begin{table}[t]
+\centering\small
+\caption{Paper procedure on 29 Sep 2026: percentage error, MAE and share of
+model prices inside the bid--ask spread. Thesis (2011) PE: MRLR 4.7--6.9\%,
+MRLRJ 3.1--5.2\%, MRLRSV 3.0--5.1\%.}
+\label{tab:fit}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}l rrr rrr rrr@{}}
+\toprule
+ & \multicolumn{3}{c}{PE (\%)} & \multicolumn{3}{c}{MAE} & \multicolumn{3}{c}{in spread (\%)}\\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(l){8-10}
+Expiry & LR & J & SV & LR & J & SV & LR & J & SV\\
+\midrule
+Oct-26 & 37.9 & 1.9 & 1.6 & .527 & .007 & .008 & 18 & 100 & 100\\
+Nov-26 & 29.5 & 2.7 & 2.8 & .517 & .016 & .019 & 21 & 98 & 98\\
+Dec-26 & 30.6 & 2.3 & 2.4 & .516 & .014 & .017 & 22 & 98 & 98\\
+Jan-27 & 28.3 & 2.4 & 2.4 & .527 & .020 & .021 & 22 & 93 & 92\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure*}[t]
+\centering
+\input{figures/skew_2026-10-21.tex}\hspace{0.9cm}
+\input{figures/skew_2027-01-20.tex}
+\caption{Black implied volatility against the parity-implied VIX future for the
+nearest and farthest calibrated maturities, 29~Sep~2026. Grey bars: market bid--ask;
+lines: models calibrated per maturity with the thesis' procedure. MRLR is flat
+against its own future, which is 27--30\% below the market (Sec.~6), so against the market
+future its curve is misplaced; MRLRJ and MRLRSV follow the steep positive skew.}
+\label{fig:skew}
+\end{figure*}
+
+\paragraph{Held-out strikes.} Refitting on strikes of odd rank and pricing the rest
+(Table~\ref{tab:oos}) leaves MRLRJ almost unchanged (1.9--2.6\% except 4.7\% in
+January). MRLRSV degrades a little more (2.2--3.5\%). The fits interpolate the
+smile; they are not memorising individual quotes.
+
+\begin{table}[t]
+\centering\small
+\caption{Out-of-sample strikes: fit on odd-ranked strikes, evaluate on the rest.
+PE in \%; last columns: share inside the spread.}
+\label{tab:oos}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}l rrr rr@{}}
+\toprule
+ & \multicolumn{3}{c}{out-of-sample PE} & \multicolumn{2}{c}{in spread (\%)}\\
+\cmidrule(lr){2-4}\cmidrule(l){5-6}
+Expiry & MRLR & MRLRJ & MRLRSV & J & SV\\
+\midrule
+Oct-26 & 39.6 & 1.9 & 3.5 & 100 & 96\\
+Nov-26 & 30.2 & 2.6 & 2.6 & 100 & 94\\
+Dec-26 & 31.9 & 2.2 & 2.2 & 100 & 93\\
+Jan-27 & 29.3 & 4.7 & 3.2 & 90 & 90\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Futures consistency.} The thesis' procedure uses spot VIX as the underlying
+and never looks at futures, which the thesis itself flags as problematic (Sec.~7.3.2). In 2026
+this matters only for MRLR. The MRLRJ and MRLRSV fits reproduce the parity-implied
+futures to within 0.1\% although the futures were never targeted. Deep in-the-money
+calls pin the forward, and the free per-maturity $\theta$ absorbs the gap between spot
+and future. The MRLR fits put the future 27--30\% below the market (12.8 vs.\ 17.6 in
+October): to fit the right tail through the log-loss, the log-normal model gives up
+the level.
+
+\paragraph{Identification.} The parameters are far less meaningful than the fit quality
+suggests. In MRLR, one maturity determines only the mean and variance of $X_T$, so
+$(\kappa,\theta,\sigma)$ has one redundant direction. Fixing $\kappa$ at 0.5, 2, 8 or
+32 and refitting $\theta,\sigma$ gives the same loss to nine digits (120.910550). The
+thesis' MRLR values $\kappa=11.05$, 11.43, 9.88 and 12.58 are therefore arbitrary
+points on a flat ridge. The same ridge appears in the 2026 MRLRJ fits: beyond
+October the optimum drifts to $\kappa\approx0.01$ and $\theta\approx-15$ to $-23$
+(Table~\ref{tab:params}). Only the product $\kappa\theta\approx-0.21$ to $-0.26$ is
+pinned down, so the jump model degenerates into a drifting Brownian motion with jumps,
+with no detectable mean reversion within any single maturity. In MRLRSV, $\kappa_v$ and
+$\theta_v$ collapse toward zero at three maturities, so the variance process
+effectively has no mean reversion either, and in 2011 $\theta$ and $\rho$ sat on
+bounds. Per-maturity MRLR-family parameters should not be read as
+estimates of VIX dynamics.
+
+\paragraph{A different volatility regime.} The parameters that are identified have
+moved a long way since 2011. There, MRLRJ used many small jumps
+($\lambda=60$--$170$/yr, mean log-jump $1/\eta\approx0.10$--$0.15$), close to extra
+diffusion. In 2026 the October fit uses rare large jumps: $\lambda=5.2$/yr, mean log-jump
+$0.30$ (a 35\% move in the VIX), about 0.3 jumps expected before expiry, on top of a
+small diffusion $\sigma=0.35$. Likewise MRLRSV needs $\sigma_v=3.2$--$14.5$ against
+0.57--1.98 in 2011. At a spot of 16, far below the 42 of 2011, the market prices a
+calm VIX with a large, discrete crash-spike risk.
+
+\paragraph{One model for the term structure.} Finally, we fit a \emph{single} parameter set
+to all four maturities, with $\theta$ set per maturity so that each model future
+matches the market exactly. This is the thesis' own two-stage strategy (Theorems
+3.3, 4.4, 5.4) with constant vol-of-vol. Table~\ref{tab:joint} shows that the per-maturity
+success does not carry over. MRLRJ, the best, misses by 5--13\% and prices only
+52\% of quotes inside the spread; MRLRSV does worse (12--31\%); MRLR fails
+(69--95\%). The MRLRSV run hit its time limit, so its figures are an upper bound, but
+the gap to the per-maturity fits is far larger than any plausible optimizer slack.
+The thesis anticipates this by making $\sigma_t$ time-dependent, which effectively
+reintroduces per-maturity parameters.
+
+\begin{table}[t]
+\centering\small
+\caption{One parameter set for all four maturities ($\theta$ anchored to each future).
+PE in \%. $^\ast$time-capped optimisation.}
+\label{tab:joint}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}l rrrr r@{}}
+\toprule
+Model & Oct & Nov & Dec & Jan & in spread\\
+\midrule
+MRLR & 95.0 & 81.0 & 71.5 & 68.7 & 9\%\\
+MRLRJ & 12.6 & 6.8 & 5.3 & 6.3 & 52\%\\
+MRLRSV$^\ast$ & 16.1 & 12.1 & 29.0 & 31.1 & 35\%\\
+\bottomrule
+\end{tabular}
+\\[3pt]
+\footnotesize MRLRJ: $\kappa=1.20$, $\sigma=0.469$, $\lambda=2.33$, $\eta=3.12$;
+MRLRSV: $\kappa=1.80$, $\rho=0.96$, $\kappa_v=18.1$, $\theta_v=0.18$, $\sigma_v=8.17$, $V_0=1.59$.
+\end{table}
+
+\begin{table*}[t]
+\centering\small
+\caption{Full disclosure: all parameters from the thesis' per-maturity procedure on
+29 Sep 2026 (spot VIX 16.04, $r=4.46\%$). Values at or near a bound are
+marked $^\dagger$. Per-strike fits: \texttt{results/calibration\_2026-09-29\_curves.csv}.}
+\label{tab:params}
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}l ccc ccccc ccccccc@{}}
+\toprule
+ & \multicolumn{3}{c}{MRLR} & \multicolumn{5}{c}{MRLRJ} & \multicolumn{7}{c}{MRLRSV}\\
+\cmidrule(lr){2-4}\cmidrule(lr){5-9}\cmidrule(l){10-16}
+Expiry & $\kappa$ & $\theta$ & $\sigma$ & $\kappa$ & $\theta$ & $\sigma$ & $\lambda$ & $\eta$
+ & $\kappa$ & $\theta$ & $\rho$ & $\kappa_v$ & $\theta_v$ & $\sigma_v$ & $V_0$\\
+\midrule
+Oct-26 & 88.5 & 2.35 & 8.35 & 9.29 & 2.76 & 0.353 & 5.23 & 3.29 & 29.1 & 2.86 & 0.93 & 1.31 & 13.6 & 14.5 & 1.74\\
+Nov-26 & 19.6 & 2.17 & 5.15 & 0.015 & $-15.0$ & 0.263 & 2.93 & 3.45 & 3.48 & 2.98 & 0.75 & 0.20 & $0^\dagger$ & 5.39 & 0.92\\
+Dec-26 & 0.265 & $-8.15$ & 1.99 & 0.014 & $-18.7$ & 0.265 & 2.38 & 3.42 & 2.07 & 3.00 & 0.71 & $0^\dagger$ & $0^\dagger$ & 3.48 & 0.75\\
+Jan-27 & 0.325 & $-2.68$ & 1.69 & 0.009 & $-23.3$ & 0.202 & 2.11 & 3.54 & 7.13 & 2.90 & 0.99 & 0.16 & $0^\dagger$ & 3.17 & 1.77\\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\section{Discussion and limitations}
+The results rest on a single end-of-day snapshot of delayed quotes; a panel of dates
+would show how stable the regime contrast with 2011 is. Futures are inferred from
+put--call parity rather than taken from traded VIX futures, although the parity fit
+is tight. Nelder--Mead with random restarts is a local method: for the per-maturity fits,
+different seeds reproduced the errors to two decimals, but the joint MRLRSV fit is not
+converged. MRLRSVJ and the time-dependent $\sigma_t$ of the thesis are not
+implemented. The loss is the thesis' MMLSE; an implied-volatility loss would weight the
+wings differently.
+
+\section{Conclusion}
+The main empirical claims of Bao (2013) hold up in a very different market, fifteen
+years later. Log-normal mean reversion alone cannot price VIX options, and upward
+jumps or stochastic vol-of-vol, not both, are enough to fit a single maturity to
+within the bid--ask spread. What the thesis left out matters as much. The fitted
+parameters sit on flat ridges and bounds, the 2026 smile implies rare large jumps
+rather than the frequent small ones of 2011, and no constant-parameter member of
+the family explains the term structure. For pricing a given expiry, MRLRJ is a
+compact and accurate smile model; as a model of how the VIX moves, the family needs
+maturity-dependent parameters or richer dynamics.
+
+\paragraph{Code and data.} {\raggedright The Julia package, tests, the 2026 snapshot and the
+scripts that regenerate every table and figure are in \texttt{julia\_impl/}:
+\texttt{Pkg.test()}, \texttt{scripts/reproduce\_paper.jl},
+\texttt{scripts/calibrate\_2026.jl} and \texttt{scripts/make\_figures.jl}.\par}
 
 {\footnotesize
 \begin{thebibliography}{9}
 \bibitem{bao2013} Q.~Bao. \emph{Mean-Reverting Logarithmic Modeling of VIX}. PhD
 thesis, Zhejiang University, 2013. MPRA Paper No.~46413.
+\bibitem{whaley1993} R.~Whaley. Derivatives on market volatility: hedging tools long
+overdue. \emph{J.\ Derivatives}, 1:71--84, 1993.
+\bibitem{grunbichler1996} A.~Gr\"unbichler, F.~Longstaff. Valuing futures and options on
+volatility. \emph{J.\ Banking \& Finance}, 20:985--1001, 1996.
 \bibitem{psychoyios2010} D.~Psychoyios, G.~Dotsis, R.~Markellos. A jump diffusion
 model for VIX volatility options and futures. \emph{Rev.\ Quant.\ Finance Account.},
 35(3):245--269, 2010.
-\bibitem{whaley1993} R.~Whaley. Derivatives on market volatility: hedging tools long
-overdue. \emph{J.\ Derivatives}, 1:71--84, 1993.
-\bibitem{rebonato2004} R.~Rebonato. \emph{Volatility and Correlation}. Wiley, 2004.
 \bibitem{gilpelaez1951} J.~Gil-Pelaez. Note on the inversion theorem.
 \emph{Biometrika}, 38:481--482, 1951.
-\bibitem{cboe} Cboe Global Markets. Delayed quotes, VIX index options,
-\url{https://www.cboe.com/delayed_quotes/vix/quote_table}. Retrieved 29~Sep~2026.
+\bibitem{cboe} Cboe Global Markets. Delayed quotes, VIX index options.
+\url{https://cdn.cboe.com/api/global/delayed_quotes/options/_VIX.json},
+retrieved 29~Sep~2026.
 \end{thebibliography}}
 \end{document}
